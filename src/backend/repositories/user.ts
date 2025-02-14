@@ -5,6 +5,7 @@ import { BaseRepository } from '@/backend/repositories/repository';
 import { mapUserDTOtoEntity } from '@/backend/mappers/user';
 import { UserType } from '@/backend/enums/user-type';
 import { comparePassword } from '@/lib/hash/hash-password';
+import { UniqueUsername } from '@/lib/hash/random-username';
 
 // Định nghĩa giao diện của lỗi MongoDB với các thuộc tính cần thiết
 interface MongoDBError extends Error {
@@ -23,6 +24,7 @@ export class UserRepository extends BaseRepository<IUser> {
     async create(user: UserDTO) {
         try {
             const newUser = await mapUserDTOtoEntity(user);
+            newUser.username = UniqueUsername()
             newUser.userType = UserType.User;
 
             // Thử tạo người dùng mới
@@ -41,13 +43,13 @@ export class UserRepository extends BaseRepository<IUser> {
         }
     }
 
-    async findByUsername(username: string) {
-        const user = await UserModel.findOne({ username });
-        if (!user) {
-            throw new Error('User not found');
-        }
-        return user;
-    }
+    // async findByUsername(username: string) {
+    //     const user = await UserModel.findOne({ username });
+    //     if (!user) {
+    //         throw new Error('User not found');
+    //     }
+    //     return user;
+    // }
 
     async findByEmail(email: string) {
         const user = await UserModel.findOne({ email });
@@ -88,15 +90,15 @@ export class UserRepository extends BaseRepository<IUser> {
         return updatedUser;
     }
 
-    async login(username: string, password: string): Promise<IUser> {
-        const user = await UserModel.findOne({ username });
+    async login(email: string, password: string): Promise<IUser> {
+        const user = await UserModel.findOne({ email });
         if (!user) {
-            throw new Error('Invalid username or password');
+            throw new Error('Invalid email or password');
         }
         const isPasswordMatch = await comparePassword(password, user.password);
 
         if (!isPasswordMatch) {
-            throw new Error('Invalid username or password');
+            throw new Error('Invalid email or password');
         }
 
         return user;

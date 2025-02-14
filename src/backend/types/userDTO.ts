@@ -1,6 +1,5 @@
 // types/userDTO.ts
 export interface UserDTO {
-    username: string;
     email: string;
     imageUrl?: string;
     password: string;
@@ -8,13 +7,12 @@ export interface UserDTO {
 }
 
 export interface UserWithOutPasswordDTO {
-    username: string;
     email: string;
     userType?: string;
 }
 
 export interface UserLoginDTO {
-    username: string;
+    email: string;
     password: string;
 }
 

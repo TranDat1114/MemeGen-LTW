@@ -3,7 +3,7 @@ import { Schema, model, models } from 'mongoose';
 import BaseEntity, { IBaseEntity } from '@/backend/models/base-entity';
 import { UserType } from '@/backend/enums/user-type';
 export interface IUser extends Document, IBaseEntity {
-    username: string;
+    username?: string;
     email: string;
     password: string;
     imageUrl?: string;
@@ -17,7 +17,6 @@ const UserSchema = new Schema<IUser>({
     username: {
         type: String,
         unique: true,
-        required: true,
         maxlength: 255,
     },
     email: {

@@ -25,9 +25,9 @@ export class UserService {
         return mapListEntitytoUserDTO(users);
     }
 
-    async getUserByUsername(username: string) {
-        return await this.userRepository.findByUsername(username);
-    }
+    // async getUserByUsername(username: string) {
+    //     return await this.userRepository.findByUsername(username);
+    // }
 
     async getUserByEmail(email: string) {
         return await this.userRepository.findByEmail(email);

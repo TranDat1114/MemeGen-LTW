@@ -13,17 +13,17 @@ export async function POST(req: Request) {
         await dbConnect();
         const ip = req.headers.get('x-forwarded-for') || null;
 
-        const { username, password } = await req.json();
+        const { email, password } = await req.json();
 
         // Type-guard or validate userData as UserDTO
-        const { error } = UserLoginValidationSchema.validate({ username, password });
+        const { error } = UserLoginValidationSchema.validate({ email, password });
         if (error) {
             return NextResponse.json({ success: false, message: error.message }, { status: 400 });
         }
 
-        const user = await userService.loginUser(username, password, ip ?? "");
+        const user = await userService.loginUser(email, password, ip ?? "");
         if (!user) {
-            return NextResponse.json({ success: false, message: 'Invalid username or password' }, { status: 401 });
+            return NextResponse.json({ success: false, message: 'Invalid email or password' }, { status: 401 });
         }
         const response: BaseResponse<UserLoginRes> = {
             success: true,
@@ -39,7 +39,7 @@ export async function POST(req: Request) {
         });
     }
     catch (error) {
-        if ((error as Error).message === 'Invalid username or password') {
+        if ((error as Error).message === 'Invalid email or password') {
             return NextResponse.json({ success: false, message: (error as Error).message }, { status: 401 });
         }
 

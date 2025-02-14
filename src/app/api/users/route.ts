@@ -11,9 +11,9 @@ async function POST(req: Request) {
     try {
         await dbConnect();
         const userData = await req.json();
-
         // Type-guard or validate userData as UserDTO
         const userDto: UserDTO = userData;
+        console.log(userDto);
         const { error } = UserDTOValidationSchema.validate(userDto);
         if (error) {
             return NextResponse.json({ success: false, message: error.message }, { status: 400 });
