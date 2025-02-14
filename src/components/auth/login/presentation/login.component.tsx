@@ -15,6 +15,7 @@ import { Separator } from "@/components/ui/separator"
 import useAuthStore from "@/stores/auth-store"
 import { UserLoginDTO } from "@/backend/types/userDTO"
 import { fetchLogin } from "@/lib/axios/fetch/auth"
+import Link from "next/link"
 
 const formSchema = z.object({
     email: z
