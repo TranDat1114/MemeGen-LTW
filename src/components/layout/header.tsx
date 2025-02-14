@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Sidebar } from "@/components/layout/sidebar"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
+import { usePathname } from "next/navigation"
 
 interface HeaderProps {
     isLoggedIn: boolean
@@ -14,6 +15,8 @@ interface HeaderProps {
 }
 
 export default function Header({ isLoggedIn, onLoginToggle }: HeaderProps) {
+    const pathName = usePathname();
+
     return (
         <header className="top-0 z-50 sticky bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 border-b w-full">
             <div className="flex items-center h-14 container">
@@ -51,11 +54,14 @@ export default function Header({ isLoggedIn, onLoginToggle }: HeaderProps) {
                                 <AvatarFallback>U</AvatarFallback>
                             </Avatar>
                         </Link>
-                    ) : (
-                        <Button onClick={onLoginToggle} className="hidden md:flex">
-                            Login
-                        </Button>
-                    )}
+                    ) : pathName !== "/login" ? (
+                        <Link href="/login">
+                            <Button className="hidden md:flex">Login</Button>
+                        </Link>
+                        // <Button onClick={onLoginToggle} className="hidden md:flex">
+                        //     Login
+                        // </Button>
+                    ) : null}
                 </div>
             </div>
         </header>
