@@ -6,6 +6,7 @@ import { useTheme } from "next-themes"
 import { LineShadowText } from "../magicui/line-shadow-text"
 
 const footerSections = {
+
     tools: {
         title: "Tools",
         items: [
@@ -78,13 +79,11 @@ const languages = [
 ]
 
 export default function Footer() {
-    const theme = useTheme();
-    const shadowColor = theme.resolvedTheme === "dark" ? "white" : "black";
-
+    const now = new Date()
     return (
-        <footer className="bg-white">
-            <div className="mx-auto max-w-screen-xl space-y-8 px-4 py-16 sm:px-6 lg:space-y-16 lg:px-8">
-                <div className="sm:flex sm:items-center sm:justify-between">
+        <footer className="bg-background">
+            <div className="space-y-8 lg:space-y-16 mx-auto px-4 sm:px-6 lg:px-8 py-16 max-w-screen-xl">
+                <div className="sm:flex sm:justify-between sm:items-center">
                     <div className="flex items-center gap-3">
                         <Image
                             src="/images/placeholder.jpg"
@@ -93,22 +92,22 @@ export default function Footer() {
                             height={100}
                             className="rounded-full object-center"
                         />
-                        <h1 className="text-balance text-4xl font-semibold leading-none tracking-tighter sm:text-6xl md:text-5xl lg:text-6xl">
-                            Meme
-                            <LineShadowText className="italic" shadowColor={shadowColor}>
-                                Generator
+                        <h1 className="font-semibold text-4xl md:text-5xl sm:text-6xl lg:text-6xl text-balance leading-none tracking-tighter">
+                            {`Ryan `}
+                            <LineShadowText className="italic">
+                                Gosling
                             </LineShadowText>
                         </h1>
                     </div>
 
-                    <ul className="mt-8 flex justify-start gap-6 sm:mt-0 sm:justify-end">
+                    <ul className="flex justify-start sm:justify-end gap-6 mt-2 sm:mt-0">
 
                         <li>
                             <a
                                 href="#"
                                 rel="noreferrer"
                                 target="_blank"
-                                className="text-gray-700 transition hover:opacity-75"
+                                className="hover:opacity-75 transition"
                             >
                                 <span className="sr-only">GitHub</span>
 
@@ -125,94 +124,94 @@ export default function Footer() {
                 </div>
 
                 <div
-                    className="grid grid-cols-1 gap-8 border-t border-gray-100 pt-8 sm:grid-cols-2 lg:grid-cols-4 lg:pt-16"
+                    className="gap-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 pt-8 lg:pt-16 border-gray-100 border-t"
                 >
                     {/* <div>
-                        <p className="font-medium text-gray-900">Services</p>
+                        <p className="font-medium">Services</p>
 
-                        <ul className="mt-6 space-y-4 text-sm">
+                        <ul className="space-y-4 mt-6 text-sm">
                             <li>
-                                <a href="#" className="text-gray-700 transition hover:opacity-75"> 1on1 Coaching </a>
+                                <a href="#" className="hover:opacity-75 transition"> 1on1 Coaching </a>
                             </li>
 
                             <li>
-                                <a href="#" className="text-gray-700 transition hover:opacity-75"> Company Review </a>
+                                <a href="#" className="hover:opacity-75 transition"> Company Review </a>
                             </li>
 
                             <li>
-                                <a href="#" className="text-gray-700 transition hover:opacity-75"> Accounts Review </a>
+                                <a href="#" className="hover:opacity-75 transition"> Accounts Review </a>
                             </li>
 
                             <li>
-                                <a href="#" className="text-gray-700 transition hover:opacity-75"> HR Consulting </a>
+                                <a href="#" className="hover:opacity-75 transition"> HR Consulting </a>
                             </li>
 
                             <li>
-                                <a href="#" className="text-gray-700 transition hover:opacity-75"> SEO Optimisation </a>
+                                <a href="#" className="hover:opacity-75 transition"> SEO Optimisation </a>
                             </li>
                         </ul>
                     </div> */}
 
                     <div>
-                        <p className="font-medium text-gray-900">Company</p>
+                        <p className="font-medium">Company</p>
 
-                        <ul className="mt-6 space-y-4 text-sm">
+                        <ul className="space-y-4 mt-6 text-sm">
                             <li>
-                                <a href="#" className="text-gray-700 transition hover:opacity-75"> About </a>
+                                <a href="#" className="hover:opacity-75 transition"> About </a>
                             </li>
 
                             <li>
-                                <a href="#" className="text-gray-700 transition hover:opacity-75"> Meet the Team </a>
+                                <a href="#" className="hover:opacity-75 transition"> Meet the Team </a>
                             </li>
 
                             <li>
-                                <a href="#" className="text-gray-700 transition hover:opacity-75"> Accounts Review </a>
-                            </li>
-                        </ul>
-                    </div>
-
-                    <div>
-                        <p className="font-medium text-gray-900">Helpful Links</p>
-
-                        <ul className="mt-6 space-y-4 text-sm">
-                            <li>
-                                <a href="#" className="text-gray-700 transition hover:opacity-75"> Contact </a>
-                            </li>
-
-                            <li>
-                                <a href="#" className="text-gray-700 transition hover:opacity-75"> FAQs </a>
-                            </li>
-
-                            <li>
-                                <a href="#" className="text-gray-700 transition hover:opacity-75"> Live Chat </a>
+                                <a href="#" className="hover:opacity-75 transition"> Accounts Review </a>
                             </li>
                         </ul>
                     </div>
 
                     <div>
-                        <p className="font-medium text-gray-900">Legal</p>
+                        <p className="font-medium">Helpful Links</p>
 
-                        <ul className="mt-6 space-y-4 text-sm">
+                        <ul className="space-y-4 mt-6 text-sm">
                             <li>
-                                <a href="#" className="text-gray-700 transition hover:opacity-75"> Accessibility </a>
+                                <a href="#" className="hover:opacity-75 transition"> Contact </a>
                             </li>
 
                             <li>
-                                <a href="#" className="text-gray-700 transition hover:opacity-75"> Returns Policy </a>
+                                <a href="#" className="hover:opacity-75 transition"> FAQs </a>
                             </li>
 
                             <li>
-                                <a href="#" className="text-gray-700 transition hover:opacity-75"> Refund Policy </a>
+                                <a href="#" className="hover:opacity-75 transition"> Live Chat </a>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div>
+                        <p className="font-medium">Legal</p>
+
+                        <ul className="space-y-4 mt-6 text-sm">
+                            <li>
+                                <a href="#" className="hover:opacity-75 transition"> Accessibility </a>
                             </li>
 
                             <li>
-                                <a href="#" className="text-gray-700 transition hover:opacity-75"> Hiring-3 Statistics </a>
+                                <a href="#" className="hover:opacity-75 transition"> Returns Policy </a>
+                            </li>
+
+                            <li>
+                                <a href="#" className="hover:opacity-75 transition"> Refund Policy </a>
+                            </li>
+
+                            <li>
+                                <a href="#" className="hover:opacity-75 transition"> Hiring-3 Statistics </a>
                             </li>
                         </ul>
                     </div>
                 </div>
 
-                <p className="text-xs text-gray-500">&copy; 2022. Company Name. All rights reserved.</p>
+                <p className="text-gray-500 text-xs">&copy; {now.getFullYear()}. Ryan Gosling. All rights reserved.</p>
             </div>
         </footer>
 
