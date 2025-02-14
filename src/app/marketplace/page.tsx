@@ -21,7 +21,7 @@ export default function Marketplace() {
                         <option>Politics</option>
                     </Select>
                 </div>
-                <Select className="w-full sm:w-auto">
+                <Select >
                     <option>Sort by: Latest</option>
                     <option>Price: Low to High</option>
                     <option>Price: High to Low</option>
@@ -37,7 +37,7 @@ export default function Marketplace() {
                         className="bg-card shadow-md hover:shadow-lg rounded-lg overflow-hidden text-card-foreground transition-shadow"
                     >
                         <Image
-                            src={`/placeholder.svg?height=300&width=300`}
+                            src={`/images/placeholder.jpg?height=300&width=300`}
                             alt={`Meme NFT ${i}`}
                             width={300}
                             height={300}
