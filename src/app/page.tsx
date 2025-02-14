@@ -8,9 +8,6 @@ export default function Home() {
     <div>
       <h1 className="text-4xl">Home</h1>
       <ModeToggle />
-      <SessionProvider >
-        <AuthButton />
-      </SessionProvider>
     </div>
   );
 }
