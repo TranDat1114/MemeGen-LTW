@@ -7,11 +7,14 @@ import { useForm } from "react-hook-form"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
-import React from 'react'
+import React, { useState } from 'react'
 import toast from 'react-hot-toast'
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form"
 import { Button } from "@/components/ui/button"
 import { Separator } from "@/components/ui/separator"
+import useAuthStore from "@/stores/auth-store"
+import { UserLoginDTO } from "@/backend/types/userDTO"
+import { fetchLogin } from "@/lib/axios/fetch/auth"
 
 const formSchema = z.object({
     email: z
@@ -22,7 +25,8 @@ const formSchema = z.object({
 })
 
 export default function LoginComponent() {
-    const form = useForm<z.infer<typeof formSchema>>({
+    const { setAccessToken, setUser } = useAuthStore();
+    const form = useForm<UserLoginDTO>({
         resolver: zodResolver(formSchema),
         defaultValues: {
             email: "",
@@ -30,11 +34,25 @@ export default function LoginComponent() {
         }
     })
 
-    function onSubmit(data: z.infer<typeof formSchema>) {
-        console.log(data)
-        toast.success("Đăng nhập thành công! 🎉");
-    }
+    const [orderErrorMessages, setOrderErrorMessages] = useState<string>();
 
+    const onSubmit = async (data: UserLoginDTO) => {
+        try {
+            const userLoginRes = await fetchLogin(data);
+            if (userLoginRes) {
+                setAccessToken(userLoginRes.accessToken);
+                toast.success("Feeling lucky? 🍀")
+                setUser(userLoginRes.user);
+
+            } else {
+                toast.error("Invalid email or password");
+            }
+        }
+        catch (error) {
+            toast.error('There was an error processing your request');
+            setOrderErrorMessages((error as Error).message);
+        }
+    };
     return (
         <>
             <Card className="w-full max-w-md">
@@ -66,19 +84,27 @@ export default function LoginComponent() {
                                     <FormItem>
                                         <div className="flex justify-between items-center">
                                             <FormLabel>Password</FormLabel>
-                                            <Label className="cursor-pointer text-muted-foreground">Forgot password?</Label>
+                                            <Label className="text-muted-foreground cursor-pointer">Forgot password?</Label>
                                         </div>
                                         <FormControl>
                                             <Input placeholder="********" {...field} type="password" />
                                         </FormControl>
                                         <FormMessage />
+                                        <>
+                                            {
+                                                orderErrorMessages &&
+                                                <p className="text-red-500 text-sm">
+                                                    {orderErrorMessages}
+                                                </p>
+                                            }
+                                        </>
                                     </FormItem>
                                 )}
                             />
-                            <div className="w-full space-y-4">
-                                <Button type="submit" className="cursor-pointer w-full">Submit</Button>
+                            <div className="space-y-4 w-full">
+                                <Button type="submit" className="w-full cursor-pointer">Submit</Button>
                                 <Separator />
-                                <Button type="button" className="cursor-pointer w-full" variant="secondary">
+                                <Button type="button" className="w-full cursor-pointer" variant="secondary">
                                     <img
                                         src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/google/google-original.svg"
                                         alt="Google icon"
