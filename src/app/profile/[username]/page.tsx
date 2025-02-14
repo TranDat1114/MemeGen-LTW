@@ -13,19 +13,19 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 const mockUserData = {
     username: "coolmemer",
     name: "Cool Memer",
-    avatar: "//images/placeholder.jpg?height=128&width=128",
+    avatar: "https://r6j0-my.sharepoint.com/personal/cctalk1114_r6j0_onmicrosoft_com/Documents/OLD%20SCHOOL/Documents/Image/placeholder-img.jpg",
     bio: "I create the dankest memes on the internet! 😎",
     followers: 1234,
     following: 567,
     joinedDate: "January 2023",
     createdMemes: [
-        { id: "1", title: "Funny Cat", imageUrl: "//images/placeholder.jpg?height=200&width=200" },
-        { id: "2", title: "Doge Meme", imageUrl: "//images/placeholder.jpg?height=200&width=200" },
-        { id: "3", title: "Distracted Boyfriend", imageUrl: "//images/placeholder.jpg?height=200&width=200" },
+        { id: "1", title: "Funny Cat", imageUrl: "https://images.unsplash.com/photo-1498050108023-c5249f4df085?q=80&w=2072&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" },
+        { id: "2", title: "Doge Meme", imageUrl: "https://images.unsplash.com/photo-1498050108023-c5249f4df085?q=80&w=2072&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" },
+        { id: "3", title: "Distracted Boyfriend", imageUrl: "https://images.unsplash.com/photo-1498050108023-c5249f4df085?q=80&w=2072&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" },
     ],
     collectedNFTs: [
-        { id: "4", title: "Rare Pepe", imageUrl: "//images/placeholder.jpg?height=200&width=200" },
-        { id: "5", title: "Wojak", imageUrl: "//images/placeholder.jpg?height=200&width=200" },
+        { id: "4", title: "Rare Pepe", imageUrl: "https://images.unsplash.com/photo-1498050108023-c5249f4df085?q=80&w=2072&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" },
+        { id: "5", title: "Wojak", imageUrl: "https://images.unsplash.com/photo-1498050108023-c5249f4df085?q=80&w=2072&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" },
     ],
 }
 
@@ -85,7 +85,7 @@ export default function UserProfilePage() {
                                     <CardContent className="p-0">
                                         <div className="relative aspect-square">
                                             <Image
-                                                src={meme.imageUrl || "//images/placeholder.jpg"}
+                                                src={meme.imageUrl || "/images/placeholder.jpg"}
                                                 alt={meme.title}
                                                 layout="fill"
                                                 objectFit="cover"
@@ -109,7 +109,7 @@ export default function UserProfilePage() {
                                     <CardContent className="p-0">
                                         <div className="relative aspect-square">
                                             <Image
-                                                src={nft.imageUrl || "//images/placeholder.jpg"}
+                                                src={nft.imageUrl || "https://r6j0-my.sharepoint.com/personal/cctalk1114_r6j0_onmicrosoft_com/Documents/OLD%20SCHOOL/Documents/Image/placeholder-img.jpg"}
                                                 alt={nft.title}
                                                 layout="fill"
                                                 objectFit="cover"

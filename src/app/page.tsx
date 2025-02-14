@@ -166,12 +166,12 @@ export default function Home() {
         <div className="gap-4 sm:gap-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
           {[1, 2, 3].map((i) => (
             <Link
-              href={`/user/creator${i}`}
+              href={`/profile/${i}`}
               key={i}
               className="flex items-center bg-card shadow-md hover:shadow-lg p-4 rounded-lg text-card-foreground transition-shadow"
             >
               <Image
-                src={`/images/placeholder.jpg?height=80&width=80`}
+                src={`/images/placeholder.jpg`}
                 alt={`Creator ${i}`}
                 width={80}
                 height={80}
