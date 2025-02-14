@@ -9,6 +9,7 @@
   --font-mono: var(--font-geist-mono);
 }
 
+
 @layer base {
   :root {
     --background: 0 0% 100%;

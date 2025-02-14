@@ -10,9 +10,9 @@ import { Menu, Home, PlusSquare, ShoppingBag, User, LogIn, Film } from "lucide-r
 
 const sidebarItems = [
     { name: "Home", href: "/", icon: Home },
-    { name: "Create", href: "/create", icon: PlusSquare },
+    { name: "Make Meme", href: "/make-meme", icon: PlusSquare },
     { name: "Marketplace", href: "/marketplace", icon: ShoppingBag },
-    { name: "View User", href: "/user/coolmemer", icon: User },
+    // { name: "View User", href: "/user/coolmemer", icon: User },
     { name: "Meme Feed", href: "/meme-feed", icon: Film },
 ]
 

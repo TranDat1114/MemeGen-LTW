@@ -8,7 +8,7 @@ export default function Profile() {
         <div className="mx-auto px-4 py-8 container">
             <div className="flex items-center mb-8">
                 <Image
-                    src="/placeholder.svg?height=128&width=128"
+                    src="//images/placeholder.jpg?height=128&width=128"
                     alt="User Avatar"
                     width={128}
                     height={128}
@@ -33,7 +33,7 @@ export default function Profile() {
                             <Card key={i}>
                                 <CardContent className="p-0">
                                     <Image
-                                        src={`/placeholder.svg?height=300&width=300`}
+                                        src={`//images/placeholder.jpg?height=300&width=300`}
                                         alt={`Created Meme ${i}`}
                                         width={300}
                                         height={300}
@@ -54,7 +54,7 @@ export default function Profile() {
                             <Card key={i}>
                                 <CardContent className="p-0">
                                     <Image
-                                        src={`/placeholder.svg?height=300&width=300`}
+                                        src={`//images/placeholder.jpg?height=300&width=300`}
                                         alt={`Collected NFT ${i}`}
                                         width={300}
                                         height={300}
@@ -75,7 +75,7 @@ export default function Profile() {
                             <Card key={i}>
                                 <CardContent className="p-0">
                                     <Image
-                                        src={`/placeholder.svg?height=300&width=300`}
+                                        src={`//images/placeholder.jpg?height=300&width=300`}
                                         alt={`Liked Meme ${i}`}
                                         width={300}
                                         height={300}

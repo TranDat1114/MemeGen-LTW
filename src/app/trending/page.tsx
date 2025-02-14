@@ -4,10 +4,10 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Card, CardContent } from "@/components/ui/card"
 
 const popularMemes = [
-    { id: 1, title: "Trending Meme 1", imageUrl: "/placeholder.svg?height=200&width=300", upvotes: 1000, comments: 50 },
-    { id: 2, title: "Trending Meme 2", imageUrl: "/placeholder.svg?height=200&width=300", upvotes: 950, comments: 45 },
-    { id: 3, title: "Trending Meme 3", imageUrl: "/placeholder.svg?height=200&width=300", upvotes: 900, comments: 40 },
-    { id: 4, title: "Trending Meme 4", imageUrl: "/placeholder.svg?height=200&width=300", upvotes: 850, comments: 35 },
+    { id: 1, title: "Trending Meme 1", imageUrl: "//images/placeholder.jpg?height=200&width=300", upvotes: 1000, comments: 50 },
+    { id: 2, title: "Trending Meme 2", imageUrl: "//images/placeholder.jpg?height=200&width=300", upvotes: 950, comments: 45 },
+    { id: 3, title: "Trending Meme 3", imageUrl: "//images/placeholder.jpg?height=200&width=300", upvotes: 900, comments: 40 },
+    { id: 4, title: "Trending Meme 4", imageUrl: "//images/placeholder.jpg?height=200&width=300", upvotes: 850, comments: 35 },
 ]
 
 export default function PopularMemesPage() {
@@ -30,7 +30,7 @@ export default function PopularMemesPage() {
                                 <Card>
                                     <CardContent className="p-0">
                                         <Image
-                                            src={meme.imageUrl || "/placeholder.svg"}
+                                            src={meme.imageUrl || "//images/placeholder.jpg"}
                                             alt={meme.title}
                                             width={300}
                                             height={200}

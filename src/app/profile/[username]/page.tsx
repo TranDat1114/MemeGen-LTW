@@ -13,19 +13,19 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 const mockUserData = {
     username: "coolmemer",
     name: "Cool Memer",
-    avatar: "/placeholder.svg?height=128&width=128",
+    avatar: "//images/placeholder.jpg?height=128&width=128",
     bio: "I create the dankest memes on the internet! 😎",
     followers: 1234,
     following: 567,
     joinedDate: "January 2023",
     createdMemes: [
-        { id: "1", title: "Funny Cat", imageUrl: "/placeholder.svg?height=200&width=200" },
-        { id: "2", title: "Doge Meme", imageUrl: "/placeholder.svg?height=200&width=200" },
-        { id: "3", title: "Distracted Boyfriend", imageUrl: "/placeholder.svg?height=200&width=200" },
+        { id: "1", title: "Funny Cat", imageUrl: "//images/placeholder.jpg?height=200&width=200" },
+        { id: "2", title: "Doge Meme", imageUrl: "//images/placeholder.jpg?height=200&width=200" },
+        { id: "3", title: "Distracted Boyfriend", imageUrl: "//images/placeholder.jpg?height=200&width=200" },
     ],
     collectedNFTs: [
-        { id: "4", title: "Rare Pepe", imageUrl: "/placeholder.svg?height=200&width=200" },
-        { id: "5", title: "Wojak", imageUrl: "/placeholder.svg?height=200&width=200" },
+        { id: "4", title: "Rare Pepe", imageUrl: "//images/placeholder.jpg?height=200&width=200" },
+        { id: "5", title: "Wojak", imageUrl: "//images/placeholder.jpg?height=200&width=200" },
     ],
 }
 
@@ -85,7 +85,7 @@ export default function UserProfilePage() {
                                     <CardContent className="p-0">
                                         <div className="relative aspect-square">
                                             <Image
-                                                src={meme.imageUrl || "/placeholder.svg"}
+                                                src={meme.imageUrl || "//images/placeholder.jpg"}
                                                 alt={meme.title}
                                                 layout="fill"
                                                 objectFit="cover"
@@ -109,7 +109,7 @@ export default function UserProfilePage() {
                                     <CardContent className="p-0">
                                         <div className="relative aspect-square">
                                             <Image
-                                                src={nft.imageUrl || "/placeholder.svg"}
+                                                src={nft.imageUrl || "//images/placeholder.jpg"}
                                                 alt={nft.title}
                                                 layout="fill"
                                                 objectFit="cover"

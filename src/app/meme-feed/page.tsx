@@ -28,7 +28,7 @@ export default function MemeFeed() {
         // For this example, we'll generate mock data
         const newMemes = Array.from({ length: ITEMS_PER_PAGE }, (_, i) => ({
             id: (pageNum - 1) * ITEMS_PER_PAGE + i + 1,
-            imageUrl: `/placeholder.svg?height=600&width=400&text=Meme+${(pageNum - 1) * ITEMS_PER_PAGE + i + 1}`,
+            imageUrl: `//images/placeholder.jpg?height=600&width=400&text=Meme+${(pageNum - 1) * ITEMS_PER_PAGE + i + 1}`,
             title: `Meme ${(pageNum - 1) * ITEMS_PER_PAGE + i + 1}`,
             creator: `User${Math.floor(Math.random() * 100) + 1}`,
             likes: Math.floor(Math.random() * 1000),
@@ -56,7 +56,7 @@ export default function MemeFeed() {
                         <CardContent className="p-0">
                             <div className="relative aspect-[4/5]">
                                 <Image
-                                    src={meme.imageUrl || "/placeholder.svg"}
+                                    src={meme.imageUrl || "//images/placeholder.jpg"}
                                     alt={meme.title}
                                     layout="fill"
                                     objectFit="cover"

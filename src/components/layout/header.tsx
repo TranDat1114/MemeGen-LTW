@@ -25,8 +25,8 @@ export default function Header({ isLoggedIn, onLoginToggle }: HeaderProps) {
                         MemeNFT
                     </Link>
                     <nav className="flex items-center space-x-4">
-                        <Link href="/create" className="font-medium text-sm">
-                            Create
+                        <Link href="/make-meme" className="font-medium text-sm">
+                            Make MEME
                         </Link>
                         <Link href="/marketplace" className="font-medium text-sm">
                             Marketplace
@@ -47,7 +47,7 @@ export default function Header({ isLoggedIn, onLoginToggle }: HeaderProps) {
                     {isLoggedIn ? (
                         <Link href="/profile">
                             <Avatar>
-                                <AvatarImage src="/placeholder.svg?height=32&width=32" alt="User" />
+                                <AvatarImage src="//images/placeholder.jpg?height=32&width=32" alt="User" />
                                 <AvatarFallback>U</AvatarFallback>
                             </Avatar>
                         </Link>

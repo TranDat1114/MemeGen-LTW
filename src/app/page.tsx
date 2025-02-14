@@ -11,7 +11,7 @@ const myCreations = [
   {
     id: 1,
     title: "My Meme 1",
-    imageUrl: "/placeholder.svg?height=150&width=200",
+    imageUrl: "images/placeholder.jpg?height=150&width=200",
     upvotes: 100,
     comments: 10,
     views: 500,
@@ -19,7 +19,7 @@ const myCreations = [
   {
     id: 2,
     title: "My Meme 2",
-    imageUrl: "/placeholder.svg?height=150&width=200",
+    imageUrl: "/images/placeholder.jpg?height=150&width=200",
     upvotes: 80,
     comments: 8,
     views: 400,
@@ -27,7 +27,7 @@ const myCreations = [
   {
     id: 3,
     title: "My Meme 3",
-    imageUrl: "/placeholder.svg?height=150&width=200",
+    imageUrl: "/images/placeholder.jpg?height=150&width=200",
     upvotes: 60,
     comments: 6,
     views: 300,
@@ -51,7 +51,7 @@ export default function Home() {
               <p className="mb-6 text-xl">Create, collect, and trade the dankest memes as NFTs!</p>
               <div className="flex space-x-4">
                 <Button asChild>
-                  <Link href="/create">Create a Meme</Link>
+                  <Link href="/make-meme">Make a Meme</Link>
                 </Button>
                 <Button asChild variant="outline">
                   <Link href="/marketplace">Explore Marketplace</Link>
@@ -60,7 +60,7 @@ export default function Home() {
             </div>
             <div className="md:w-1/2">
               <Image
-                src="/placeholder.svg?height=400&width=600"
+                src="/images/placeholder.jpg?height=400&width=600"
                 alt="MemeNFT Hero"
                 width={600}
                 height={400}
@@ -86,7 +86,7 @@ export default function Home() {
                 <Card>
                   <CardContent className="p-0">
                     <Image
-                      src={meme.imageUrl || "/placeholder.svg"}
+                      src={meme.imageUrl || "/images/placeholder.jpg"}
                       alt={meme.title}
                       width={200}
                       height={150}
@@ -118,7 +118,7 @@ export default function Home() {
               className="bg-card shadow-md hover:shadow-lg rounded-lg overflow-hidden text-card-foreground transition-shadow"
             >
               <Image
-                src={`/placeholder.svg?height=200&width=300`}
+                src={`/images/placeholder.jpg?height=200&width=300`}
                 alt={`Trending Meme ${i}`}
                 width={300}
                 height={200}
@@ -145,7 +145,7 @@ export default function Home() {
               className="bg-card shadow-md hover:shadow-lg rounded-lg overflow-hidden text-card-foreground transition-shadow"
             >
               <Image
-                src={`/placeholder.svg?height=150&width=200`}
+                src={`/images/placeholder.jpg?height=150&width=200`}
                 alt={`Latest Meme ${i}`}
                 width={200}
                 height={150}
@@ -171,7 +171,7 @@ export default function Home() {
               className="flex items-center bg-card shadow-md hover:shadow-lg p-4 rounded-lg text-card-foreground transition-shadow"
             >
               <Image
-                src={`/placeholder.svg?height=80&width=80`}
+                src={`/images/placeholder.jpg?height=80&width=80`}
                 alt={`Creator ${i}`}
                 width={80}
                 height={80}
