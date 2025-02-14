@@ -5,7 +5,7 @@ import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { cn } from "@/lib/utils"
 import { Button } from "@/components/ui/button"
-import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
+import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet"
 import { Menu, Home, PlusSquare, ShoppingBag, User, LogIn, Film } from "lucide-react"
 
 const sidebarItems = [
@@ -37,7 +37,11 @@ export function Sidebar({ isLoggedIn, onLoginToggle }: SidebarProps) {
                 <div className="flex flex-col h-full">
                     <div className="space-y-4 py-4">
                         <div className="px-3 py-2">
-                            <h2 className="mb-2 px-4 font-semibold text-lg tracking-tight">Menu</h2>
+                            <SheetHeader>
+                                <SheetTitle className="mb-2 px-4 font-semibold text-lg tracking-tight">
+                                    Menu
+                                </SheetTitle>
+                            </SheetHeader>
                             <div className="space-y-1">
                                 {sidebarItems.map((item) => (
                                     <Link key={item.href} href={item.href} onClick={() => setOpen(false)}>
