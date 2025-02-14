@@ -47,7 +47,7 @@ export default function Header({ isLoggedIn, onLoginToggle }: HeaderProps) {
                     {isLoggedIn ? (
                         <Link href="/profile">
                             <Avatar>
-                                <AvatarImage src="//images/placeholder.jpg?height=32&width=32" alt="User" />
+                                <AvatarImage src="/images/placeholder.jpg?height=32&width=32" alt="User" />
                                 <AvatarFallback>U</AvatarFallback>
                             </Avatar>
                         </Link>

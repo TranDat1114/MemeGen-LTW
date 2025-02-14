@@ -11,7 +11,7 @@ const myCreations = [
   {
     id: 1,
     title: "My Meme 1",
-    imageUrl: "images/placeholder.jpg?height=150&width=200",
+    imageUrl: "/images/placeholder.jpg?height=150&width=200",
     upvotes: 100,
     comments: 10,
     views: 500,
