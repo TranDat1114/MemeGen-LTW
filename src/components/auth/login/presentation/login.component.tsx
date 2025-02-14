@@ -12,6 +12,7 @@ import toast from 'react-hot-toast'
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form"
 import { Button } from "@/components/ui/button"
 import { Separator } from "@/components/ui/separator"
+import Link from "next/link"
 
 const formSchema = z.object({
     email: z
@@ -32,7 +33,7 @@ export default function LoginComponent() {
 
     function onSubmit(data: z.infer<typeof formSchema>) {
         console.log(data)
-        toast.success("Đăng nhập thành công! 🎉");
+        toast.success("Login successful 🎉");
     }
 
     return (
@@ -43,6 +44,27 @@ export default function LoginComponent() {
                     <CardDescription>Please sign in or sign up below.</CardDescription>
                 </CardHeader>
                 <CardContent>
+                    <div className="space-y-4">
+                        <Button className="cursor-pointer w-full" variant="secondary">
+                            <img
+                                src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/google/google-original.svg"
+                                alt="Google icon"
+                                width={16}
+                                height={16}
+                            />
+                            Sign in with Google
+                        </Button>
+                        <Button className="cursor-pointer w-full" variant="secondary">
+                            <img
+                                src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/github/github-original.svg"
+                                alt="Github icon"
+                                width={16}
+                                height={16}
+                            />
+                            Sign in with Github
+                        </Button>
+                    </div>
+                    <Separator className="my-6" />
                     <Form {...form}>
                         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
                             <FormField
@@ -77,16 +99,15 @@ export default function LoginComponent() {
                             />
                             <div className="w-full space-y-4">
                                 <Button type="submit" className="cursor-pointer w-full">Submit</Button>
-                                <Separator />
-                                <Button type="button" className="cursor-pointer w-full" variant="secondary">
-                                    <img
-                                        src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/google/google-original.svg"
-                                        alt="Google icon"
-                                        width={16}
-                                        height={16}
-                                    />
-                                    Sign in with Google
-                                </Button>
+                                <div className="flex justify-center items-center">
+                                    <Label>
+                                        Don't have an account?&nbsp;
+                                        <Link href="/register" className="text-primary">
+                                            Sign up
+                                        </Link>
+                                    </Label>
+                                </div>
+
                             </div>
                         </form>
                     </Form>
