@@ -1,6 +1,6 @@
 import { UserLoginValidationSchema } from "@/backend/validators/userValidator";
-import { REFRESH_TOKEN_LIFETIME } from "@/libs/jwt/handle-token";
-import dbConnect from "@/libs/mongodb";
+import { REFRESH_TOKEN_LIFETIME } from "@/lib/jwt/handle-token";
+import dbConnect from "@/lib/mongodb";
 import { UserService } from "@/backend/services/user";
 import { BaseResponse } from "@/backend/types/baseResponse";
 import { UserLoginRes } from "@/backend/types/userDTO";

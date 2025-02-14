@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
-import { verifyAccessToken } from '@/libs/jwt/handle-token';
+import { verifyAccessToken } from '@/lib/jwt/handle-token';
 
 // Middleware function to handle AccessToken
 export async function authenticateRequestMiddleware(req: NextRequest) {

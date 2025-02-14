@@ -1,4 +1,4 @@
-import apiClient from "@/libs/axios/interceptor";
+import apiClient from "@/lib/axios/interceptor";
 
 export const logout = async () => {
     try {

@@ -1,6 +1,6 @@
 // services/userService.ts
-import { hashPassword } from '@/libs/hash/hash-password';
-import { generateTokens } from '@/libs/jwt/handle-token';
+import { hashPassword } from '@/lib/hash/hash-password';
+import { generateTokens } from '@/lib/jwt/handle-token';
 import { mapEntitytoUserDTO, mapListEntitytoUserDTO } from '@/backend/mappers/user';
 import { UserRepository } from '@/backend/repositories/user';
 import { UserDTO } from '@/backend/types/userDTO';

@@ -1,6 +1,6 @@
 // pages/api/users.ts
 import { UserService } from '@/backend/services/user';
-import dbConnect from '@/libs/mongodb';
+import dbConnect from '@/lib/mongodb';
 import { NextResponse } from 'next/server';
 import { UserDTO } from '@/backend/types/userDTO';
 import { UserDTOValidationSchema } from '@/backend/validators/userValidator';

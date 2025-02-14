@@ -4,7 +4,7 @@ import { UserDTO } from '@/backend/types/userDTO';
 import { BaseRepository } from '@/backend/repositories/repository';
 import { mapUserDTOtoEntity } from '@/backend/mappers/user';
 import { UserType } from '@/backend/enums/user-type';
-import { comparePassword } from '@/libs/hash/hash-password';
+import { comparePassword } from '@/lib/hash/hash-password';
 
 // Định nghĩa giao diện của lỗi MongoDB với các thuộc tính cần thiết
 interface MongoDBError extends Error {

@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { getAccessTokenFromStorage, updateAccessTokenInStorage } from '@/libs/local-storage/access-token-in-storage';
+import { getAccessTokenFromStorage, updateAccessTokenInStorage } from '@/lib/local-storage/access-token-in-storage';
 
 // Khởi tạo Axios instance
 const apiClient = axios.create({

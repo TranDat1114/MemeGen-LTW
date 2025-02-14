@@ -1,5 +1,5 @@
 // models/base-entity.ts
-import { getNextSequenceValue } from '@/libs/mongodb';
+import { getNextSequenceValue } from '@/lib/mongodb';
 import mongoose, { Schema, Document } from 'mongoose';
 import { v4 as uuidv4 } from 'uuid';
 

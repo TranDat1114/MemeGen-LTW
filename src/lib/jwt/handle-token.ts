@@ -1,6 +1,6 @@
 
 import { IUser } from '@/backend/models/user';
-import { generateJWT, verifyJWT } from '@/libs/jwt/handle-jwt';
+import { generateJWT, verifyJWT } from '@/lib/jwt/handle-jwt';
 
 // Secret keys (thay thế bằng giá trị thực trong file .env)
 const ACCESS_TOKEN_SECRET = process.env.ACCESS_TOKEN_SECRET || 'youraccesstokensecret';
