@@ -56,7 +56,7 @@ export class UserRepository extends BaseRepository<IUser> {
         const user = await UserModel.findOne({ email });
 
         if (!user) {
-            throw new Error('User not found');
+            return null;
         }
 
         return user;
