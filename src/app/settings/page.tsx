@@ -21,7 +21,7 @@ export default function SettingsPage() {
         // Here you would typically send the updated profile data to your backend
         console.log("Updating profile:", { username, email, bio })
         // For now, we'll just redirect to the profile page
-        router.push("/profile")
+        router.push("/me")
     }
 
     return (
