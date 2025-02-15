@@ -11,17 +11,16 @@ import { usePathname } from "next/navigation"
 
 interface HeaderProps {
     isLoggedIn: boolean
-    onLoginToggle: () => void
 }
 
-export default function Header({ isLoggedIn, onLoginToggle }: HeaderProps) {
+export default function Header({ isLoggedIn }: HeaderProps) {
     const pathName = usePathname();
 
     return (
         <header className="top-0 z-50 sticky bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 border-b w-full">
             <div className="flex items-center h-14 container">
                 <div className="md:hidden">
-                    <Sidebar isLoggedIn={isLoggedIn} onLoginToggle={onLoginToggle} />
+                    <Sidebar isLoggedIn={isLoggedIn} />
                 </div>
                 <div className="hidden md:flex items-center space-x-4 mr-4">
                     <Link href="/" className="font-bold">
@@ -58,10 +57,11 @@ export default function Header({ isLoggedIn, onLoginToggle }: HeaderProps) {
                         <Link href="/login">
                             <Button className="hidden md:flex">Login</Button>
                         </Link>
-                        // <Button onClick={onLoginToggle} className="hidden md:flex">
-                        //     Login
-                        // </Button>
-                    ) : null}
+                    ) :
+                        <Link href="/auth/register">
+                            <Button className="hidden md:flex">Register</Button>
+                        </Link>
+                    }
                 </div>
             </div>
         </header>

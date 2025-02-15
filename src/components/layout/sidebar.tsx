@@ -18,10 +18,9 @@ const sidebarItems = [
 
 interface SidebarProps {
     isLoggedIn: boolean
-    onLoginToggle: () => void
 }
 
-export function Sidebar({ isLoggedIn, onLoginToggle }: SidebarProps) {
+export function Sidebar({ isLoggedIn }: SidebarProps) {
     const pathname = usePathname()
     const [open, setOpen] = useState(false)
 
@@ -73,25 +72,17 @@ export function Sidebar({ isLoggedIn, onLoginToggle }: SidebarProps) {
                         </div>
                     </div>
                     <div className="mt-auto p-4">
-                        <Button
-                            className="w-full"
-                            onClick={() => {
-                                onLoginToggle()
-                                setOpen(false)
-                            }}
-                        >
-                            {isLoggedIn ? (
-                                <>
-                                    <LogIn className="mr-2 w-4 h-4" />
-                                    Logout
-                                </>
-                            ) : (
-                                <>
-                                    <LogIn className="mr-2 w-4 h-4" />
-                                    Login
-                                </>
-                            )}
-                        </Button>
+                        {isLoggedIn ? (
+                            <>
+                                <LogIn className="mr-2 w-4 h-4" />
+                                Logout
+                            </>
+                        ) : (
+                            <>
+                                <LogIn className="mr-2 w-4 h-4" />
+                                Login
+                            </>
+                        )}
                     </div>
                 </div>
             </SheetContent>

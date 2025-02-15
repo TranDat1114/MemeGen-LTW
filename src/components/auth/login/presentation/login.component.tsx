@@ -7,7 +7,7 @@ import { useForm } from "react-hook-form"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import toast from 'react-hot-toast'
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form"
 import { Button } from "@/components/ui/button"
@@ -16,6 +16,7 @@ import useAuthStore from "@/stores/auth-store"
 import { UserLoginDTO } from "@/backend/types/userDTO"
 import { fetchLogin } from "@/lib/axios/fetch/auth"
 import Link from "next/link"
+import { useRouter } from "next/navigation";
 
 const formSchema = z.object({
     email: z
@@ -27,6 +28,8 @@ const formSchema = z.object({
 
 export default function LoginComponent() {
     const { setAccessToken, setUser } = useAuthStore();
+    const router = useRouter();
+
     const form = useForm<UserLoginDTO>({
         resolver: zodResolver(formSchema),
         defaultValues: {
@@ -44,6 +47,7 @@ export default function LoginComponent() {
                 setAccessToken(userLoginRes.accessToken);
                 toast.success("Feeling lucky? 🍀")
                 setUser(userLoginRes.user);
+                router.push('/');
 
             } else {
                 toast.error("Invalid email or password");

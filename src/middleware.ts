@@ -2,7 +2,6 @@ import { NextRequest, NextResponse } from "next/server";
 import { corsMiddleware, pathConfig as corsPathConfig } from "@/middlewares/cors-middleware";
 import { authenticateRequestMiddleware, pathConfig as authRequestPathConfig } from "@/middlewares/authenticate-request-middleware";
 
-
 export async function middleware(req: NextRequest) {
     const { pathname } = req.nextUrl;
 
@@ -25,6 +24,7 @@ export async function middleware(req: NextRequest) {
     }
 
     return NextResponse.next(); // Cho phép tiếp tục nếu tất cả đều hợp lệ
+
 }
 
 // Cấu hình matcher để áp dụng cho từng route

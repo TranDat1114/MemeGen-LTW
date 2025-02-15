@@ -27,5 +27,5 @@ export async function authenticateRequestMiddleware(req: NextRequest) {
 
 export const pathConfig = [
     "/api/protected",
-    "/api/images"
+    "/api/users"
 ]

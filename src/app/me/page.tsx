@@ -1,14 +1,51 @@
+"use client"
 import Image from "next/image"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Card, CardContent } from "@/components/ui/card"
 import { User, ImageIcon, ShoppingCart, Heart } from "lucide-react"
+import { useEffect, useState } from "react";
+import apiClient from "@/lib/axios/interceptor";
+import { useRouter } from "next/navigation";
+import useAuthStore from "@/stores/auth-store";
 
 export default function Profile() {
+    const [isHydrated, setIsHydrated] = useState(false);
+    const { accessToken } = useAuthStore();
+    const router = useRouter();
+    useEffect(() => {
+        // Xác nhận khi hydration hoàn tất
+        setIsHydrated(true);
+    }, []);
+
+    useEffect(() => {
+        // Chỉ tiếp tục nếu đã hydrate và có accessToken
+        if (!isHydrated) return;
+        if (!accessToken) {
+            console.log('No access token found');
+            router.push('/login');
+            return;
+        }
+
+        const fetchResult = async () => {
+            try {
+                const result = await apiClient.get('/api/protected', {
+                    headers: {
+                        Authorization: `Bearer ${accessToken}`,
+                    },
+                });
+            } catch (error) {
+                console.error(error);
+                router.push('/login'); // Điều hướng tới login nếu xảy ra lỗi
+            }
+        };
+
+        fetchResult();
+    }, [isHydrated, accessToken, router]);
     return (
         <div className="mx-auto px-4 py-8 container">
             <div className="flex items-center mb-8">
                 <Image
-                    src="//images/placeholder.jpg?height=128&width=128"
+                    src="/images/placeholder.jpg?height=128&width=128"
                     alt="User Avatar"
                     width={128}
                     height={128}
@@ -33,7 +70,7 @@ export default function Profile() {
                             <Card key={i}>
                                 <CardContent className="p-0">
                                     <Image
-                                        src={`//images/placeholder.jpg?height=300&width=300`}
+                                        src={`/images/placeholder.jpg?height=300&width=300`}
                                         alt={`Created Meme ${i}`}
                                         width={300}
                                         height={300}
@@ -54,7 +91,7 @@ export default function Profile() {
                             <Card key={i}>
                                 <CardContent className="p-0">
                                     <Image
-                                        src={`//images/placeholder.jpg?height=300&width=300`}
+                                        src={`/images/placeholder.jpg?height=300&width=300`}
                                         alt={`Collected NFT ${i}`}
                                         width={300}
                                         height={300}
@@ -75,7 +112,7 @@ export default function Profile() {
                             <Card key={i}>
                                 <CardContent className="p-0">
                                     <Image
-                                        src={`//images/placeholder.jpg?height=300&width=300`}
+                                        src={`/images/placeholder.jpg?height=300&width=300`}
                                         alt={`Liked Meme ${i}`}
                                         width={300}
                                         height={300}

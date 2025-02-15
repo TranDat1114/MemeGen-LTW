@@ -3,7 +3,7 @@ import { UserLoginDTO, UserLoginRes } from "@/backend/types/userDTO";
 import apiClient from "@/lib/axios/interceptor";
 
 export async function fetchLogin(userLoginDTO: UserLoginDTO) {
-    const response = await apiClient.post<BaseResponse<UserLoginRes>>(`/api/login`,
+    const response = await apiClient.post<BaseResponse<UserLoginRes>>(`/api/auth/login`,
         userLoginDTO
     );
     const result = response.data;

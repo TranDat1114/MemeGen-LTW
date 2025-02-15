@@ -170,7 +170,7 @@ export default function RegisterComponent() {
                                     </FormItem>
                                 )}
                             />
-                            <div className='flex gap-2 w-full justify-between mt-2'>
+                            <div className='flex justify-between gap-2 mt-2 w-full'>
                                 <span
                                     className={`${calculateStrength.score >= 1 ? 'bg-green-200' : 'bg-border'
                                         }  p-1 rounded-full w-full`}
@@ -194,7 +194,7 @@ export default function RegisterComponent() {
                             </div>
                             <p
                                 id='password-strength'
-                                className='my-2 text-sm font-medium flex justify-between'
+                                className='flex justify-between my-2 font-medium text-sm'
                             >
                                 <span>Must contain:</span>
                                 <span>
@@ -229,7 +229,7 @@ export default function RegisterComponent() {
                                 ))}
                             </ul>
                             <Separator className='my-6' />
-                            <div className="w-full space-y-4">
+                            <div className="space-y-4 w-full">
                                 <Button type='submit' className='w-full cursor-pointer'>Register</Button>
                                 <div className="flex justify-center items-center gap-2">
                                     <Label>Already have an account?&nbsp;
