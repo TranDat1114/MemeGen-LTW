@@ -6,6 +6,7 @@ import Image from "next/image"
 import { TrendingUpIcon as Trending, Zap, Award, User, Upload, Plus } from "lucide-react"
 import { Card, CardContent } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
+import useAuthStore from "@/stores/auth-store"
 
 const myCreations = [
   {
@@ -42,11 +43,8 @@ const trendingTemplates = [
 ]
 
 export default function Home() {
-  const [isLoggedIn, setIsLoggedIn] = useState(false)
 
-  const toggleLoginStatus = () => {
-    setIsLoggedIn(!isLoggedIn)
-  }
+  const { accessToken } = useAuthStore();
 
   return (
     <div className="space-y-8">
@@ -54,11 +52,11 @@ export default function Home() {
         <div className="mx-auto px-4 container">
           <div className="flex md:flex-row flex-col justify-between items-center">
             <div className="mb-8 md:mb-0 md:w-1/2">
-              <h1 className="mb-4 font-bold text-4xl md:text-6xl">Welcome to MemeNFT</h1>
-              <p className="mb-6 text-xl">Create, collect, and trade the dankest memes as NFTs!</p>
+              <h1 className="mb-4 font-bold text-4xl md:text-6xl">Welcome to Meme Gen</h1>
+              <p className="mb-6 text-xl">Make, collect, and trade the dankest memes as NFTs!</p>
               <div className="flex space-x-4">
                 <Button asChild>
-                  <Link href="/create">Create a Meme</Link>
+                  <Link href="/make-meme">Make a Meme</Link>
                 </Button>
                 <Button asChild variant="outline">
                   <Link href="/marketplace">Explore Marketplace</Link>
@@ -68,7 +66,7 @@ export default function Home() {
             <div className="md:w-1/2">
               <Image
                 src="/images/placeholder.jpg?height=400&width=600"
-                alt="MemeNFT Hero"
+                alt="Meme Gen Hero"
                 width={600}
                 height={400}
                 className="shadow-lg rounded-lg"
@@ -79,11 +77,6 @@ export default function Home() {
       </section>
 
       <div className="mx-auto px-4 container">
-        <div className="flex justify-between items-center mb-8">
-          <h1 className="font-bold text-4xl">Welcome to MemeNFT Marketplace</h1>
-          <Button onClick={toggleLoginStatus}>{isLoggedIn ? "Logout" : "Login"}</Button>
-        </div>
-
         <section className="mb-12">
           <div className="flex justify-between items-center mb-4">
             <h2 className="flex items-center font-semibold text-2xl">
@@ -112,7 +105,7 @@ export default function Home() {
           </div>
         </section>
 
-        {isLoggedIn && (
+        {!!accessToken && (
           <section className="mb-12">
             <h2 className="flex items-center mb-4 font-semibold text-2xl">
               <User className="mr-2" /> My Creations

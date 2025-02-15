@@ -19,7 +19,7 @@ apiClient.interceptors.request.use((config) => {
 // Hàm lấy access token mới bằng refresh token
 const refreshToken = async () => {
     try {
-        const response = await apiClient.post('/api/auth/refresh-token');
+        const response = await apiClient.get('/api/auth/refresh-token');
         const { accessToken } = response.data;
 
         // Lưu lại accessToken mới

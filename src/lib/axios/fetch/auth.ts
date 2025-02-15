@@ -7,11 +7,7 @@ export async function fetchLogin(userLoginDTO: UserLoginDTO) {
     const response = await apiClient.post<BaseResponse<UserLoginRes>>(`/api/auth/login`,
         userLoginDTO
     );
-    const result = response.data;
-    if (result.success === false) {
-        throw new Error(result.message);
-    }
-    return result.data;
+    return response
 }
 
 export async function fetchRegister(userLoginDTO: UserDTO) {
@@ -20,9 +16,9 @@ export async function fetchRegister(userLoginDTO: UserDTO) {
     );
     const result = response.data;
     if (result.success === false) {
-        throw new Error(result.message);
+        return result.message;
     }
-    return result.data;
+    return result.result;
 }
 export const fetchGoogleLogin = async () => {
     const userChrome = await SignUpWithGoogle()

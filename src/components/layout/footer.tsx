@@ -86,11 +86,11 @@ export default function Footer() {
                 <div className="sm:flex sm:justify-between sm:items-center">
                     <div className="flex items-center gap-3">
                         <Image
-                            src="/images/placeholder.jpg"
+                            src="https://i.kym-cdn.com/photos/images/facebook/002/390/598/e60"
                             alt="Logo"
                             width={100}
                             height={100}
-                            className="rounded-full object-center"
+                            className="border-2 border-foreground rounded-full w-[100px] h-[100px] object-center object-cover"
                         />
                         <h1 className="font-semibold text-4xl md:text-5xl sm:text-6xl lg:text-6xl text-balance leading-none tracking-tighter">
                             {`Ryan `}
@@ -219,7 +219,7 @@ export default function Footer() {
         //     <div className="mx-auto px-6 py-12 container">
         //         <div className="mb-8">
         //             <Link href="/" className="flex items-center">
-        //                 <span className="font-bold text-2xl">MemeNFT</span>
+        //                 <span className="font-bold text-2xl">Meme Gen</span>
         //             </Link>
         //             <div className="flex space-x-4 mt-4">
         //                 <Link href="#" className="text-muted-foreground hover:text-foreground">
@@ -265,7 +265,7 @@ export default function Footer() {
         //                     ))}
         //                 </div>
         //                 <p className="text-muted-foreground text-sm">
-        //                     © {new Date().getFullYear()} MemeNFT. Made with love in Ho Chi Minh city, Viet Nam.
+        //                     © {new Date().getFullYear()} Meme Gen. Made with love in Ho Chi Minh city, Viet Nam.
         //                 </p>
         //             </div>
         //         </div>

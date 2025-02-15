@@ -3,46 +3,38 @@ import Image from "next/image"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Card, CardContent } from "@/components/ui/card"
 import { User, ImageIcon, ShoppingCart, Heart } from "lucide-react"
-import { useEffect, useState } from "react";
-import apiClient from "@/lib/axios/interceptor";
+import { useEffect } from "react";
+// import apiClient from "@/lib/axios/interceptor";
 import { useRouter } from "next/navigation";
 import useAuthStore from "@/stores/auth-store";
 
 export default function Profile() {
-    const [isHydrated, setIsHydrated] = useState(false);
     const { accessToken } = useAuthStore();
     const router = useRouter();
     useEffect(() => {
-        // Xác nhận khi hydration hoàn tất
-        setIsHydrated(true);
-    }, []);
-
-    useEffect(() => {
-        // Chỉ tiếp tục nếu đã hydrate và có accessToken
-        if (!isHydrated) return;
         if (!accessToken) {
             console.log('No access token found');
             router.push('/login');
-            return;
         }
 
-        const fetchResult = async () => {
-            try {
-                const result = await apiClient.get('/api/protected', {
-                    headers: {
-                        Authorization: `Bearer ${accessToken}`,
-                    },
-                });
-            } catch (error) {
-                console.error(error);
-                router.push('/login'); // Điều hướng tới login nếu xảy ra lỗi
-            }
-        };
+        // const fetchResult = async () => {
+        //     await apiClient.get('/api/auth/protected', {
+        //         headers: {
+        //             Authorization: `Bearer ${accessToken}`,
+        //         },
+        //     }).then((res) => {
+        //         console.log('Protected data:', res.data);
+        //     }).catch((error) => {
+        //         console.error('Error fetching protected data:', error);
+        //         router.push('/login');
+        //     });
+        // };
 
-        fetchResult();
-    }, [isHydrated, accessToken, router]);
+        // fetchResult();
+    }, []);
+
     return (
-        <div className="mx-auto px-4 py-8 container">
+        <div className="mx-auto px-4 py-8 container" suppressHydrationWarning>
             <div className="flex items-center mb-8">
                 <Image
                     src="/images/placeholder.jpg?height=128&width=128"

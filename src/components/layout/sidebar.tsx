@@ -55,11 +55,11 @@ export function Sidebar() {
                                     </Link>
                                 ))}
                                 {!!accessToken && (
-                                    <Link href="/profile" onClick={() => setOpen(false)}>
+                                    <Link href="/me" onClick={() => setOpen(false)}>
                                         <span
                                             className={cn(
                                                 "flex items-center rounded-md px-3 py-2 text-sm font-medium hover:bg-accent hover:text-accent-foreground",
-                                                pathname === "/profile" ? "bg-accent" : "transparent",
+                                                pathname === "/me" ? "bg-accent" : "transparent",
                                             )}
                                         >
                                             <User className="mr-2 w-4 h-4" />
