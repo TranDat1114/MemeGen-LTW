@@ -94,19 +94,20 @@ export default function Header() {
                                 </Avatar>
                             </DropdownMenuTrigger>
                             <DropdownMenuContent className="w-56">
-                                <DropdownMenuLabel>@{user.username}</DropdownMenuLabel>
-                                <DropdownMenuSeparator />
-                                <DropdownMenuItem>
-                                    <Link href="/profile">
-                                        <Label>Profile</Label>
+                                <DropdownMenuLabel>
+                                    <Link href="/profile" className="w-full">
+                                        <Button variant={"link"} className="w-full">
+                                            @{user.username}
+                                        </Button>
                                     </Link>
-                                </DropdownMenuItem>
+                                </DropdownMenuLabel>
+                                <DropdownMenuSeparator />
                                 <DropdownMenuItem>
                                     {
                                         accessToken &&
-                                        <button id="logout" title="logout" type="button" onClick={logoutOfApp}>
-                                            <Label>Log out</Label>
-                                        </button>
+                                        <Button className="w-full" id="logout" title="logout" type="button" onClick={logoutOfApp}>
+                                            Log out
+                                        </Button>
                                     }
                                     <DropdownMenuShortcut>⇧⌘Q</DropdownMenuShortcut>
                                 </DropdownMenuItem>
