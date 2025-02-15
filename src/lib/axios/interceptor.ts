@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { getAccessTokenFromStorage, updateAccessTokenInStorage } from '@/lib/local-storage/access-token-in-storage';
+import toast from 'react-hot-toast';
 
 // Khởi tạo Axios instance
 const apiClient = axios.create({
@@ -27,7 +28,10 @@ const refreshToken = async () => {
         return accessToken;
     } catch (error) {
         console.error('Error refreshing token', error);
-        // Xử lý lỗi (ví dụ: điều hướng người dùng đến trang đăng nhập)
+        // Nếu lỗi, xóa access token trong localStorage và chuyển hướng về trang login
+        updateAccessTokenInStorage('');
+        window.location.href = '/login';
+        toast.error('Your session has expired. Please log in again.');
         return null;
     }
 };
