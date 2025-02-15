@@ -16,6 +16,7 @@ const useAuthStore = create<AuthStore>()(
                 username: '',
                 userType: '',
                 email: '',
+                imageUrl: '',
             },
             setUser: (user: UserWithOutPasswordDTO) => {
                 set({ user });

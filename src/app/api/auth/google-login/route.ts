@@ -1,24 +1,38 @@
 import { UserService } from "@/backend/services/user";
-import { UserDTO } from "@/backend/types/userDTO";
+import { BaseResponse } from "@/backend/types/baseResponse";
+import { UserLoginRes } from "@/backend/types/userDTO";
+import { REFRESH_TOKEN_LIFETIME } from "@/lib/jwt/handle-token";
 import dbConnect from "@/lib/mongodb";
 import { NextResponse } from "next/server";
 const userService = new UserService();
 
-async function GET(req: Request) {
+async function POST(req: Request) {
     try {
         await dbConnect();
-        const { email } = await req.json();
-        
-        const users = await userService.getUserByEmail(email);
-        console.log(users);
-        const newUser = { email:email }
-      
-        const user = await userService.createUser(newUser);
+        const ip = req.headers.get('x-forwarded-for') || null;
 
-        return NextResponse.json({ success: true, data: user }, { status: 200 });
+        const { email, photoURL } = await req.json();
+
+        console.log(email, photoURL);
+        const loginResult = await userService.loginWithGoogle(email, ip ?? "", photoURL);
+        if (!loginResult) {
+            throw new Error('Login failed');
+        }
+        const response: BaseResponse<UserLoginRes> = {
+            success: true,
+            result: {
+                user: loginResult.userLoginRes.user,
+                accessToken: loginResult.userLoginRes.accessToken
+            }
+        }
+        return NextResponse.json(response, {
+            status: loginResult.newUser ? 201 : 200, headers: {
+                'Set-Cookie': `refresh_token=${loginResult.userLoginRes.refreshToken}; HttpOnly; Path=/; Max-Age=${REFRESH_TOKEN_LIFETIME}; SameSite=Lax; secure: ${process.env.NODE_ENV === 'production'}`
+            }
+        });
     } catch (error) {
         console.error((error as Error).message);
         return NextResponse.json({ success: false, message: (error as Error).message }, { status: 500 });
     }
 }
-export { GET };
+export { POST };

@@ -22,14 +22,18 @@ export async function fetchRegister(userLoginDTO: UserDTO) {
 }
 export const fetchGoogleLogin = async () => {
     const userChrome = await SignUpWithGoogle()
-    const email = userChrome?.user.email
-    const response = await apiClient.get('/api/auth/google-login', email);
-    console.log(result);
-    if (result.success == false) {
-       console.log('ddd')
+    const user = userChrome?.user;
+    if (!user) {
+        throw new Error('User not login with google');
     }
-    return result.data;
-    
+
+    const response = await apiClient.post<BaseResponse<UserLoginRes>>('/api/auth/google-login',
+        {
+            email: user.email,
+            photoURL: user.photoURL
+        }
+    );
+    return response.data.result
 }
 export const logout = async () => {
     try {

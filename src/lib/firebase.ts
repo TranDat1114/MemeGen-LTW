@@ -1,18 +1,16 @@
 import { initializeApp } from "firebase/app";
-import { getAnalytics } from "firebase/analytics";
+// import { getAnalytics } from "firebase/analytics";
 import { getAuth, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
 
-
 const firebaseConfig = {
-    apiKey: "AIzaSyCy25AlHFFD9qmPGXasETmqun9Dd_SIv7A",
-    authDomain: "meme-gen-f7d2b.firebaseapp.com",
-    projectId: "meme-gen-f7d2b",
-    storageBucket: "meme-gen-f7d2b.firebasestorage.app",
-    messagingSenderId: "521428739913",
-    appId: "1:521428739913:web:f5f2db99f422bd82851c98",
-    measurementId: "G-7CLTHN81N7"
+    apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
+    authDomain: process.env.NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN,
+    projectId: process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID,
+    storageBucket: process.env.NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET,
+    messagingSenderId: process.env.NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID,
+    appId: process.env.NEXT_PUBLIC_FIREBASE_APP_ID,
+    measurementId: process.env.NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID
 };
-
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 export const auth = getAuth(app);
@@ -20,9 +18,9 @@ export const SignUpWithGoogle = async () => {
     try {
         const provider = new GoogleAuthProvider();
         const result = await signInWithPopup(auth, provider)
-        return result 
+        return result
     } catch (error) {
         console.log(error);
-        
+
     }
 }

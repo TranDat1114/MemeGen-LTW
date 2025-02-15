@@ -3,7 +3,7 @@
 import { useState } from "react"
 import Image from "next/image"
 import Link from "next/link"
-import { useParams } from "next/navigation"
+// import { useParams } from "next/navigation"
 import { Heart, MessageCircle, Share2, DollarSign } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
@@ -36,7 +36,7 @@ const relatedMemes = [
 ]
 
 export default function MemePage() {
-    const params = useParams()
+    // const params = useParams()
     const [comment, setComment] = useState("")
 
     const handleCommentSubmit = (e: React.FormEvent) => {

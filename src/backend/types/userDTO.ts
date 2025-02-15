@@ -9,6 +9,7 @@ export interface UserDTO {
 export interface UserWithOutPasswordDTO {
     username: string;
     email: string;
+    imageUrl?: string;
     userType?: string;
 }
 

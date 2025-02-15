@@ -16,10 +16,11 @@ import useAuthStore from "@/stores/auth-store"
 import { UserLoginDTO } from "@/backend/types/userDTO"
 import { fetchGoogleLogin, fetchLogin } from "@/lib/axios/fetch/auth"
 import Link from "next/link"
+import Image from "next/image"
 import { useRouter } from "next/navigation";
 import { AxiosError } from "axios"
 import { BaseResponse } from "@/backend/types/baseResponse"
-import { SignUpWithGoogle } from "@/lib/firebase"
+
 
 const formSchema = z.object({
     email: z
@@ -57,18 +58,21 @@ export default function LoginComponent() {
             } else {
                 setOrderErrorMessages("An error occurred. Please try again later.");
             }
-        }
-        catch (error) {
-            toast.error('There was an error processing your request');
-            setOrderErrorMessages((error as Error).message);
-        }
+        });
     };
     const googleLogin = async () => {
-        // const userService = new UserService();
-        const googleLogin = await fetchGoogleLogin()
-        console.log(googleLogin);
-        // const checkEmailExist = userService.getUserByEmail(email);
-        // console.log(checkEmailExist);
+        await fetchGoogleLogin().then((res) => {
+            setAccessToken(res.accessToken);
+            setUser(res.user);
+            toast.success("Feeling lucky? 🍀")
+            router.push('/')
+        }).catch((error: AxiosError<BaseResponse<null>>) => {
+            if (error.response?.status === 400) {
+                setOrderErrorMessages("Invalid email or password");
+            } else {
+                setOrderErrorMessages("An error occurred. Please try again later.");
+            }
+        });
     }
 
     return (
@@ -142,7 +146,7 @@ export default function LoginComponent() {
                                 className="w-full cursor-pointer"
                                 onClick={googleLogin}
                                 variant="outline">
-                                <img
+                                <Image
                                     src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/google/google-original.svg"
                                     alt="Google icon"
                                     width={16}
@@ -151,9 +155,10 @@ export default function LoginComponent() {
                                 Sign in with Google
                             </Button>
                             <Button
+                                onClick={() => toast.error("This feature is in development.\n Please check back later.")}
                                 className="w-full cursor-pointer"
                                 variant="outline">
-                                <img
+                                <Image
                                     src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/github/github-original.svg"
                                     alt="Github icon"
                                     width={16}
@@ -164,7 +169,7 @@ export default function LoginComponent() {
                         </div>
                         <div className="flex justify-center items-center">
                             <Label>
-                                Don't have an account?&nbsp;
+                                {`Don't have an account?&nbsp;`}
                                 <Link
                                     href="/register"
                                     className="text-primary">

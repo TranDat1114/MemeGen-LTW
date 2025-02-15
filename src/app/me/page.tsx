@@ -31,7 +31,7 @@ export default function Profile() {
         // };
 
         // fetchResult();
-    }, []);
+    }, [accessToken, router]);
 
     return (
         <div className="mx-auto px-4 py-8 container" suppressHydrationWarning>

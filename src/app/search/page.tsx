@@ -40,7 +40,7 @@ export default function SearchPage() {
 
     return (
         <div className="mx-auto px-4 py-8 container">
-            <h1 className="mb-8 font-bold text-4xl">Search Results for "{query}"</h1>
+            <h1 className="mb-8 font-bold text-4xl">{`Search Results for "${query}"`}</h1>
 
             <Tabs value={activeTab} onValueChange={setActiveTab} className="mb-8">
                 <TabsList>

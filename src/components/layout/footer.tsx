@@ -1,82 +1,79 @@
-import Link from "next/link"
-import { Twitter, Youtube, Instagram, Facebook } from "lucide-react"
 import React from "react" // Import React
 import Image from "next/image"
-import { useTheme } from "next-themes"
 import { LineShadowText } from "../magicui/line-shadow-text"
 
-const footerSections = {
+// const footerSections = {
 
-    tools: {
-        title: "Tools",
-        items: [
-            // { name: "Video Editor", href: "#" },
-            // { name: "Subtitles", href: "#" },
-            { name: "Meme Generator", href: "#" },
-            // { name: "Convert Video", href: "#" },
-            // { name: "Video Trimmer", href: "#" },
-            // { name: "Screen Recorder", href: "#" },
-        ],
-    },
-    // aiPowered: {
-    //     title: "AI-powered",
-    //     items: [
-    //         { name: "Smart Cut", href: "#" },
-    //         { name: "AI Video Generator", href: "#" },
-    //         { name: "Clean Audio", href: "#" },
-    //         { name: "AI Image Generator", href: "#" },
-    //         { name: "Text to Speech", href: "#" },
-    //         { name: "Document to Video", href: "#" },
-    //     ],
-    // },
-    templates: {
-        title: "Templates",
-        items: [
-            { name: "Video Templates", href: "#" },
-            { name: "Meme Templates", href: "#" },
-            // { name: "Collage Templates", href: "#" },
-            // { name: "Instagram Video", href: "#" },
-            // { name: "Popular Templates", href: "#" },
-            // { name: "EDU Templates", href: "#" },
-        ],
-    },
-    learn: {
-        title: "Learn",
-        items: [
-            { name: "About Us", href: "#" },
-            // { name: "Resources", href: "#" },
-            { name: "Help Center", href: "#" },
-            // { name: "Blog", href: "#" },
-            // { name: "EDU", href: "#" },
-            { name: "Teams", href: "#" },
-            { name: "Contact Us", href: "#" },
-        ],
-    },
-    company: {
-        title: "Company",
-        items: [
-            // { name: "Pricing", href: "#" },
-            // { name: "Careers", href: "#" },
-            // { name: "Partnerships", href: "#" },
-            // { name: "Affiliates", href: "#" },
-            // { name: "Plugins", href: "#" },
-            { name: "Release Notes", href: "#" },
-            // { name: "Refund Policy", href: "#" },
-            { name: "Privacy Policy", href: "#" },
-            { name: "Terms of Service", href: "#" },
-        ],
-    },
-}
+//     tools: {
+//         title: "Tools",
+//         items: [
+//             // { name: "Video Editor", href: "#" },
+//             // { name: "Subtitles", href: "#" },
+//             { name: "Meme Generator", href: "#" },
+//             // { name: "Convert Video", href: "#" },
+//             // { name: "Video Trimmer", href: "#" },
+//             // { name: "Screen Recorder", href: "#" },
+//         ],
+//     },
+//     // aiPowered: {
+//     //     title: "AI-powered",
+//     //     items: [
+//     //         { name: "Smart Cut", href: "#" },
+//     //         { name: "AI Video Generator", href: "#" },
+//     //         { name: "Clean Audio", href: "#" },
+//     //         { name: "AI Image Generator", href: "#" },
+//     //         { name: "Text to Speech", href: "#" },
+//     //         { name: "Document to Video", href: "#" },
+//     //     ],
+//     // },
+//     templates: {
+//         title: "Templates",
+//         items: [
+//             { name: "Video Templates", href: "#" },
+//             { name: "Meme Templates", href: "#" },
+//             // { name: "Collage Templates", href: "#" },
+//             // { name: "Instagram Video", href: "#" },
+//             // { name: "Popular Templates", href: "#" },
+//             // { name: "EDU Templates", href: "#" },
+//         ],
+//     },
+//     learn: {
+//         title: "Learn",
+//         items: [
+//             { name: "About Us", href: "#" },
+//             // { name: "Resources", href: "#" },
+//             { name: "Help Center", href: "#" },
+//             // { name: "Blog", href: "#" },
+//             // { name: "EDU", href: "#" },
+//             { name: "Teams", href: "#" },
+//             { name: "Contact Us", href: "#" },
+//         ],
+//     },
+//     company: {
+//         title: "Company",
+//         items: [
+//             // { name: "Pricing", href: "#" },
+//             // { name: "Careers", href: "#" },
+//             // { name: "Partnerships", href: "#" },
+//             // { name: "Affiliates", href: "#" },
+//             // { name: "Plugins", href: "#" },
+//             { name: "Release Notes", href: "#" },
+//             // { name: "Refund Policy", href: "#" },
+//             { name: "Privacy Policy", href: "#" },
+//             { name: "Terms of Service", href: "#" },
+//         ],
+//     },
+// }
 
-const languages = [
-    { name: "English", code: "en" },
-    { name: "Vietnamese", code: "vi" },
-    // { name: "Español", code: "es" },
-    // { name: "Français", code: "fr" },
-    // { name: "Português", code: "pt" },
-    // { name: "日本語", code: "ja" },
-    // { name: "عربى", code: "ar" },
-]
+// const languages = [
+//     { name: "English", code: "en" },
+//     { name: "Vietnamese", code: "vi" },
+//     // { name: "Español", code: "es" },
+//     // { name: "Français", code: "fr" },
+//     // { name: "Português", code: "pt" },
+//     // { name: "日本語", code: "ja" },
+//     // { name: "عربى", code: "ar" },
+// ]
 
 export default function Footer() {
     const now = new Date()

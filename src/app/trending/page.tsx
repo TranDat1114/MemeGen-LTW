@@ -50,15 +50,15 @@ export default function PopularMemesPage() {
                 </TabsContent>
 
                 <TabsContent value="week">
-                    <p>Content for this week's popular memes</p>
+                    <p>{`Content for this week's popular memes`}</p>
                 </TabsContent>
 
                 <TabsContent value="month">
-                    <p>Content for this month's popular memes</p>
+                    <p>{`Content for this month's popular memes`}</p>
                 </TabsContent>
 
                 <TabsContent value="alltime">
-                    <p>Content for all-time popular memes</p>
+                    <p>{`Content for all-time popular memes`}</p>
                 </TabsContent>
             </Tabs>
         </div>

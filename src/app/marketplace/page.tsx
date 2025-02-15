@@ -40,7 +40,7 @@ const priceRanges = [
 ]
 
 export default function Marketplace() {
-    const [memes, setMemes] = useState<Meme[]>(
+    const [memes] = useState<Meme[]>(
         Array.from({ length: 12 }, (_, i) => ({
             id: i + 1,
             title: `Meme NFT #${i + 1}`,
