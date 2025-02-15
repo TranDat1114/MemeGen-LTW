@@ -192,7 +192,7 @@ export default function Marketplace() {
                         <Link href={`/meme/${meme.id}`}>
                             <CardContent className="p-0">
                                 <Image
-                                    src={meme.imageUrl || "/placeholder.svg"}
+                                    src={meme.imageUrl || "/images/placeholder.jpg"}
                                     alt={meme.title}
                                     width={300}
                                     height={300}

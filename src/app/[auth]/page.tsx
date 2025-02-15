@@ -3,6 +3,7 @@ import { authPathConfig } from "@/lib/router"
 import useAuthStore from "@/stores/auth-store";
 import { usePathname, useRouter } from "next/navigation";
 import { useEffect } from "react";
+import NotFound from "./not-found";
 
 
 export default function AuthPage() {
@@ -21,12 +22,15 @@ export default function AuthPage() {
         }
     }, [accessToken, router]);
 
+    if (!authPathConfig.find((config) => config.path === pathName)) {
+        return <NotFound />
+    }
+
     return (
         <>
             {
                 authPathConfig.map((config) =>
-                    accessToken ?
-                        undefined
+                    accessToken ? undefined
                         :
                         config.path === pathName &&
                         <div key={config.path}>

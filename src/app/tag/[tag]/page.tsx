@@ -31,7 +31,7 @@ export default function TagPage() {
         const fetchedMemes = Array.from({ length: 12 }, (_, i) => ({
             id: i + 1,
             title: `${tag} Meme ${i + 1}`,
-            imageUrl: `/placeholder.svg?height=300&width=300&text=${tag}+${i + 1}`,
+            imageUrl: `/images/placeholder.jpg?height=300&width=300&text=${tag}+${i + 1}`,
             creator: `User${Math.floor(Math.random() * 100) + 1}`,
             likes: Math.floor(Math.random() * 1000),
             comments: Math.floor(Math.random() * 100),
@@ -93,7 +93,7 @@ export default function TagPage() {
                             <CardContent className="p-0">
                                 <div className="relative aspect-square">
                                     <Image
-                                        src={meme.imageUrl || "/placeholder.svg"}
+                                        src={meme.imageUrl || "/images/placeholder.jpg"}
                                         alt={meme.title}
                                         layout="fill"
                                         objectFit="cover"

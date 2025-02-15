@@ -155,6 +155,7 @@ export default function RegisterComponent() {
                                         </div>
                                         <FormControl>
                                             <Input
+                                                type='password'
                                                 placeholder="Input your password"
                                                 {...field}
                                                 // onChange={(e) => setPassword(e.target.value)}
