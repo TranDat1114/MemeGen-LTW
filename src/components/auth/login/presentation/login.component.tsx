@@ -66,27 +66,7 @@ export default function LoginComponent() {
                     <CardDescription>Please sign in or sign up below.</CardDescription>
                 </CardHeader>
                 <CardContent>
-                    <div className="space-y-4">
-                        <Button className="w-full cursor-pointer" variant="secondary">
-                            <img
-                                src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/google/google-original.svg"
-                                alt="Google icon"
-                                width={16}
-                                height={16}
-                            />
-                            Sign in with Google
-                        </Button>
-                        <Button className="w-full cursor-pointer" variant="secondary">
-                            <img
-                                src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/github/github-original.svg"
-                                alt="Github icon"
-                                width={16}
-                                height={16}
-                            />
-                            Sign in with Github
-                        </Button>
-                    </div>
-                    <Separator className="my-6" />
+
                     <Form {...form}>
                         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
                             <FormField
@@ -130,19 +110,47 @@ export default function LoginComponent() {
                                 )}
                             />
                             <div className="space-y-4 w-full">
-                                <Button type="submit" className="w-full cursor-pointer">Submit</Button>
-                                <div className="flex justify-center items-center">
-                                    <Label>
-                                        Don't have an account?&nbsp;
-                                        <Link href="/register" className="text-primary">
-                                            Sign up
-                                        </Link>
-                                    </Label>
-                                </div>
+                                <Button type="submit" className="w-full cursor-pointer">Continue</Button>
+
 
                             </div>
                         </form>
                     </Form>
+
+                    <div className="my-6 px-8">
+                        <Separator className="flex-1" />
+                    </div>
+
+                    <div className="space-y-6">
+                        <div className="space-y-4">
+                            <Button className="w-full cursor-pointer" variant="outline">
+                                <img
+                                    src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/google/google-original.svg"
+                                    alt="Google icon"
+                                    width={16}
+                                    height={16}
+                                />
+                                Sign in with Google
+                            </Button>
+                            <Button className="w-full cursor-pointer" variant="outline">
+                                <img
+                                    src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/github/github-original.svg"
+                                    alt="Github icon"
+                                    width={16}
+                                    height={16}
+                                />
+                                Sign in with Github
+                            </Button>
+                        </div>
+                        <div className="flex justify-center items-center">
+                            <Label>
+                                Don't have an account?&nbsp;
+                                <Link href="/register" className="text-primary">
+                                    Sign up
+                                </Link>
+                            </Label>
+                        </div>
+                    </div>
 
                 </CardContent>
             </Card>
