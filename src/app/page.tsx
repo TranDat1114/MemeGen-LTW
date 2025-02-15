@@ -55,10 +55,10 @@ export default function Home() {
           <div className="flex md:flex-row flex-col justify-between items-center">
             <div className="mb-8 md:mb-0 md:w-1/2">
               <h1 className="mb-4 font-bold text-4xl md:text-6xl">Welcome to Meme Gen</h1>
-              <p className="mb-6 text-xl">Create, collect, and trade the dankest memes as NFTs!</p>
+              <p className="mb-6 text-xl">Make, collect, and trade the dankest memes as NFTs!</p>
               <div className="flex space-x-4">
                 <Button asChild>
-                  <Link href="/create">Create a Meme</Link>
+                  <Link href="/make-meme">Make a Meme</Link>
                 </Button>
                 <Button asChild variant="outline">
                   <Link href="/marketplace">Explore Marketplace</Link>

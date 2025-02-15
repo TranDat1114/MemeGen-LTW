@@ -38,7 +38,7 @@ export default function MemeTemplatesPage() {
 
             <div className="gap-4 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5">
                 {filteredTemplates.map((template) => (
-                    <Link href={`/create?template=${template.id}`} key={template.id}>
+                    <Link href={`/make-meme?template=${template.id}`} key={template.id}>
                         <Card className="hover:shadow-lg overflow-hidden transition-shadow">
                             <CardContent className="p-0">
                                 <div className="relative aspect-square">
