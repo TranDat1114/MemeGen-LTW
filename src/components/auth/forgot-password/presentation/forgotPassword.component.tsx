@@ -10,6 +10,7 @@ import { useForm } from 'react-hook-form'
 import { z } from 'zod'
 import toast from 'react-hot-toast'
 import { InputOtpComponent } from './otp.component'
+import ResetPasswordComponent from '../../reset-password/presentation/resetPassword.component'
 
 const formSchema = z.object({
     email: z.string().email({ message: "Please enter a valid email address" }).min(1, { message: "Email is required" }),
@@ -17,6 +18,7 @@ const formSchema = z.object({
 
 export default function ForgotPasswordComponent() {
     const [otpSent, setOtpSent] = useState(false);
+    const [resetPassword, setResetPassword] = useState(false);
     const [email, setEmail] = useState("");
 
     const form = useForm<z.infer<typeof formSchema>>({
@@ -36,8 +38,9 @@ export default function ForgotPasswordComponent() {
     }
 
     function handleVerifyOtp(otp: string) {
-        if (otp === "123456") { // Fake OTP check
+        if (otp === "123456") {
             toast.success("OTP verified!");
+            setResetPassword(true);
         } else {
             toast.error("Invalid OTP!");
         }
@@ -47,9 +50,15 @@ export default function ForgotPasswordComponent() {
         <>
             <Card className='w-full max-w-md'>
                 <CardHeader>
-                    <CardTitle>{otpSent ? "Enter OTP" : "Forgot Password?"}</CardTitle>
+                    <CardTitle>
+                        {resetPassword ? "Reset Password" : otpSent ? "Enter OTP" : "Forgot Password?"}
+                    </CardTitle>
                     <CardDescription>
-                        {otpSent ? `Enter the OTP sent to your ${email}` : "Enter your email address to reset your password"}
+                        {resetPassword
+                            ? "Enter your new password below"
+                            : otpSent
+                                ? `Enter the OTP sent to ${email}`
+                                : "Enter your email to reset your password"}
                     </CardDescription>
                 </CardHeader>
                 <CardContent>
@@ -79,8 +88,11 @@ export default function ForgotPasswordComponent() {
                                 </div>
                             </form>
                         </Form>
+                    ) : resetPassword ? (
+                        <ResetPasswordComponent />
                     ) : (
                         <InputOtpComponent
+                            email={email}
                             onVerifyOtp={handleVerifyOtp}
                         />
                     )}
