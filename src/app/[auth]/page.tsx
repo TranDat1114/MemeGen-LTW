@@ -20,7 +20,7 @@ export default function AuthPage() {
             }
             return;
         }
-    }, [accessToken, router]);
+    }, [accessToken, router, pathName]);
 
     if (!authPathConfig.find((config) => config.path === pathName)) {
         return <NotFound />

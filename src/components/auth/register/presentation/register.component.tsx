@@ -4,7 +4,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { useForm } from "react-hook-form"
 
 import React, { useMemo, useState } from 'react'
-import { Check, Undo2, X } from 'lucide-react'
+import { Check, X } from 'lucide-react'
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form'
 import toast from 'react-hot-toast'
 import { Input } from '@/components/ui/input'
@@ -18,6 +18,8 @@ import * as yup from 'yup'
 import { InferType } from 'yup'
 import { fetchRegister } from '@/lib/axios/fetch/auth'
 import { useRouter } from 'next/navigation'
+import { AxiosError } from 'axios'
+import { BaseResponse } from '@/backend/types/baseResponse'
 
 const PASSWORD_REQUIREMENTS = [
     { regex: /.{8,}/, text: 'At least 8 characters' },
@@ -91,19 +93,20 @@ export default function RegisterComponent() {
         }
     })
 
-    const [errorList, setErrorList] = useState<string[]>([])
+    const [errorList, setErrorList] = useState<string>()
 
-    function onSubmit(data: InferType<typeof formSchema>) {
+    async function onSubmit(data: InferType<typeof formSchema>) {
         const { repeatPassword, ...rest } = data
-        fetchRegister(rest).then((res) => {
+        console.log(repeatPassword)
+        await fetchRegister(rest).then((res) => {
             if (res) {
                 toast.success("Account created successfully 🎉")
 
                 router.push('/login')
             }
-        }).catch((error) => {
+        }).catch((error: AxiosError<BaseResponse<null>>) => {
             toast.error("❌ Failed to create account")
-            setErrorList((error as Error).message.split(','))
+            setErrorList(error.response?.data.message)
         })
     }
 
@@ -183,6 +186,7 @@ export default function RegisterComponent() {
                                     </FormItem>
                                 )}
                             />
+                            {errorList && <p className="text-red-500 text-sm">{errorList}</p>}
                             <div className='flex justify-between gap-2 mt-2 w-full'>
                                 <span
                                     className={`${calculateStrength.score >= 1 ? 'bg-green-200' : 'bg-border'

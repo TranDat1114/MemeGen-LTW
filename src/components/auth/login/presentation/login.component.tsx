@@ -14,11 +14,13 @@ import { Button } from "@/components/ui/button"
 import { Separator } from "@/components/ui/separator"
 import useAuthStore from "@/stores/auth-store"
 import { UserLoginDTO } from "@/backend/types/userDTO"
-import { fetchLogin } from "@/lib/axios/fetch/auth"
+import { fetchGoogleLogin, fetchLogin } from "@/lib/axios/fetch/auth"
 import Link from "next/link"
+import Image from "next/image"
 import { useRouter } from "next/navigation";
 import { AxiosError } from "axios"
 import { BaseResponse } from "@/backend/types/baseResponse"
+
 
 const formSchema = z.object({
     email: z
@@ -56,8 +58,23 @@ export default function LoginComponent() {
             } else {
                 setOrderErrorMessages("An error occurred. Please try again later.");
             }
-        })
+        });
+    };
+    const googleLogin = async () => {
+        await fetchGoogleLogin().then((res) => {
+            setAccessToken(res.accessToken);
+            setUser(res.user);
+            toast.success("Feeling lucky? 🍀")
+            router.push('/')
+        }).catch((error: AxiosError<BaseResponse<null>>) => {
+            if (error.response?.status === 400) {
+                setOrderErrorMessages("Invalid email or password");
+            } else {
+                setOrderErrorMessages("An error occurred. Please try again later.");
+            }
+        });
     }
+
     return (
         <>
             <Card className="w-full max-w-md">
@@ -66,9 +83,10 @@ export default function LoginComponent() {
                     <CardDescription>Please sign in or sign up below.</CardDescription>
                 </CardHeader>
                 <CardContent>
-
                     <Form {...form}>
-                        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+                        <form
+                            onSubmit={form.handleSubmit(onSubmit)}
+                            className="space-y-6">
                             <FormField
                                 control={form.control}
                                 name="email"
@@ -76,7 +94,10 @@ export default function LoginComponent() {
                                     <FormItem>
                                         <FormLabel>Email</FormLabel>
                                         <FormControl>
-                                            <Input placeholder="johndoe@email.com" {...field} />
+                                            <Input
+                                                placeholder="johndoe@email.com"
+                                                {...field}
+                                            />
                                         </FormControl>
                                         <FormMessage />
                                     </FormItem>
@@ -121,8 +142,11 @@ export default function LoginComponent() {
 
                     <div className="space-y-6">
                         <div className="space-y-4">
-                            <Button className="w-full cursor-pointer" variant="outline">
-                                <img
+                            <Button
+                                className="w-full cursor-pointer"
+                                onClick={googleLogin}
+                                variant="outline">
+                                <Image
                                     src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/google/google-original.svg"
                                     alt="Google icon"
                                     width={16}
@@ -130,8 +154,11 @@ export default function LoginComponent() {
                                 />
                                 Sign in with Google
                             </Button>
-                            <Button className="w-full cursor-pointer" variant="outline">
-                                <img
+                            <Button
+                                onClick={() => toast.error("This feature is in development.\n Please check back later.")}
+                                className="w-full cursor-pointer"
+                                variant="outline">
+                                <Image
                                     src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/github/github-original.svg"
                                     alt="Github icon"
                                     width={16}
@@ -142,16 +169,17 @@ export default function LoginComponent() {
                         </div>
                         <div className="flex justify-center items-center">
                             <Label>
-                                Don't have an account?&nbsp;
-                                <Link href="/register" className="text-primary">
+                                {`Don't have an account?&nbsp;`}
+                                <Link
+                                    href="/register"
+                                    className="text-primary">
                                     Sign up
                                 </Link>
                             </Label>
                         </div>
                     </div>
-
                 </CardContent>
             </Card>
         </>
-    )
+    );
 }

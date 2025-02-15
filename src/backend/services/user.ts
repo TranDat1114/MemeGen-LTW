@@ -4,6 +4,7 @@ import { generateTokens } from '@/lib/jwt/handle-token';
 import { mapEntitytoUserDTO, mapListEntitytoUserDTO } from '@/backend/mappers/user';
 import { UserRepository } from '@/backend/repositories/user';
 import { UserDTO } from '@/backend/types/userDTO';
+import { UniqueUsername } from '@/lib/hash/random-username';
 
 
 
@@ -58,7 +59,6 @@ export class UserService {
         if (loginResult) {
             // Tạo Access Token và Refresh Token
             const tokens = generateTokens(loginResult);
-            console.log(tokens);
             // Luu Refresh Token vào cơ sở dữ liệu
             await this.saveRefreshTokenAndIp(loginResult._id, tokens.refreshToken, ip);
 
@@ -68,6 +68,37 @@ export class UserService {
         }
 
         return null;
+    }
+
+    async loginWithGoogle(email: string, ip: string, photoURL?: string) {
+        try {
+            const user = await this.getUserByEmail(email);
+            if (user) {
+                // Tạo Access Token và Refresh Token
+                const tokens = generateTokens(user);
+                // Luu Refresh Token vào cơ sở dữ liệu
+                await this.saveRefreshTokenAndIp(user._id, tokens.refreshToken, ip);
+
+                const mapUser = await mapEntitytoUserDTO(user);
+
+                return { userLoginRes: { user: mapUser, ...tokens }, newUser: false };
+            }
+        }
+        catch (error) {
+            if ((error as Error).message === 'User not found') {
+                const newUser = { email, password: UniqueUsername(), imageUrl: photoURL };
+                const createdUser = await this.createUser(newUser)
+                console.log(createdUser);
+                const tokens = generateTokens(createdUser);
+                await this.saveRefreshTokenAndIp(createdUser._id, tokens.refreshToken, ip);
+
+                const mapUser = await mapEntitytoUserDTO(createdUser);
+
+                return { userLoginRes: { user: mapUser, ...tokens }, newUser: true };
+            } else {
+                throw error;
+            }
+        }
     }
 
     // Lưu Refresh Token vào cơ sở dữ liệu

@@ -26,6 +26,7 @@ export class UserRepository extends BaseRepository<IUser> {
             const newUser = await mapUserDTOtoEntity(user);
             newUser.username = UniqueUsername()
             newUser.userType = UserType.User;
+            newUser.imageUrl = user.imageUrl ?? "https://res.cloudinary.com/desckxywr/image/upload/v1739650819/f265bbfb-abde-48ea-b4b9-c4b727aa65f9_anteze.jpg";
 
             // Thử tạo người dùng mới
             await UserModel.create(newUser);

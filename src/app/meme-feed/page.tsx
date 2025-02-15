@@ -45,7 +45,7 @@ export default function MemeFeed() {
                 setPage((prevPage) => prevPage + 1)
             })
         }
-    }, [inView, page, fetchMemes]) // Added fetchMemes to dependencies
+    }, [inView, page])
 
     return (
         <div className="mx-auto px-4 py-8 container">

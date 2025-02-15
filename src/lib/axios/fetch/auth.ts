@@ -1,6 +1,7 @@
 import { BaseResponse } from "@/backend/types/baseResponse";
 import { UserDTO, UserLoginDTO, UserLoginRes } from "@/backend/types/userDTO";
 import apiClient from "@/lib/axios/interceptor";
+import { SignUpWithGoogle } from "@/lib/firebase";
 
 export async function fetchLogin(userLoginDTO: UserLoginDTO) {
     const response = await apiClient.post<BaseResponse<UserLoginRes>>(`/api/auth/login`,
@@ -19,7 +20,21 @@ export async function fetchRegister(userLoginDTO: UserDTO) {
     }
     return result.result;
 }
+export const fetchGoogleLogin = async () => {
+    const userChrome = await SignUpWithGoogle()
+    const user = userChrome?.user;
+    if (!user) {
+        throw new Error('User not login with google');
+    }
 
+    const response = await apiClient.post<BaseResponse<UserLoginRes>>('/api/auth/google-login',
+        {
+            email: user.email,
+            photoURL: user.photoURL
+        }
+    );
+    return response.data.result
+}
 export const logout = async () => {
     try {
         const res = await apiClient.get('/api/auth/logout');

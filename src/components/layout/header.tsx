@@ -18,35 +18,41 @@ import {
     DropdownMenuShortcut,
     DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
-import { useEffect, useState } from "react"
+import { useCallback, useEffect, useState } from "react"
 import toast from "react-hot-toast"
 
 
 export default function Header() {
     const pathName = usePathname();
-    const { accessToken, setAccessToken, user } = useAuthStore();
+    const { accessToken, setAccessToken, user, setUser } = useAuthStore();
     const router = useRouter();
 
-    const logoutOfApp = async () => {
+    const logoutOfApp = useCallback(async () => {
         await fetchLogout();
         setAccessToken('');
+        setUser({
+            username: '',
+            userType: '',
+            email: '',
+            imageUrl: '',
+        });
         toast.success("Logged out successfully");
-    }
+    }, [setAccessToken, setUser]); // Chỉ phụ thuộc vào các setter
 
     useEffect(() => {
         const handleShortcut = (event: KeyboardEvent) => {
             if (event.altKey && event.shiftKey && event.key === "Q") {
-                event.preventDefault(); // Ngăn hành động mặc định
+                event.preventDefault();
                 logoutOfApp();
             }
         };
 
         window.addEventListener("keydown", handleShortcut);
-
         return () => {
             window.removeEventListener("keydown", handleShortcut);
         };
-    }, []);
+    }, [logoutOfApp]); // Đảm bảo `useEffect` chỉ chạy lại khi `logoutOfApp` thay đổi
+
 
 
     const [searchTerm, setSearchTerm] = useState("")
@@ -94,7 +100,7 @@ export default function Header() {
                         <DropdownMenu>
                             <DropdownMenuTrigger asChild>
                                 <Avatar className="border-2 border-foreground">
-                                    <AvatarImage src="/images/placeholder.jpg?height=32&width=32" alt="User" />
+                                    <AvatarImage src={user.imageUrl} alt="User" />
                                     <AvatarFallback>U</AvatarFallback>
                                 </Avatar>
                             </DropdownMenuTrigger>
@@ -133,7 +139,7 @@ export default function Header() {
                             <Button className="hidden md:flex">Login</Button>
                         </Link>
                     ) :
-                        <Link href="/auth/register">
+                        <Link href="/register">
                             <Button className="hidden md:flex">Register</Button>
                         </Link>
                     }

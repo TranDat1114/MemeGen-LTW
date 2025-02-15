@@ -1,7 +1,7 @@
 "use client"
 
 import { useState, useEffect } from "react"
-import { useParams } from "next/navigation"
+// import { useParams } from "next/navigation"
 import Image from "next/image"
 import Link from "next/link"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
@@ -30,7 +30,7 @@ const mockUserData = {
 }
 
 export default function UserProfilePage() {
-    const params = useParams()
+    // const params = useParams()
     const [userData, setUserData] = useState(mockUserData)
     const [isFollowing, setIsFollowing] = useState(false)
 

@@ -7,6 +7,8 @@ export async function mapUserDTOtoEntity(dto: UserDTO): Promise<IUser> {
     return {
         email: dto.email,
         password: dto.password,
+        userType: dto.userType,
+        imageUrl: dto.imageUrl,
     } as IUser;
 }
 
@@ -15,6 +17,7 @@ export async function mapEntitytoUserDTO(entity: IUser): Promise<UserWithOutPass
         username: entity.username,
         email: entity.email,
         userType: entity.userType,
+        imageUrl: entity.imageUrl,
     } as UserWithOutPasswordDTO;
 }
 
