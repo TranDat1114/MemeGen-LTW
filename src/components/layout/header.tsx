@@ -66,12 +66,6 @@ export default function Header() {
                         <Link href="/make-meme" className="font-medium text-sm">
                             Make MEME
                         </Link>
-                        <Link href="/upload-template" className="font-medium text-sm">
-                            Upload Template
-                        </Link>
-                        <Link href="/marketplace" className="font-medium text-sm">
-                            Marketplace
-                        </Link>
                         <Link href="/meme-feed" className="font-medium text-sm">
                             Meme Feed
                         </Link>
@@ -89,7 +83,7 @@ export default function Header() {
                             <Search className="top-2.5 left-2 absolute w-4 h-4 text-muted-foreground" />
                             <Input
                                 placeholder="Search memes & templates..."
-                                className="pl-8 w-full md:w-[300px] lg:w-[400px]"
+                                className="pl-8 w-full md:w-[300px]"
                                 value={searchTerm}
                                 onChange={(e) => setSearchTerm(e.target.value)}
                             />

@@ -86,11 +86,11 @@ export default function Footer() {
                 <div className="sm:flex sm:justify-between sm:items-center">
                     <div className="flex items-center gap-3">
                         <Image
-                            src="/images/placeholder.jpg"
+                            src="https://i.kym-cdn.com/photos/images/facebook/002/390/598/e60"
                             alt="Logo"
                             width={100}
                             height={100}
-                            className="rounded-full object-center"
+                            className="border-2 border-foreground rounded-full w-[100px] h-[100px] object-center object-cover"
                         />
                         <h1 className="font-semibold text-4xl md:text-5xl sm:text-6xl lg:text-6xl text-balance leading-none tracking-tighter">
                             {`Ryan `}
