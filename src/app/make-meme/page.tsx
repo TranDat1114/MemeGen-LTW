@@ -7,8 +7,12 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Slider } from "@/components/ui/slider"
 import { Toggle } from "@/components/ui/toggle"
-import { X, Move, Type, ScanEye } from "lucide-react"
+import { X, Move, Type, ScanEye, Bold, Italic, Underline } from "lucide-react"
 import { Textarea } from "@/components/ui/textarea"
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
+import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover"
+import { HexColorPicker } from "react-colorful"
+import { getComplementaryColor } from "@/lib/react-colorful/invert-color"
 
 interface TextPosition {
     id: number
@@ -17,7 +21,29 @@ interface TextPosition {
     text: string
     size: number
     rotation: number
+    color: string
+    font: string
+    bold: boolean
+    italic: boolean
+    underline: boolean
+    opacity: number
 }
+
+const fonts = [
+    "Arial",
+    "Helvetica",
+    "Times New Roman",
+    "Courier",
+    "Verdana",
+    "Georgia",
+    "Palatino",
+    "Garamond",
+    "Bookman",
+    "Comic Sans MS",
+    "Trebuchet MS",
+    "Arial Black",
+    "Impact",
+]
 
 export default function MemeGenerator() {
     const [image, setImage] = useState<string | null>(null)
@@ -62,7 +88,20 @@ export default function MemeGenerator() {
                 const y = (e.clientY - rect.top) * (canvas.height / rect.height)
 
                 if (text && addTextState) {
-                    const newText: TextPosition = { id: nextId, x, y, text, size: 80, rotation: 0 }
+                    const newText: TextPosition = {
+                        id: nextId,
+                        x,
+                        y,
+                        text,
+                        size: 80,
+                        rotation: 0,
+                        color: "#000000",
+                        font: "Arial",
+                        bold: false,
+                        italic: false,
+                        underline: false,
+                        opacity: 1,
+                    }
                     setTextPositions((prev) => [...prev, newText])
                     setSelectedTextId(nextId)
                     setNextId((prevId) => prevId + 1)
@@ -76,7 +115,7 @@ export default function MemeGenerator() {
     )
 
     const removeText = useCallback((e: React.MouseEvent, id: number) => {
-        e.stopPropagation() // Prevent canvas click
+        e.stopPropagation()
         setTextPositions((prev) => prev.filter((pos) => pos.id !== id))
         setSelectedTextId(null)
     }, [])
@@ -87,7 +126,7 @@ export default function MemeGenerator() {
 
     const handleDragStart = useCallback(
         (e: React.MouseEvent, id: number) => {
-            e.stopPropagation() // Prevent canvas click
+            e.stopPropagation()
             const canvas = canvasRef.current
             if (canvas) {
                 const rect = canvas.getBoundingClientRect()
@@ -186,6 +225,44 @@ export default function MemeGenerator() {
         [selectedTextId],
     )
 
+    const handleTextColorChange = useCallback(
+        (color: string) => {
+            if (selectedTextId !== null) {
+                setTextPositions((prev) => prev.map((pos) => (pos.id === selectedTextId ? { ...pos, color: color } : pos)))
+            }
+        },
+        [selectedTextId],
+    )
+
+    const handleTextFontChange = useCallback(
+        (font: string) => {
+            if (selectedTextId !== null) {
+                setTextPositions((prev) => prev.map((pos) => (pos.id === selectedTextId ? { ...pos, font: font } : pos)))
+            }
+        },
+        [selectedTextId],
+    )
+
+    const handleTextStyleChange = useCallback(
+        (style: "bold" | "italic" | "underline") => {
+            if (selectedTextId !== null) {
+                setTextPositions((prev) =>
+                    prev.map((pos) => (pos.id === selectedTextId ? { ...pos, [style]: !pos[style] } : pos)),
+                )
+            }
+        },
+        [selectedTextId],
+    )
+
+    const handleTextOpacityChange = useCallback(
+        (value: number) => {
+            if (selectedTextId !== null) {
+                setTextPositions((prev) => prev.map((pos) => (pos.id === selectedTextId ? { ...pos, opacity: value } : pos)))
+            }
+        },
+        [selectedTextId],
+    )
+
     const generateMeme = useCallback(() => {
         const canvas = canvasRef.current
         if (canvas && image) {
@@ -201,19 +278,23 @@ export default function MemeGenerator() {
                         ctx.translate(pos.x, pos.y)
                         ctx.rotate((pos.rotation * Math.PI) / 180)
 
+                        ctx.font = `${pos.italic ? "italic " : ""}${pos.bold ? "bold " : ""}${pos.size}px ${pos.font}`
+                        ctx.fillStyle = pos.color
+                        ctx.globalAlpha = pos.opacity
+                        ctx.textAlign = "center"
+
                         const lines = pos.text.split("\n")
                         lines.forEach((line, idx) => {
                             const lineHeight = pos.size * 1.2
-                            const yOffset = idx * lineHeight
-                            ctx.font = `${pos.size}px 'Bangers', 'Impact', sans-serif`
-                            ctx.fillStyle = "white"
-                            ctx.strokeStyle = "black"
-                            ctx.lineWidth = 2
-                            ctx.textAlign = "center"
+                            const yOffset = idx * lineHeight - ((lines.length - 1) * lineHeight) / 2
                             ctx.fillText(line, 0, yOffset)
-                            ctx.strokeText(line, 0, yOffset)
-                            // ctx.fillText(pos.text, 0, 0)
-                            // ctx.strokeText(pos.text, 0, 0)
+                            if (pos.underline) {
+                                const textWidth = ctx.measureText(line).width
+                                ctx.beginPath()
+                                ctx.moveTo(-textWidth / 2, yOffset + 3)
+                                ctx.lineTo(textWidth / 2, yOffset + 3)
+                                ctx.stroke()
+                            }
                         })
 
                         ctx.restore()
@@ -312,6 +393,76 @@ export default function MemeGenerator() {
                                 onValueChange={(value) => handleTextRotationChange(value[0])}
                             />
                         </div>
+                    </div>
+
+                    <div className="flex md:flex-row md:space-x-4">
+                        <div className="mb-4 md:w-1/2">
+                            <Label htmlFor="text-color">{`Text Color: `}
+                                <span>
+                                    {selectedText ? selectedText.color : "#000000"}
+                                </span>
+                            </Label>
+                            <br />
+                            <Popover>
+                                <PopoverTrigger asChild>
+                                    <Button
+                                        id="text-color"
+                                        variant="outline"
+                                        className="justify-start w-full font-normal text-left"
+                                        style={{ backgroundColor: selectedText ? selectedText.color : "#000000" }}
+                                    >
+                                        <div
+                                            className="mr-2 border border-gray-200 rounded-full w-4 h-4"
+                                            style={{ backgroundColor: selectedText ? selectedText.color : "#000000" }}
+                                        />
+                                    </Button>
+                                </PopoverTrigger>
+                                <PopoverContent className="w-80">
+                                    <HexColorPicker
+                                        color={selectedText ? selectedText.color : "#000000"}
+                                        onChange={handleTextColorChange}
+                                    />
+                                </PopoverContent>
+                            </Popover>
+                        </div>
+                        <div className="mb-4 md:w-1/2">
+                            <Label htmlFor="text-font">Text Font</Label>
+                            <Select onValueChange={handleTextFontChange} value={selectedText ? selectedText.font : "Arial"}>
+                                <SelectTrigger className="w-full">
+                                    <SelectValue placeholder="Select a font" />
+                                </SelectTrigger>
+                                <SelectContent>
+                                    {fonts.map((font) => (
+                                        <SelectItem key={font} value={font}>
+                                            {font}
+                                        </SelectItem>
+                                    ))}
+                                </SelectContent>
+                            </Select>
+                        </div>
+                    </div>
+                    <div className="flex space-x-2 mb-4">
+                        <Toggle pressed={selectedText?.bold} onPressedChange={() => handleTextStyleChange("bold")}>
+                            <Bold className="w-4 h-4" />
+                        </Toggle>
+                        <Toggle pressed={selectedText?.italic} onPressedChange={() => handleTextStyleChange("italic")}>
+                            <Italic className="w-4 h-4" />
+                        </Toggle>
+                        <Toggle pressed={selectedText?.underline} onPressedChange={() => handleTextStyleChange("underline")}>
+                            <Underline className="w-4 h-4" />
+                        </Toggle>
+                    </div>
+
+                    <div className="mb-4">
+                        <Label htmlFor="text-opacity">Text Opacity</Label>
+                        <Slider
+                            id="text-opacity"
+                            min={0}
+                            max={1}
+                            step={0.01}
+                            value={[selectedText ? selectedText.opacity : 1]}
+                            onValueChange={(value) => handleTextOpacityChange(value[0])}
+                        />
                     </div>
                 </>
             )}
