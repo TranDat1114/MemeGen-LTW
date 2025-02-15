@@ -219,7 +219,7 @@ export default function Footer() {
         //     <div className="mx-auto px-6 py-12 container">
         //         <div className="mb-8">
         //             <Link href="/" className="flex items-center">
-        //                 <span className="font-bold text-2xl">MemeNFT</span>
+        //                 <span className="font-bold text-2xl">Meme Gen</span>
         //             </Link>
         //             <div className="flex space-x-4 mt-4">
         //                 <Link href="#" className="text-muted-foreground hover:text-foreground">
@@ -265,7 +265,7 @@ export default function Footer() {
         //                     ))}
         //                 </div>
         //                 <p className="text-muted-foreground text-sm">
-        //                     © {new Date().getFullYear()} MemeNFT. Made with love in Ho Chi Minh city, Viet Nam.
+        //                     © {new Date().getFullYear()} Meme Gen. Made with love in Ho Chi Minh city, Viet Nam.
         //                 </p>
         //             </div>
         //         </div>

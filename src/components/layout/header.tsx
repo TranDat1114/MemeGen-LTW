@@ -7,34 +7,31 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Sidebar } from "@/components/layout/sidebar"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
-import { usePathname } from "next/navigation"
+import { usePathname, useRouter } from "next/navigation"
 import useAuthStore from "@/stores/auth-store"
 import { logout as fetchLogout } from "@/lib/axios/fetch/auth"
-
 import {
     DropdownMenu,
     DropdownMenuContent,
     DropdownMenuItem,
-    DropdownMenuLabel,
     DropdownMenuSeparator,
     DropdownMenuShortcut,
     DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
+import { useEffect, useState } from "react"
 import toast from "react-hot-toast"
-import { Label } from "../ui/label"
-import { useEffect } from "react"
 
 
 export default function Header() {
     const pathName = usePathname();
     const { accessToken, setAccessToken, user } = useAuthStore();
+    const router = useRouter();
 
     const logoutOfApp = async () => {
         await fetchLogout();
         setAccessToken('');
         toast.success("Logged out successfully");
     }
-
 
     useEffect(() => {
         const handleShortcut = (event: KeyboardEvent) => {
@@ -52,19 +49,25 @@ export default function Header() {
     }, []);
 
 
+    const [searchTerm, setSearchTerm] = useState("")
+
+
     return (
         <header className="top-0 z-50 sticky bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 border-b w-full">
             <div className="flex items-center h-14 container">
                 <div className="md:hidden">
                     <Sidebar />
                 </div>
-                <div className="hidden md:flex items-center space-x-4 mr-4">
+                <div className="hidden md:flex items-center space-x-4 mr-4 uppercase">
                     <Link href="/" className="font-bold">
-                        MemeNFT
+                        Meme GEN
                     </Link>
                     <nav className="flex items-center space-x-4">
                         <Link href="/make-meme" className="font-medium text-sm">
                             Make MEME
+                        </Link>
+                        <Link href="/upload-template" className="font-medium text-sm">
+                            Upload Template
                         </Link>
                         <Link href="/marketplace" className="font-medium text-sm">
                             Marketplace
@@ -72,16 +75,24 @@ export default function Header() {
                         <Link href="/meme-feed" className="font-medium text-sm">
                             Meme Feed
                         </Link>
-                        <Link href="/trending" className="font-medium text-sm">
-                            Trending
-                        </Link>
                     </nav>
                 </div>
                 <div className="flex flex-1 justify-end items-center space-x-2">
                     <div className="flex-1 md:flex-none w-full md:w-auto">
-                        <form className="relative">
+                        <form
+                            className="relative flex-1 md:flex-none w-full md:w-auto"
+                            onSubmit={(e) => {
+                                e.preventDefault()
+                                router.push(`/search?q=${encodeURIComponent(searchTerm)}`)
+                            }}
+                        >
                             <Search className="top-2.5 left-2 absolute w-4 h-4 text-muted-foreground" />
-                            <Input placeholder="Search memes..." className="pl-8 w-full md:w-[300px] lg:w-[400px]" />
+                            <Input
+                                placeholder="Search memes & templates..."
+                                className="pl-8 w-full md:w-[300px] lg:w-[400px]"
+                                value={searchTerm}
+                                onChange={(e) => setSearchTerm(e.target.value)}
+                            />
                         </form>
                     </div>
                     <ThemeToggle />

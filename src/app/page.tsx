@@ -54,7 +54,7 @@ export default function Home() {
         <div className="mx-auto px-4 container">
           <div className="flex md:flex-row flex-col justify-between items-center">
             <div className="mb-8 md:mb-0 md:w-1/2">
-              <h1 className="mb-4 font-bold text-4xl md:text-6xl">Welcome to MemeNFT</h1>
+              <h1 className="mb-4 font-bold text-4xl md:text-6xl">Welcome to Meme Gen</h1>
               <p className="mb-6 text-xl">Create, collect, and trade the dankest memes as NFTs!</p>
               <div className="flex space-x-4">
                 <Button asChild>
@@ -68,7 +68,7 @@ export default function Home() {
             <div className="md:w-1/2">
               <Image
                 src="/images/placeholder.jpg?height=400&width=600"
-                alt="MemeNFT Hero"
+                alt="Meme Gen Hero"
                 width={600}
                 height={400}
                 className="shadow-lg rounded-lg"
@@ -80,7 +80,7 @@ export default function Home() {
 
       <div className="mx-auto px-4 container">
         <div className="flex justify-between items-center mb-8">
-          <h1 className="font-bold text-4xl">Welcome to MemeNFT Marketplace</h1>
+          <h1 className="font-bold text-4xl">Welcome to Meme Gen Marketplace</h1>
           <Button onClick={toggleLoginStatus}>{isLoggedIn ? "Logout" : "Login"}</Button>
         </div>
 
