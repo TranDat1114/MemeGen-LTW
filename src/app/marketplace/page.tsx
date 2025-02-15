@@ -89,7 +89,7 @@ export default function Marketplace() {
     })
 
     return (
-        <div className="space-y-6">
+        <div className="space-y-6" suppressHydrationWarning>
             <div className="flex sm:flex-row flex-col justify-between items-center gap-4">
                 <h1 className="font-bold text-4xl">NFT Marketplace</h1>
                 <div className="flex items-center gap-2 w-full sm:w-auto">
