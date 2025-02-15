@@ -20,12 +20,8 @@ export async function POST(req: Request) {
             return NextResponse.json({ success: false, message: error.message }, { status: 400 });
         }
 
-        try {
-            if (await userService.getUserByEmail(userDto.email)) {
-                return NextResponse.json({ success: false, message: 'Email already exists' }, { status: 400 });
-            }
-        } catch (error) {
-            // Do nothing
+        if (await userService.getUserByEmail(userDto.email)) {
+            return NextResponse.json({ success: false, message: 'Email already exists' }, { status: 400 });
         }
 
         const user = await userService.createUser(userDto);

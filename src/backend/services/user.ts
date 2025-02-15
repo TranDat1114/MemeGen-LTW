@@ -71,33 +71,26 @@ export class UserService {
     }
 
     async loginWithGoogle(email: string, ip: string, photoURL?: string) {
-        try {
-            const user = await this.getUserByEmail(email);
-            if (user) {
-                // Tạo Access Token và Refresh Token
-                const tokens = generateTokens(user);
-                // Luu Refresh Token vào cơ sở dữ liệu
-                await this.saveRefreshTokenAndIp(user._id, tokens.refreshToken, ip);
+        const user = await this.getUserByEmail(email);
+        if (user) {
+            // Tạo Access Token và Refresh Token
+            const tokens = generateTokens(user);
+            // Luu Refresh Token vào cơ sở dữ liệu
+            await this.saveRefreshTokenAndIp(user._id, tokens.refreshToken, ip);
 
-                const mapUser = await mapEntitytoUserDTO(user);
+            const mapUser = await mapEntitytoUserDTO(user);
 
-                return { userLoginRes: { user: mapUser, ...tokens }, newUser: false };
-            }
-        }
-        catch (error) {
-            if ((error as Error).message === 'User not found') {
-                const newUser = { email, password: UniqueUsername(), imageUrl: photoURL };
-                const createdUser = await this.createUser(newUser)
-                console.log(createdUser);
-                const tokens = generateTokens(createdUser);
-                await this.saveRefreshTokenAndIp(createdUser._id, tokens.refreshToken, ip);
+            return { userLoginRes: { user: mapUser, ...tokens }, newUser: false };
+        } else {
+            const newUser = { email, password: UniqueUsername(), imageUrl: photoURL };
+            const createdUser = await this.createUser(newUser)
+            console.log(createdUser);
+            const tokens = generateTokens(createdUser);
+            await this.saveRefreshTokenAndIp(createdUser._id, tokens.refreshToken, ip);
 
-                const mapUser = await mapEntitytoUserDTO(createdUser);
+            const mapUser = await mapEntitytoUserDTO(createdUser);
 
-                return { userLoginRes: { user: mapUser, ...tokens }, newUser: true };
-            } else {
-                throw error;
-            }
+            return { userLoginRes: { user: mapUser, ...tokens }, newUser: true };
         }
     }
 
