@@ -88,24 +88,34 @@ export default function Header() {
                     {!!accessToken ? (
                         <DropdownMenu>
                             <DropdownMenuTrigger asChild>
-                                <Avatar>
+                                <Avatar className="border-2 border-foreground">
                                     <AvatarImage src="/images/placeholder.jpg?height=32&width=32" alt="User" />
                                     <AvatarFallback>U</AvatarFallback>
                                 </Avatar>
                             </DropdownMenuTrigger>
-                            <DropdownMenuContent className="w-56">
-                                <DropdownMenuLabel>
-                                    <Link href="/profile" className="w-full">
-                                        <Button variant={"link"} className="w-full">
+                            <DropdownMenuContent className="w-56" align="end" forceMount>
+                                <DropdownMenuItem asChild>
+                                    <Link href="/me" className="cursor-pointer">
+                                        <Button variant={'link'}>
                                             @{user.username}
                                         </Button>
                                     </Link>
-                                </DropdownMenuLabel>
+                                </DropdownMenuItem>
+                                <DropdownMenuSeparator />
+                                <DropdownMenuItem asChild>
+                                    <Link href="/settings" className="cursor-pointer" >
+                                        Settings
+                                    </Link>
+                                </DropdownMenuItem>
                                 <DropdownMenuSeparator />
                                 <DropdownMenuItem>
                                     {
                                         accessToken &&
-                                        <Button className="w-full" id="logout" title="logout" type="button" onClick={logoutOfApp}>
+                                        <Button className="w-full"
+                                            id="logout"
+                                            title="logout"
+                                            type="button"
+                                            onClick={logoutOfApp}>
                                             Log out
                                         </Button>
                                     }
