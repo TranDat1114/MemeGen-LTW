@@ -7,7 +7,7 @@ import { useForm } from "react-hook-form"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import toast from 'react-hot-toast'
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form"
 import { Button } from "@/components/ui/button"
@@ -17,6 +17,8 @@ import { UserLoginDTO } from "@/backend/types/userDTO"
 import { fetchLogin } from "@/lib/axios/fetch/auth"
 import Link from "next/link"
 import { useRouter } from "next/navigation";
+import { AxiosError } from "axios"
+import { BaseResponse } from "@/backend/types/baseResponse"
 
 const formSchema = z.object({
     email: z
@@ -41,23 +43,21 @@ export default function LoginComponent() {
     const [orderErrorMessages, setOrderErrorMessages] = useState<string>();
 
     const onSubmit = async (data: UserLoginDTO) => {
-        try {
-            const userLoginRes = await fetchLogin(data);
-            if (userLoginRes) {
-                setAccessToken(userLoginRes.accessToken);
+        await fetchLogin(data).then((res) => {
+            if (res.status === 200) {
+                setAccessToken(res.data.result.accessToken);
+                setUser(res.data.result.user);
                 toast.success("Feeling lucky? 🍀")
-                setUser(userLoginRes.user);
-                router.push('/');
-
-            } else {
-                toast.error("Invalid email or password");
+                router.push('/')
             }
-        }
-        catch (error) {
-            toast.error('There was an error processing your request');
-            setOrderErrorMessages((error as Error).message);
-        }
-    };
+        }).catch((error: AxiosError<BaseResponse<null>>) => {
+            if (error.response?.status === 400) {
+                setOrderErrorMessages("Invalid email or password");
+            } else {
+                setOrderErrorMessages("An error occurred. Please try again later.");
+            }
+        })
+    }
     return (
         <>
             <Card className="w-full max-w-md">
@@ -110,9 +110,7 @@ export default function LoginComponent() {
                                 )}
                             />
                             <div className="space-y-4 w-full">
-                                <Button type="submit" className="w-full cursor-pointer">Continue</Button>
-
-
+                                <Button type="submit" className="w-full">Continue</Button>
                             </div>
                         </form>
                     </Form>
