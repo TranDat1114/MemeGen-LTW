@@ -88,7 +88,9 @@ export default function LoginComponent() {
                                     <FormItem>
                                         <div className="flex justify-between items-center">
                                             <FormLabel>Password</FormLabel>
-                                            <Label className="cursor-pointer text-muted-foreground">Forgot password?</Label>
+                                            <Link href="/forgot-password">
+                                                <Label className="cursor-pointer text-muted-foreground">Forgot password?</Label>
+                                            </Link>
                                         </div>
                                         <FormControl>
                                             <Input placeholder="********" {...field} type="password" />
