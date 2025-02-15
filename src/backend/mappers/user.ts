@@ -10,11 +10,12 @@ export async function mapUserDTOtoEntity(dto: UserDTO): Promise<IUser> {
     } as IUser;
 }
 
-export async function mapEntitytoUserDTO(entity: IUser): Promise<UserDTO> {
+export async function mapEntitytoUserDTO(entity: IUser): Promise<UserWithOutPasswordDTO> {
     return {
+        username: entity.username,
         email: entity.email,
         userType: entity.userType,
-    } as UserDTO;
+    } as UserWithOutPasswordDTO;
 }
 
 export async function mapListEntitytoUserDTO(entities: IUser[]): Promise<UserWithOutPasswordDTO[]> {

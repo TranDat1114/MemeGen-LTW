@@ -7,6 +7,7 @@ export interface UserDTO {
 }
 
 export interface UserWithOutPasswordDTO {
+    username: string;
     email: string;
     userType?: string;
 }
@@ -19,4 +20,11 @@ export interface UserLoginDTO {
 export interface UserLoginRes {
     user: UserWithOutPasswordDTO;
     accessToken: string;
+}
+
+export interface UserRegisterRes {
+    email: string;
+    userType?: string;
+    username: string;
+    //pass
 }

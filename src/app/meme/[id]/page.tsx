@@ -47,7 +47,7 @@ export default function MemePage() {
     }
 
     return (
-        <div className="mx-auto px-4 py-8 container">
+        <div className="mx-auto px-4 py-8 container" suppressHydrationWarning>
             <div className="gap-8 grid grid-cols-1 md:grid-cols-3">
                 <div className="md:col-span-2">
                     <Card>

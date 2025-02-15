@@ -7,6 +7,7 @@ import { cn } from "@/lib/utils"
 import { Button } from "@/components/ui/button"
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet"
 import { Menu, Home, PlusSquare, ShoppingBag, User, LogIn, Film } from "lucide-react"
+import useAuthStore from "@/stores/auth-store"
 
 const sidebarItems = [
     { name: "Home", href: "/", icon: Home },
@@ -16,13 +17,11 @@ const sidebarItems = [
     { name: "Meme Feed", href: "/meme-feed", icon: Film },
 ]
 
-interface SidebarProps {
-    isLoggedIn: boolean
-}
-
-export function Sidebar({ isLoggedIn }: SidebarProps) {
+export function Sidebar() {
     const pathname = usePathname()
     const [open, setOpen] = useState(false)
+
+    const { accessToken } = useAuthStore()
 
     return (
         <Sheet open={open} onOpenChange={setOpen}>
@@ -55,7 +54,7 @@ export function Sidebar({ isLoggedIn }: SidebarProps) {
                                         </span>
                                     </Link>
                                 ))}
-                                {isLoggedIn && (
+                                {!!accessToken && (
                                     <Link href="/profile" onClick={() => setOpen(false)}>
                                         <span
                                             className={cn(
@@ -72,7 +71,7 @@ export function Sidebar({ isLoggedIn }: SidebarProps) {
                         </div>
                     </div>
                     <div className="mt-auto p-4">
-                        {isLoggedIn ? (
+                        {!!accessToken ? (
                             <>
                                 <LogIn className="mr-2 w-4 h-4" />
                                 Logout

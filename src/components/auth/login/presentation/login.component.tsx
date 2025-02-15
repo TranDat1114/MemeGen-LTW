@@ -111,11 +111,11 @@ export default function LoginComponent() {
                                         <div className="flex justify-between items-center">
                                             <FormLabel>Password</FormLabel>
                                             <Link href="/forgot-password">
-                                                <Label className="cursor-pointer text-muted-foreground">Forgot password?</Label>
+                                                <Label className="text-muted-foreground cursor-pointer">Forgot password?</Label>
                                             </Link>
                                         </div>
                                         <FormControl>
-                                            <Input placeholder="********" {...field} type="password" />
+                                            <Input placeholder="Input your password" {...field} type="password" />
                                         </FormControl>
                                         <FormMessage />
                                         <>

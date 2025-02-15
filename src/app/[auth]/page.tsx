@@ -9,6 +9,8 @@ export default function AuthPage() {
     const pathName = usePathname();
     const router = useRouter();
     const { accessToken } = useAuthStore();
+
+    // Redirect to home page if user is already logged in
     useEffect(() => {
         if (accessToken) {
             const isAuthPath = authPathConfig.find((config) => config.path === `${pathName}`);

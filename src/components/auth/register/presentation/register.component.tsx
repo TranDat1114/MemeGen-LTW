@@ -1,8 +1,6 @@
 "use client"
 
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
-import { zodResolver } from "@hookform/resolvers/zod"
-import { z } from "zod"
 import { useForm } from "react-hook-form"
 
 import React, { useMemo, useState } from 'react'
@@ -14,6 +12,12 @@ import { Label } from '@/components/ui/label'
 import { Separator } from '@/components/ui/separator'
 import { Button } from '@/components/ui/button'
 import Link from 'next/link'
+
+import { yupResolver } from '@hookform/resolvers/yup'
+import * as yup from 'yup'
+import { InferType } from 'yup'
+import { fetchRegister } from '@/lib/axios/fetch/auth'
+import { useRouter } from 'next/navigation'
 
 const PASSWORD_REQUIREMENTS = [
     { regex: /.{8,}/, text: 'At least 8 characters' },
@@ -54,31 +58,32 @@ type PasswordStrength = {
     requirements: Requirement[];
 };
 
-const formSchema = z.object({
-    email: z
+export const formSchema = yup.object().shape({
+    email: yup
         .string()
-        .email({ message: "Please enter a valid email address" })
-        .min(1, { message: "Email is required" }),
+        .email("Please enter a valid email address")
+        .required("Email is required"),
 
-    password: z
+    password: yup
         .string()
-        .min(8, { message: "Password must be at least 8 characters long" })
-        .max(32, { message: "Password must be at most 32 characters long" })
-        .regex(/[A-Z]/, { message: "Password must contain at least one uppercase letter" })
-        .regex(/[a-z]/, { message: "Password must contain at least one lowercase letter" })
-        .regex(/\d/, { message: "Password must contain at least one number" })
-        .regex(/[@$!%*?&]/, { message: "Password must contain at least one special character (@$!%*?&)" }),
+        .required("Password is required")
+        .min(8, "Password must be at least 8 characters long")
+        .max(32, "Password must be at most 32 characters long")
+        .matches(/[A-Z]/, "Password must contain at least one uppercase letter")
+        .matches(/[a-z]/, "Password must contain at least one lowercase letter")
+        .matches(/\d/, "Password must contain at least one number")
+        .matches(/[@$!%*?&]/, "Password must contain at least one special character (@$!%*?&)"),
 
-    repeatPassword: z.string().min(1, { message: "Please confirm your password" }),
-})
-    .refine((data) => data.password === data.repeatPassword, {
-        message: "Passwords do not match",
-        path: ["repeatPassword"],
-    })
+    repeatPassword: yup
+        .string()
+        .required("Please confirm your password")
+        .oneOf([yup.ref("password"), ''], "Passwords do not match"),
+});
 
 export default function RegisterComponent() {
-    const form = useForm<z.infer<typeof formSchema>>({
-        resolver: zodResolver(formSchema),
+    const router = useRouter()
+    const form = useForm<InferType<typeof formSchema>>({
+        resolver: yupResolver(formSchema),
         defaultValues: {
             email: "",
             password: "",
@@ -86,17 +91,27 @@ export default function RegisterComponent() {
         }
     })
 
-    function onSubmit(data: z.infer<typeof formSchema>) {
-        console.log(data)
-        toast.success("Login successful 🎉");
+    const [errorList, setErrorList] = useState<string[]>([])
+
+    function onSubmit(data: InferType<typeof formSchema>) {
+        const { repeatPassword, ...rest } = data
+        fetchRegister(rest).then((res) => {
+            if (res) {
+                toast.success("Account created successfully 🎉")
+
+                router.push('/login')
+            }
+        }).catch((error) => {
+            toast.error("❌ Failed to create account")
+            setErrorList((error as Error).message.split(','))
+        })
     }
 
-    const [password, setPassword] = useState('');
-    const [isVisible, setIsVisible] = useState(false);
+    const password = form.watch("password");
 
     const calculateStrength = useMemo((): PasswordStrength => {
         const requirements = PASSWORD_REQUIREMENTS.map((req) => ({
-            met: req.regex.test(password),
+            met: req.regex.test(password ?? ""),
             text: req.text,
         }));
 
@@ -140,12 +155,9 @@ export default function RegisterComponent() {
                                         </div>
                                         <FormControl>
                                             <Input
-                                                type={isVisible ? 'text' : 'password'}
-                                                value={password}
-                                                placeholder="********"
-                                                // {...field}
-                                                // type="password"
-                                                onChange={(e) => setPassword(e.target.value)}
+                                                placeholder="Input your password"
+                                                {...field}
+                                                // onChange={(e) => setPassword(e.target.value)}
                                                 aria-invalid={calculateStrength.score < 4}
                                                 aria-describedby='password-strength'
                                             />
@@ -164,7 +176,7 @@ export default function RegisterComponent() {
                                             <FormLabel>Confirm password</FormLabel>
                                         </div>
                                         <FormControl>
-                                            <Input placeholder="********" type='password' {...field} />
+                                            <Input placeholder="Input your confirm password" type='password' {...field} />
                                         </FormControl>
                                         <FormMessage />
                                     </FormItem>
