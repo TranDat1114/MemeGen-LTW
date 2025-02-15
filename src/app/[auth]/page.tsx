@@ -1,19 +1,37 @@
-import ForgotPasswordComponent from '@/components/auth/forgot-password/presentation/forgotPassword.component';
-import LoginComponent from '@/components/auth/login/presentation/login.component';
-import RegisterComponent from '@/components/auth/register/presentation/register.component';
-import React from 'react'
+"use client"
+import { authPathConfig } from "@/lib/router"
+import useAuthStore from "@/stores/auth-store";
+import { usePathname, useRouter } from "next/navigation";
+import { useEffect } from "react";
 
-type Props = {
-    params: { auth: string };
-}
 
-export default function AuthPage({ params }: Props) {
-    const { auth } = params;
+export default function AuthPage() {
+    const pathName = usePathname();
+    const router = useRouter();
+    const { accessToken } = useAuthStore();
+    useEffect(() => {
+        if (accessToken) {
+            const isAuthPath = authPathConfig.find((config) => config.path === `${pathName}`);
+            if (isAuthPath) {
+                router.push(isAuthPath.redirectPath);
+            }
+            return;
+        }
+    }, [accessToken, router]);
+
     return (
-        <div className="flex justify-center items-center min-h-screen">
-            {auth === 'login' && <LoginComponent />}
-            {auth === 'register' && <RegisterComponent />}
-            {auth === 'forgot-password' && <ForgotPasswordComponent />}
-        </div>
+        <>
+            {
+                authPathConfig.map((config) =>
+                    accessToken ?
+                        undefined
+                        :
+                        config.path === pathName &&
+                        <div key={config.path}>
+                            {config.component}
+                        </div>
+                )
+            }
+        </>
     )
 }
