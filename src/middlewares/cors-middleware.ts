@@ -2,7 +2,7 @@ import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
 
 // List of allowed origins
-const allowedOrigins = ['http://localhost:3000'];
+const allowedOrigins = ['http://localhost:3000', 'https://meme-gen-ltw.vercel.app', 'https://meme-gen-ltw-jayandys-projects.vercel.app', 'https://meme-gen-ltw-git-local-dev-jayandys-projects.vercel.app'];
 
 export async function corsMiddleware(req: NextRequest) {
     // 1. Handle CORS
