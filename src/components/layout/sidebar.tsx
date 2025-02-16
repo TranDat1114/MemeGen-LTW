@@ -8,6 +8,7 @@ import { Button } from "@/components/ui/button"
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet"
 import { Menu, Home, PlusSquare, ShoppingBag, User, LogIn, Film } from "lucide-react"
 import useAuthStore from "@/stores/auth-store"
+import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar"
 
 const sidebarItems = [
     { name: "Home", href: "/", icon: Home },
@@ -20,8 +21,7 @@ const sidebarItems = [
 export function Sidebar() {
     const pathname = usePathname()
     const [open, setOpen] = useState(false)
-
-    const { accessToken } = useAuthStore()
+    const { accessToken, setAccessToken, user, setUser } = useAuthStore();
 
     return (
         <Sheet open={open} onOpenChange={setOpen}>
@@ -54,33 +54,32 @@ export function Sidebar() {
                                         </span>
                                     </Link>
                                 ))}
-                                {!!accessToken && (
-                                    <Link href="/me" onClick={() => setOpen(false)}>
-                                        <span
-                                            className={cn(
-                                                "flex items-center rounded-md px-3 py-2 text-sm font-medium hover:bg-accent hover:text-accent-foreground",
-                                                pathname === "/me" ? "bg-accent" : "transparent",
-                                            )}
-                                        >
-                                            <User className="mr-2 w-4 h-4" />
-                                            <span>Profile</span>
-                                        </span>
-                                    </Link>
-                                )}
                             </div>
                         </div>
                     </div>
                     <div className="mt-auto p-4">
                         {!!accessToken ? (
-                            <>
-                                <LogIn className="mr-2 w-4 h-4" />
-                                Logout
-                            </>
+                            <Link href="/me" className="flex justify-betweenflex-row items-center space-x-2 hover:bg-accent rounded-md font-medium text-sm hover:text-accent-foreground">
+                                <Avatar className="border-2 border-foreground">
+                                    <AvatarImage src={user.imageUrl} alt="User" />
+                                    <AvatarFallback>U</AvatarFallback>
+                                </Avatar>
+                                <span className="font-semibold text-sm hover:text-accent-foreground">
+                                    @{user.username}
+                                </span>
+                            </Link>
                         ) : (
-                            <>
-                                <LogIn className="mr-2 w-4 h-4" />
-                                Login
-                            </>
+                            <Link href="/login">
+                                <span
+                                    className={cn(
+                                        "flex items-center flex-row rounded-md px-3 py-2 text-sm font-medium hover:bg-accent hover:text-accent-foreground",
+                                        pathname === "/login" ? "bg-accent" : "transparent",
+                                    )}
+                                >
+                                    <LogIn className="mr-2 w-4 h-4" />
+                                    Login
+                                </span>
+                            </Link>
                         )}
                     </div>
                 </div>

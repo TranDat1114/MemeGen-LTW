@@ -39,7 +39,7 @@ const generateJWT = (jwtpayload: JWTPayloadDTO, secret: string, expiresIn: numbe
 const verifyJWT = (token: string, secret: string) => {
     const parts = token.split('.');
     if (parts.length !== 3) {
-        console.log('Token không hợp lệ');
+        console.log('Token is not valid');
         return null;
     }
     const [encodedHeader, encodedPayload, signature] = parts;
@@ -49,7 +49,7 @@ const verifyJWT = (token: string, secret: string) => {
         .toString(CryptoJS.enc.Base64)
         .replace(/=+$/, '');
     if (validSignature !== signature) {
-        console.log('Chữ ký không hợp lệ');
+        console.log('Signature is not valid');
         return null;
     }
 
@@ -57,7 +57,7 @@ const verifyJWT = (token: string, secret: string) => {
 
     // Kiểm tra thời gian hết hạn
     if (decodedPayload.exp < Math.floor(Date.now() / 1000)) {
-        console.log('Token đã hết hạn');
+        console.log('Token has expired');
         return null;
     }
 

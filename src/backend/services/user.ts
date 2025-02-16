@@ -84,7 +84,6 @@ export class UserService {
         } else {
             const newUser = { email, password: UniqueUsername(), imageUrl: photoURL };
             const createdUser = await this.createUser(newUser)
-            console.log(createdUser);
             const tokens = generateTokens(createdUser);
             await this.saveRefreshTokenAndIp(createdUser._id, tokens.refreshToken, ip);
 

@@ -47,15 +47,15 @@ export default function Home() {
 
   return (
     <div className="space-y-8">
-      <section className="bg-gradient-to-r from-primary to-primary-foreground py-12 md:py-24 text-primary-foreground">
-        <div className="mx-auto px-4 container">
-          <div className="flex md:flex-row flex-col justify-between items-center">
+      <section className="bg-gradient-to-r from-primary to-foreground py-12 md:py-24 text-background">
+        <div className="mx-auto container">
+          <div className="flex md:flex-row flex-col justify-between items-center px-2">
             <div className="mb-8 md:mb-0 md:w-1/2">
-              <h1 className="mb-4 font-bold text-4xl md:text-6xl">Welcome to Meme Gen</h1>
-              <p className="mb-6 text-xl">Make, collect, and trade the dankest memes as NFTs!</p>
-              <div className="flex space-x-4">
+              <h1 className="mb-4 font-bold text-4xl md:text-6xl max-md:text-center">Welcome to Meme Gen</h1>
+              <p className="mb-6 font-semibold text-xl max-md:text-center">Make, collect, and trade the dankest memes as NFTs!</p>
+              <div className="flex md:flex-row flex-col gap-4">
                 <Button asChild>
-                  <Link href="/make-meme">Make a Meme</Link>
+                  <Link href="/make-meme">{`Make your 'Memes' come true`}</Link>
                 </Button>
                 <Button asChild variant="outline">
                   <Link href="/marketplace">Explore Marketplace</Link>
@@ -64,7 +64,7 @@ export default function Home() {
             </div>
             <div className="md:w-1/2">
               <Image
-                src="/images/placeholder.jpg?height=400&width=600"
+                src="/images/tomemeornottomeme.jpg"
                 alt="Meme Gen Hero"
                 width={600}
                 height={400}
@@ -75,10 +75,10 @@ export default function Home() {
         </div>
       </section>
 
-      <div className="mx-auto px-4 container">
+      <div className="mx-auto container">
         <section className="mb-12">
           <div className="flex justify-between items-center mb-4">
-            <h2 className="flex items-center font-semibold text-2xl">
+            <h2 className="flex items-center font-semibold max-md:text-sm text-2xl">
               <Trending className="mr-2" /> Trending Meme Templates
             </h2>
             <Button asChild variant="outline">
@@ -106,7 +106,7 @@ export default function Home() {
 
         {!!accessToken && (
           <section className="mb-12">
-            <h2 className="flex items-center mb-4 font-semibold text-2xl">
+            <h2 className="flex items-center mb-4 font-semibold max-md:text-sm text-2xl">
               <User className="mr-2" /> My Creations
             </h2>
             <div className="gap-4 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
@@ -136,7 +136,7 @@ export default function Home() {
         )}
 
         <section className="mb-12">
-          <h2 className="flex items-center mb-4 font-semibold text-2xl">
+          <h2 className="flex items-center mb-4 font-semibold max-md:text-sm text-2xl">
             <Zap className="mr-2" /> Latest Memes
           </h2>
           <div className="gap-4 grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4">
@@ -162,7 +162,7 @@ export default function Home() {
         </section>
 
         <section className="mb-12">
-          <h2 className="flex items-center mb-4 font-semibold text-2xl">
+          <h2 className="flex items-center mb-4 font-semibold max-md:text-sm text-2xl">
             <Award className="mr-2" /> Top Meme Creators
           </h2>
           <div className="gap-4 sm:gap-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
@@ -189,7 +189,7 @@ export default function Home() {
         </section>
 
         <section className="mb-12">
-          <h2 className="mb-4 font-semibold text-2xl">Features</h2>
+          <h2 className="mb-4 font-semibold max-md:text-sm text-2xl">Features</h2>
           <div className="gap-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
             <Card>
               <CardContent className="p-6">
