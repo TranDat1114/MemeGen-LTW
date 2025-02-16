@@ -2,14 +2,14 @@
 import Image from "next/image"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Card, CardContent } from "@/components/ui/card"
-import { User, ImageIcon, ShoppingCart, Heart } from "lucide-react"
+import { User, ImageIcon, ShoppingCart, Heart, Plus, Boxes } from "lucide-react"
 import { useEffect } from "react";
 // import apiClient from "@/lib/axios/interceptor";
 import { useRouter } from "next/navigation";
 import useAuthStore from "@/stores/auth-store";
 
 export default function Profile() {
-    const { accessToken } = useAuthStore();
+    const { accessToken, user } = useAuthStore();
     const router = useRouter();
     useEffect(() => {
         if (!accessToken) {
@@ -34,7 +34,7 @@ export default function Profile() {
     }, [accessToken, router]);
 
     return (
-        <div className="mx-auto px-4 py-8 container" suppressHydrationWarning>
+        <div className="mx-auto py-8 container" suppressHydrationWarning>
             <div className="flex items-center mb-8">
                 <Image
                     src="/images/placeholder.jpg?height=128&width=128"
@@ -44,17 +44,32 @@ export default function Profile() {
                     className="mr-6 rounded-full"
                 />
                 <div>
-                    <h1 className="mb-2 font-bold text-4xl">John Doe</h1>
-                    <p className="mb-2 text-gray-600">@johndoe</p>
-                    <p className="text-gray-600">Joined: January 2023</p>
+                    {/* <h1 className="mb-2 font-bold text-2xl md:text-4xl">{user.fullname}</h1> */}
+                    <p className="mb-2 text-gray-600">@{user.username}</p>
+                    {/* <p className="text-gray-600">Joined: {user.createdAt}</p> */}
                 </div>
             </div>
 
             <Tabs defaultValue="created">
-                <TabsList>
-                    <TabsTrigger value="created">Created Memes</TabsTrigger>
-                    <TabsTrigger value="collected">Collected NFTs</TabsTrigger>
-                    <TabsTrigger value="liked">Liked Memes</TabsTrigger>
+                <TabsList className="flex gap-4 w-full">
+                    <TabsTrigger value="created" className="flex items-center w-full">
+                        <Plus className="md:mr-2 w-6 h-6" />
+                        <strong className="hidden md:inline">
+                            Created Memes
+                        </strong>
+                    </TabsTrigger >
+                    <TabsTrigger value="collected" className="flex items-center w-full">
+                        <Boxes className="md:mr-2 w-6 h-6" />
+                        <strong className="hidden md:inline">
+                            Collected NFTs
+                        </strong>
+                    </TabsTrigger>
+                    <TabsTrigger value="liked" className="flex items-center w-full">
+                        <Heart className="md:mr-2 w-6 h-6" />
+                        <strong className="hidden md:inline">
+                            Liked Memes
+                        </strong>
+                    </TabsTrigger>
                 </TabsList>
                 <TabsContent value="created">
                     <div className="gap-6 grid grid-cols-1 md:grid-cols-3 mt-6">

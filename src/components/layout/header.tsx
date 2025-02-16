@@ -99,7 +99,7 @@ export default function Header() {
                     {!!accessToken ? (
                         <DropdownMenu>
                             <DropdownMenuTrigger asChild>
-                                <Avatar className="border-2 border-foreground">
+                                <Avatar className="mr-1 border-2 border-foreground w-8 h-8">
                                     <AvatarImage src={user.imageUrl} alt="User" />
                                     <AvatarFallback>U</AvatarFallback>
                                 </Avatar>

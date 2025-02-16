@@ -47,7 +47,7 @@ export default function Home() {
 
   return (
     <div className="space-y-8">
-      <section className="bg-gradient-to-r from-primary to-foreground py-12 md:py-24 text-background">
+      <section className="bg-gradient-to-tl from-primary to-foreground py-12 md:py-24 text-background">
         <div className="mx-auto container">
           <div className="flex md:flex-row flex-col justify-between items-center px-2">
             <div className="mb-8 md:mb-0 md:w-1/2">
