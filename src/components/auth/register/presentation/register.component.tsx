@@ -97,6 +97,7 @@ export default function RegisterComponent() {
 
     async function onSubmit(data: InferType<typeof formSchema>) {
         const { repeatPassword, ...rest } = data
+        void repeatPassword;
         await fetchRegister(rest).then((res) => {
             if (res) {
                 toast.success("Account created successfully 🎉")

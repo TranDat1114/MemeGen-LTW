@@ -6,7 +6,7 @@ import { usePathname } from "next/navigation"
 import { cn } from "@/lib/utils"
 import { Button } from "@/components/ui/button"
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet"
-import { Menu, Home, PlusSquare, ShoppingBag, User, LogIn, Film } from "lucide-react"
+import { Menu, Home, PlusSquare, ShoppingBag, LogIn, Film } from "lucide-react"
 import useAuthStore from "@/stores/auth-store"
 import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar"
 
@@ -21,7 +21,7 @@ const sidebarItems = [
 export function Sidebar() {
     const pathname = usePathname()
     const [open, setOpen] = useState(false)
-    const { accessToken, setAccessToken, user, setUser } = useAuthStore();
+    const { accessToken, user } = useAuthStore();
 
     return (
         <Sheet open={open} onOpenChange={setOpen}>
