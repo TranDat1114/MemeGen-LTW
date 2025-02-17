@@ -4,6 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev --turbopack",
+    "https": "next dev -p 3001 --experimental-https",
     "build": "next build",
     "start": "next start",
     "lint": "next lint"
