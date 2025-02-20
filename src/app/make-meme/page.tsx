@@ -7,7 +7,7 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Slider } from "@/components/ui/slider"
 import { Toggle } from "@/components/ui/toggle"
-import { X, Move, Type, ScanEye, Bold, Italic, Underline, Upload, Settings2 } from "lucide-react"
+import { X, Move, Type, ScanEye, Bold, Italic, Underline, Upload, Settings2, Info } from "lucide-react"
 import { Textarea } from "@/components/ui/textarea"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover"
@@ -341,13 +341,13 @@ export default function MemeGenerator() {
                 <h1 className="font-bold text-2xl">Meme Generator</h1>
                 <div className="">
                     <Button onClick={() => fileInputRef.current?.click()}>
-                        <Upload className="w-4 h-4" />
+                        <Upload className="size-4" />
                     </Button>
 
                     {/* <Popover>
                         <PopoverTrigger asChild>
                             <Button variant="default" className="w-full">
-                                <Upload className="w-4 h-4" />
+                                <Upload className="size-4" />
                             </Button>
                         </PopoverTrigger>
                         <PopoverContent className="w-80">
@@ -381,7 +381,7 @@ export default function MemeGenerator() {
                             pressed={addTextState}
                             onPressedChange={setAddTextState}
                         >
-                            <Type className="w-4 h-4" />
+                            <Type className="size-4" />
                         </Toggle>
                     </div>
                     {
@@ -447,7 +447,7 @@ export default function MemeGenerator() {
                                         style={{ backgroundColor: selectedText ? selectedText.color : "#000000" }}
                                     >
                                         <div
-                                            className="mr-2 border border-gray-200 rounded-full w-4 h-4"
+                                            className="mr-2 border border-gray-200 rounded-full size-4"
                                             style={{ backgroundColor: selectedText ? selectedText.color : "#000000" }}
                                         />
                                     </Button>
@@ -478,13 +478,13 @@ export default function MemeGenerator() {
                     </div>
                     <div className="flex space-x-2 mb-4">
                         <Toggle pressed={selectedText?.bold} onPressedChange={() => handleTextStyleChange("bold")}>
-                            <Bold className="w-4 h-4" />
+                            <Bold className="size-4" />
                         </Toggle>
                         <Toggle pressed={selectedText?.italic} onPressedChange={() => handleTextStyleChange("italic")}>
-                            <Italic className="w-4 h-4" />
+                            <Italic className="size-4" />
                         </Toggle>
                         <Toggle pressed={selectedText?.underline} onPressedChange={() => handleTextStyleChange("underline")}>
-                            <Underline className="w-4 h-4" />
+                            <Underline className="size-4" />
                         </Toggle>
                     </div>
 
@@ -519,11 +519,11 @@ export default function MemeGenerator() {
                             whileTap={{ scale: 0.95 }}
                         >
                             <Button variant="default" size={"icon"} className="" >
-                                <Settings2 className="w-4 h-4" />
+                                <Settings2 className="size-4" />
                             </Button>
                         </motion.div>
                     </PopoverTrigger>
-                    <PopoverContent className="bg-background/40 backdrop-blur-sm min-w-80">
+                    <PopoverContent className="bg-background/50 backdrop-blur-sm min-w-80">
                         <div className="">
                             <div className="mb-4">
                                 <Label htmlFor="text-add">
@@ -538,7 +538,7 @@ export default function MemeGenerator() {
                                     pressed={addTextState}
                                     onPressedChange={setAddTextState}
                                 >
-                                    <Type className="w-4 h-4" />
+                                    <Type className="size-4" />
                                 </Toggle>
                             </div>
                             {
@@ -604,7 +604,7 @@ export default function MemeGenerator() {
                                                 style={{ backgroundColor: selectedText ? selectedText.color : "#000000" }}
                                             >
                                                 <div
-                                                    className="mr-2 border border-gray-200 rounded-full w-4 h-4"
+                                                    className="mr-2 border border-gray-200 rounded-full size-4"
                                                     style={{ backgroundColor: selectedText ? selectedText.color : "#000000" }}
                                                 />
                                             </Button>
@@ -647,13 +647,13 @@ export default function MemeGenerator() {
                             </div>
                             <div className="flex space-x-2 mb-4">
                                 <Toggle pressed={selectedText?.bold} onPressedChange={() => handleTextStyleChange("bold")}>
-                                    <Bold className="w-4 h-4" />
+                                    <Bold className="size-4" />
                                 </Toggle>
                                 <Toggle pressed={selectedText?.italic} onPressedChange={() => handleTextStyleChange("italic")}>
-                                    <Italic className="w-4 h-4" />
+                                    <Italic className="size-4" />
                                 </Toggle>
                                 <Toggle pressed={selectedText?.underline} onPressedChange={() => handleTextStyleChange("underline")}>
-                                    <Underline className="w-4 h-4" />
+                                    <Underline className="size-4" />
                                 </Toggle>
                             </div>
 
@@ -714,7 +714,7 @@ export default function MemeGenerator() {
                             onTouchMove={handleTouchMove}
                         >
                             <div className="flex justify-center items-center bg-white shadow-md rounded-full w-6 h-6">
-                                <Move className="w-4 h-4 text-gray-600" />
+                                <Move className="size-4 text-gray-600" />
                             </div>
 
                             {selectedTextId === pos.id && (
@@ -724,40 +724,72 @@ export default function MemeGenerator() {
                                     className="top-0 right-0 absolute w-6 h-6 -translate-y-full translate-x-full transform"
                                     onClick={(e) => removeText(e, pos.id)}
                                 >
-                                    <X className="w-4 h-4" />
+                                    <X className="size-4" />
                                 </Button>
                             )}
                         </div>
                     ))}
             </div>
             <div className="" >
-                <div className="mt-2 text-gray-600 text-sm">
+                <div className="my-2 text-gray-600 text-sm">
                     {image ? (
-                        <div>
-                            <p className="flex flex-row items-center gap-2">
-                                Click on the <Settings2 className="w-4 h-4" /> icon to customize text. <br />
-                            </p>
-                            <p>
-                                Write meme text and click on the image to add text.  <br />
-                                Drag the move handle to reposition text. <br /> Click on text to edit size
-                                and rotation.
-                            </p>
-                        </div>
+                        <Popover>
+                            <PopoverTrigger asChild>
+                                <div className="flex flex-row items-center space-x-2 text-foreground whitespace-nowrap cursor-pointer">
+                                    <Button variant={"default"} size={"icon"}>
+                                        <Info className="size-4" />
+                                    </Button>
+                                    <p className="text-blue-400">
+                                        Read Me
+                                    </p>
+                                </div>
+                            </PopoverTrigger>
+                            <PopoverContent className="bg-background/50 backdrop-blur-sm p-4 w-full min-w-80">
+                                <ul className="ml-2 list-disc">
+                                    <li>
+                                        <p className="flex flex-row flex-wrap items-center gap-2">
+                                            Click on the <Settings2 className="size-4" /> icon to customize text. <br />
+                                        </p>
+                                    </li>
+                                    <li>
+                                        <p>
+                                            Write meme text and click on the image to add text.
+                                        </p>
+                                    </li>
+                                    <li>
+                                        <p>
+
+                                            Drag the move handle to reposition text.
+                                        </p>
+                                    </li>
+                                    <li>
+                                        <p>
+                                            Click on text to edit size and rotation.
+                                        </p>
+                                    </li>
+                                    <li>
+                                        <p className="flex flex-row flex-wrap justify-start items-center gap-2">
+                                            You can move <Settings2 className="size-4" />.
+                                        </p>
+                                    </li>
+                                </ul>
+                            </PopoverContent>
+                        </Popover>
                     ) : (
                         <>Choose an image to get started.</>
                     )}
                 </div>
-                <br />
                 {image && (
-                    <div className="flex flex-wrap gap-2">
-                        <Toggle variant={"outline"} className="cursor-pointer" pressed={previewState} onPressedChange={setPreviewState}>
-                            <ScanEye className="w-4 h-4" />
+                    <div className="flex justify-evenly items-center gap-2">
+                        <Toggle variant={"primary"} className="gap-2 w-full cursor-pointer" pressed={previewState} onPressedChange={setPreviewState}>
+                            <ScanEye className="size-4" />
                             {
                                 previewState ? "Hide Preview" : "Show Preview"
                             }
                         </Toggle>
-                        <Button onClick={downloadMeme}>Download Meme</Button>
-                        <Button onClick={downloadMeme}>To BlockChain</Button>
+
+                        <Button className="w-full" onClick={downloadMeme}>Download</Button>
+                        <Button className="w-full" onClick={downloadMeme}>Publish</Button>
                     </div>
                 )}
             </div>
