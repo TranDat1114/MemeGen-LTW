@@ -305,15 +305,46 @@ export default function MemeGenerator() {
         }
     }, [image, textPositions])
 
-    const downloadMeme = useCallback(() => {
-        const canvas = canvasRef.current
-        if (canvas) {
-            const link = document.createElement("a")
-            link.download = "meme.png"
-            link.href = canvas.toDataURL()
-            link.click()
+    const downloadMeme = useCallback(async () => {
+        const canvas = canvasRef.current;
+        if (!canvas) return;
+
+        try {
+            // Convert canvas to Blob
+            const blob = await new Promise<Blob | null>((resolve) => canvas.toBlob(resolve, "image/png"));
+            if (!blob) return;
+
+            // Check if File System Access API is supported
+            if ("showSaveFilePicker" in window) {
+                try {
+                    const fileHandle = await (window as any).showSaveFilePicker({
+                        suggestedName: "meme.png",
+                        types: [{ description: "PNG Image", accept: { "image/png": [".png"] } }],
+                    });
+
+                    const writable = await fileHandle.createWritable();
+                    await writable.write(blob);
+                    await writable.close();
+                } catch (error: any) {
+                    if (error.name === "AbortError") {
+                        console.warn("File save was canceled by the user.");
+                        return;
+                    }
+                    throw error; // Handle other unexpected errors
+                }
+            } else {
+                // Fallback: Default browser download
+                const link = document.createElement("a");
+                link.download = "meme.png";
+                link.href = URL.createObjectURL(blob);
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+            }
+        } catch (error) {
+            console.error("Error saving file:", error);
         }
-    }, [])
+    }, []);
 
     useEffect(() => {
         generateMeme()
