@@ -619,7 +619,7 @@ export default function MemeGenerator() {
                             </div>
 
                             <div className="flex md:flex-row md:space-x-4">
-                                <div className="mb-4 md:w-1/2">
+                                <div className="mb-4 w-1/2">
                                     <Label htmlFor="text-color">{`Text Color `}
                                         {/* <span>
                                             {selectedText ? selectedText.color : "#000000"}
@@ -660,7 +660,7 @@ export default function MemeGenerator() {
                                     </Popover>
 
                                 </div>
-                                <div className="mb-4 md:w-1/2">
+                                <div className="mb-4 w-1/2">
                                     <Label htmlFor="text-font">Text Font</Label>
                                     <Select onValueChange={handleTextFontChange} value={selectedText ? selectedText.font : "Impact"}>
                                         <SelectTrigger className="w-full text-xs">
