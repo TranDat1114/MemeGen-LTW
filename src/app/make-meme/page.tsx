@@ -314,10 +314,11 @@ export default function MemeGenerator() {
             const blob = await new Promise<Blob | null>((resolve) => canvas.toBlob(resolve, "image/png"));
             if (!blob) return;
 
-            // Check if File System Access API is supported
-            if ("showSaveFilePicker" in window) {
+            // Ensure File System API is available
+            if (window.showSaveFilePicker) {
                 try {
-                    const fileHandle = await (window as any).showSaveFilePicker({
+                    // Now TypeScript recognizes this function correctly
+                    const fileHandle = await window.showSaveFilePicker({
                         suggestedName: "meme.png",
                         types: [{ description: "PNG Image", accept: { "image/png": [".png"] } }],
                     });
@@ -325,12 +326,12 @@ export default function MemeGenerator() {
                     const writable = await fileHandle.createWritable();
                     await writable.write(blob);
                     await writable.close();
-                } catch (error: any) {
-                    if (error.name === "AbortError") {
+                } catch (error) {
+                    if (error instanceof DOMException && error.name === "AbortError") {
                         console.warn("File save was canceled by the user.");
                         return;
                     }
-                    throw error; // Handle other unexpected errors
+                    throw error; // Handle unexpected errors
                 }
             } else {
                 // Fallback: Default browser download
@@ -345,6 +346,7 @@ export default function MemeGenerator() {
             console.error("Error saving file:", error);
         }
     }, []);
+
 
     useEffect(() => {
         generateMeme()
