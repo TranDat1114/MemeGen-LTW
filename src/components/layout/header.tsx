@@ -59,7 +59,7 @@ export default function Header() {
 
 
     return (
-        <header className="top-0 z-50 sticky bg-background/95 supports-[backdrop-filter]:bg-background/60 backdrop-blur-3xl border-b w-full">
+        <header className="top-0 z-50 sticky bg-background/95 supports-[backdrop-filter]:bg-background/60 backdrop-blur-3xl max-sm:px-2 border-b w-full">
             <div className="flex items-center max-md:p-0 h-14 container">
                 <div className="md:hidden">
                     <Sidebar />

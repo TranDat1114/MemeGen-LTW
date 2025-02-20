@@ -1,7 +1,8 @@
+"use client"
 import React from "react" // Import React
 import Image from "next/image"
 import { LineShadowText } from "../magicui/line-shadow-text"
-
+import { usePathname } from "next/navigation"
 // const footerSections = {
 
 //     tools: {
@@ -75,8 +76,15 @@ import { LineShadowText } from "../magicui/line-shadow-text"
 //     // { name: "عربى", code: "ar" },
 // ]
 
+const withOutFooter = ["/login", "/register", "/forgot-password", "/reset-password", "make-meme"]
+
 export default function Footer() {
     const now = new Date()
+    const pathName = usePathname()
+    if (
+        withOutFooter.some((path) => pathName.includes(path))
+    ) return null
+
     return (
         <footer className="bg-background">
             <div className="space-y-8 lg:space-y-16 mx-auto px-4 sm:px-6 lg:px-8 py-16 max-w-screen-xl">
