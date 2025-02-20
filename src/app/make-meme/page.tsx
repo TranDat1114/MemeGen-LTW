@@ -514,7 +514,7 @@ export default function MemeGenerator() {
                                 right: window ? window.innerWidth - 50 : 0, // Adjust based on button width
                                 bottom: window ? window.innerHeight - 50 : 0, // Adjust based on button height
                             }}
-                            className="-top-10 right-20 absolute cursor-grab active:cursor-grabbing"
+                            className="absolute cursor-grab active:cursor-grabbing"
                             whileDrag={{ scale: 1.1 }}
                             whileTap={{ scale: 0.95 }}
                         >
