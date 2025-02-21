@@ -6,13 +6,8 @@ import { mapUserDTOtoEntity } from '@/backend/mappers/user';
 import { UserType } from '@/backend/enums/user-type';
 import { comparePassword } from '@/lib/hash/hash-password';
 import { UniqueUsername } from '@/lib/hash/random-username';
+import { MongoDBError } from '@/lib/mongodb';
 
-// Định nghĩa giao diện của lỗi MongoDB với các thuộc tính cần thiết
-interface MongoDBError extends Error {
-    code?: number;
-    keyPattern?: Record<string, unknown>;
-    keyValue?: Record<string, unknown>;
-}
 
 // Make sure to specify UserDTO as the generic type for BaseRepository
 export class UserRepository extends BaseRepository<IUser> {
@@ -28,18 +23,15 @@ export class UserRepository extends BaseRepository<IUser> {
             newUser.userType = UserType.User;
             newUser.imageUrl = user.imageUrl ?? "https://res.cloudinary.com/desckxywr/image/upload/v1739650819/f265bbfb-abde-48ea-b4b9-c4b727aa65f9_anteze.jpg";
 
-            // Thử tạo người dùng mới
             await UserModel.create(newUser);
             return newUser;
         } catch (error) {
             const mongoError = error as MongoDBError;
-            // Bắt lỗi MongoDB, kiểm tra mã lỗi trùng lặp
             if (mongoError.code === 11000) {
                 const duplicateField = mongoError.keyPattern ? Object.keys(mongoError.keyPattern)[0] : 'field';
                 throw new Error(`Duplicate ${duplicateField} entered. This value already exists.`);
             }
 
-            // Bắt các lỗi khác và trả về thông điệp lỗi
             throw new Error(mongoError.message);
         }
     }

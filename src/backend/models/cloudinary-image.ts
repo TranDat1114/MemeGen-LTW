@@ -27,4 +27,4 @@ const CloudinaryImageSchema = new Schema<ICloudinaryImage>({
 
 CloudinaryImageSchema.add(BaseEntity.schema);
 
-export default models.User || model<ICloudinaryImage & IBaseEntity>('User', CloudinaryImageSchema);
+export default models.CloudinaryImage || model<ICloudinaryImage & IBaseEntity>('CloudinaryImage', CloudinaryImageSchema);

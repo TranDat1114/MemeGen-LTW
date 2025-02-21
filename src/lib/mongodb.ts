@@ -42,6 +42,12 @@ interface ICounter extends Document {
     sequenceValue: number;
 }
 
+export interface MongoDBError extends Error {
+    code?: number;
+    keyPattern?: Record<string, unknown>;
+    keyValue?: Record<string, unknown>;
+}
+
 // Counter schema to track the auto-increment values for different collections
 const CounterSchema = new Schema({
     modelName: { type: String, required: true, unique: true }, // Name of the collection or model
