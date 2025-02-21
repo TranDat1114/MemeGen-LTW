@@ -1,11 +1,12 @@
 import { NextResponse } from "next/server";
 import cloudinary from "@/lib/cloudinary/cloud-info";
+import type { UploadApiResponse } from "cloudinary";
 import { unlink, writeFile } from "fs/promises";
 import path from "path";
 import { v4 as uuidv4 } from 'uuid';
 import dbConnect from "@/lib/mongodb";
 import { CloudinaryImageService } from "@/backend/services/cloudinary-image";
-import { ICloudinaryImage } from "@/backend/models/cloudinary-image";
+import { mapUploadResponseDTOtoEntity } from "@/backend/mappers/cloudinary-image";
 
 const cloudinaryImageService = new CloudinaryImageService();
 
@@ -32,19 +33,21 @@ export async function POST(req: Request) {
         // Save temporarily (optional, for debugging)
         tempPath = path.join(process.cwd(), "public/images", fileName);
         await writeFile(tempPath, buffer);
-
         // Upload to Cloudinary
-        const uploadResult = await new Promise((resolve, reject) => {
+        const uploadResult = await new Promise<UploadApiResponse>((resolve, reject) => {
             cloudinary.uploader.upload(tempPath, { folder: "uploads" }, (err, result) => {
-                if (err) reject(err);
-                resolve(result);
+                if (err) {
+                    reject(err);
+                }
+                resolve(result as UploadApiResponse);
             });
         });
 
         if (uploadResult) {
             // MongoDB: Save the public_id to the database
             await dbConnect();
-            cloudinaryImageService.createImage(uploadResult as ICloudinaryImage);
+
+            cloudinaryImageService.createImage(await mapUploadResponseDTOtoEntity(uploadResult));
 
             //delete the temporary file after upload
             await unlink(tempPath);

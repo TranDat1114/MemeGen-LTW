@@ -71,7 +71,7 @@ export default function UploadForm() {
                     <p>Uploaded Image:</p>
                     {/* <img src={url} alt="Uploaded" width={300} /> */}
 
-                    <Image width={300} alt="Uploaded" src={url} />
+                    <Image width={300} alt="Uploaded" src={url} height={300} />
 
                     <button onClick={handleDelete} disabled={loading}>
                         {loading ? "Deleting..." : "Delete"}
