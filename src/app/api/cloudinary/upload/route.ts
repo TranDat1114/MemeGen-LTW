@@ -1,12 +1,16 @@
 import { NextResponse } from "next/server";
 import cloudinary from "@/lib/cloudinary/cloud-info";
-import { writeFile } from "fs/promises";
+import { unlink, writeFile } from "fs/promises";
 import path from "path";
 import { v4 as uuidv4 } from 'uuid';
 import dbConnect from "@/lib/mongodb";
+import { CloudinaryImageService } from "@/backend/services/cloudinary-image";
+import { ICloudinaryImage } from "@/backend/models/cloudinary-image";
 
+const cloudinaryImageService = new CloudinaryImageService();
 
 export async function POST(req: Request) {
+    let tempPath = "";
     try {
         const formData = await req.formData();
         const file = formData.get("file") as File | null;
@@ -26,7 +30,7 @@ export async function POST(req: Request) {
         const buffer = Buffer.from(bytes);
 
         // Save temporarily (optional, for debugging)
-        const tempPath = path.join(process.cwd(), "public/images", fileName);
+        tempPath = path.join(process.cwd(), "public/images", fileName);
         await writeFile(tempPath, buffer);
 
         // Upload to Cloudinary
@@ -40,15 +44,18 @@ export async function POST(req: Request) {
         if (uploadResult) {
             // MongoDB: Save the public_id to the database
             await dbConnect();
+            cloudinaryImageService.createImage(uploadResult as ICloudinaryImage);
 
-
+            //delete the temporary file after upload
+            await unlink(tempPath);
 
         }
-
-
-
         return NextResponse.json({ success: true, data: uploadResult });
     } catch (error) {
         return NextResponse.json({ error: (error as Error).message }, { status: 500 });
+    } finally {
+        await unlink(tempPath).catch(() => {
+
+        }); // Ensures deletion even on failure
     }
 }

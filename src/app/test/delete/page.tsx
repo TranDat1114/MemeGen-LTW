@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { useState } from "react";
 
 export default function UploadForm() {
@@ -68,7 +69,10 @@ export default function UploadForm() {
             {url && (
                 <div>
                     <p>Uploaded Image:</p>
-                    <img src={url} alt="Uploaded" width={300} />
+                    {/* <img src={url} alt="Uploaded" width={300} /> */}
+
+                    <Image width={300} alt="Uploaded" src={url} />
+
                     <button onClick={handleDelete} disabled={loading}>
                         {loading ? "Deleting..." : "Delete"}
                     </button>
