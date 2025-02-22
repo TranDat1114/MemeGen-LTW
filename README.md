@@ -20,38 +20,41 @@ Meme Generator NFT is a platform that allows users to create, edit memes in the 
 - 📂 **Store and View Meme** - Keep your meme treasures safe and sound! 🏦: Supports a personal meme library for reviewing or sharing.
 - 🔗 **Crypto Wallet Integration** - Connect your Metamask and make it rain NFTs! 💸: Supports connection with wallets like Metamask for meme NFT transactions.
 
-## Technologies Used
+## Technologies Used (Temp Stack) 🛠️🔥
 
 - **Frontend**: React.js, Next.js, Tailwind CSS
-- **Backend**: Node.js, Express.js
-- **Blockchain**: Solidity, Hardhat, OpenZeppelin
-- **IPFS**: Stores meme images on a distributed system
+- **Backend**: Next.js
+<!-- - **Blockchain**: Solidity, Hardhat, OpenZeppelin -->
+- **Blockchain**: Chopin Framework (for NFTs)
+- **IPFS**: Stores meme images on cloud -> upload metadata on a distributed system
 - **Database**: MongoDB
 
 ## Installation and Running the Project ⚙️🚀
 
+[My repository](https://github.com/TranDat1114/MemeGen-LTW)
+
 ### 1. Clone Repository
 ```sh
-  git clone https://github.com/your-repo/meme-generator-nft.git
-  cd meme-generator-nft
+  git clone https://github.com/TranDat1114/MemeGen-LTW
+  cd MEMEGEN-LTW
 ```
 
 ### 2. Install Dependencies
 ```sh
-  npm install
+  pnpm i
 ```
 
 ### 3. Run Local Server
 ```sh
-  npm run dev
+  pnpm dev
 ```
 
-### 4. Run Smart Contract
+<!-- ### 4. Run Smart Contract
 ```sh
   cd blockchain
   npx hardhat node
   npx hardhat run scripts/deploy.js --network localhost
-```
+``` -->
 
 ## Contribution 🤝🎉
 All contributions to improve the project are welcome! Please create an issue or submit a pull request.
