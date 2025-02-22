@@ -4,8 +4,6 @@
 
 🚀🎉 Welcome to Meme Generator NFT - where your memes become legendary and make you rich (or at least internet-famous)! 😂💎 Have you ever created a meme so good that you thought, "This deserves to be in a museum"? 🖼️ Well, now it can be—on the blockchain! ⛓️ Turn your spicy 🌶️, hilarious 🤣, and chaotic 🤯 memes into NFTs and let the world bid for your humor. One does not simply make memes for free anymore. 💰🔥💸
 
-🚀 Welcome to Meme Generator NFT - where your memes become legendary and make you rich (or at least internet-famous)! Have you ever created a meme so good that you thought, "This deserves to be in a museum"? Well, now it can be—on the blockchain! Turn your spicy, hilarious, and chaotic memes into NFTs and let the world bid for your humor. One does not simply make memes for free anymore. 💰🔥
-
 Meme Generator NFT is a platform that allows users to create, edit memes in the style of Imgflip, and convert them into NFTs. Users can browse, buy, sell, and trade meme NFTs on the platform.
 
 ## Features 🎭🔥
