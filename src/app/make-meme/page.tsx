@@ -13,8 +13,8 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover"
 import { HexColorPicker } from "react-colorful"
 import { motion } from "framer-motion"
-import { useDropzone } from "react-dropzone"
-import { GridPattern } from "@/components/ui/file-upload"
+// import { useDropzone } from "react-dropzone"
+// import { GridPattern } from "@/components/ui/file-upload"
 
 interface TextPosition {
     id: number
