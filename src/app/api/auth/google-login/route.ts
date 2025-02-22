@@ -12,8 +12,6 @@ async function POST(req: Request) {
         const ip = req.headers.get('x-forwarded-for') || null;
 
         const { email, photoURL } = await req.json();
-
-        console.log(email, photoURL);
         const loginResult = await userService.loginWithGoogle(email, ip ?? "", photoURL);
         if (!loginResult) {
             throw new Error('Login failed');
@@ -31,7 +29,6 @@ async function POST(req: Request) {
             }
         });
     } catch (error) {
-        console.error((error as Error).message);
         return NextResponse.json({ success: false, message: (error as Error).message }, { status: 500 });
     }
 }

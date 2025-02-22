@@ -14,13 +14,3 @@ export const comparePassword = async (password: string, hashedPassword: string):
     const isMatch = await bcrypt.compare(password, hashedPassword);
     return isMatch;
 };
-
-// Ví dụ sử dụng
-// (async () => {
-//     const password = 'your_password';
-//     const hashed = await hashPassword(password);
-//     console.log('Mật khẩu đã băm:', hashed);
-
-//     const isValid = await comparePassword(password, hashed);
-//     console.log('Mật khẩu khớp:', isValid);
-// })();

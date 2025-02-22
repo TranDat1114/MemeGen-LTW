@@ -1,11 +1,11 @@
 
 import type { Metadata } from "next";
-import { Poppins } from "next/font/google";
+import { Inter } from "next/font/google";
 import { ThemeProvider } from "@/provider/theme-provider"
 import "./globals.css";
 import AppWrapper from "@/components/layout/app-wrapper";
 import { Toaster } from "react-hot-toast";
-import { SpeedInsights } from '@vercel/speed-insights/next';
+// import { SpeedInsights } from '@vercel/speed-insights/next';
 
 // const geistSans = Geist({
 //   variable: "--font-geist-sans",
@@ -17,11 +17,22 @@ import { SpeedInsights } from '@vercel/speed-insights/next';
 //   subsets: ["latin"],
 // });
 
-const poppins = Poppins({
-  weight: "400",
-  variable: "--font-poppins",
+// const poppins = Poppins({
+//   weight: "400",
+//   variable: "--font-poppins",
+//   subsets: ["latin"],
+// });
+
+const inter = Inter({
+  variable: "--font-inter",
   subsets: ["latin"],
 });
+
+// const happyMonkey = Happy_Monkey({
+//   variable: "--font-happy-monkey",
+//   subsets: ["latin"],
+//   weight: "400",
+// });
 
 export const metadata: Metadata = {
   title: "MEME Generator - LTW",
@@ -35,8 +46,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
+      <meta name="apple-mobile-web-app-title" content="MemeGen" />
       <body
-        className={`${poppins.variable} antialiased`}
+        className={`${inter.className} antialiased`}
       >
 
         <ThemeProvider
@@ -50,7 +62,7 @@ export default function RootLayout({
             <Toaster />
           </AppWrapper>
         </ThemeProvider>
-        <SpeedInsights />
+        {/* <SpeedInsights /> */}
       </body>
     </html>
   );

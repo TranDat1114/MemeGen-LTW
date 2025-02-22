@@ -6,7 +6,6 @@ import { NextResponse } from "next/server";
 const userService = new UserService();
 
 export async function GET() {
-    console.log('logout')
     // Lấy cookie
     const cookieStore = await cookies()
     const refreshToken = cookieStore.get('refresh_token');

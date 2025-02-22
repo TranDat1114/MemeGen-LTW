@@ -25,8 +25,8 @@ export default function SettingsPage() {
     }
 
     return (
-        <div className="mx-auto px-4 py-8 container">
-            <h1 className="mb-8 font-bold text-4xl">Profile Settings</h1>
+        <div className="mx-auto py-8 container">
+            <h1 className="mb-8 font-bold text-2xl md:text-4xl">Profile Settings</h1>
             <Card>
                 <CardHeader>
                     <CardTitle>Edit Your Profile</CardTitle>

@@ -35,6 +35,7 @@ export const fetchGoogleLogin = async () => {
     );
     return response.data.result
 }
+
 export const logout = async () => {
     try {
         const res = await apiClient.get('/api/auth/logout');

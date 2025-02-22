@@ -31,7 +31,6 @@ export default function ForgotPasswordComponent() {
     const emailValue = form.watch("email");
 
     function onSubmit(data: z.infer<typeof formSchema>) {
-        console.log(data);
         setEmail(data.email);
         setOtpSent(true);
         toast.success("OTP sent to your email address");
@@ -83,7 +82,7 @@ export default function ForgotPasswordComponent() {
                                         </FormItem>
                                     )}
                                 />
-                                <div className="w-full space-y-4">
+                                <div className="space-y-4 w-full">
                                     <Button type='submit' className='w-full cursor-pointer' disabled={!emailValue}>Reset Password</Button>
                                 </div>
                             </form>
