@@ -5,7 +5,7 @@ import { ThemeProvider } from "@/provider/theme-provider"
 import "./globals.css";
 import AppWrapper from "@/components/layout/app-wrapper";
 import { Toaster } from "react-hot-toast";
-import { SpeedInsights } from '@vercel/speed-insights/next';
+// import { SpeedInsights } from '@vercel/speed-insights/next';
 
 // const geistSans = Geist({
 //   variable: "--font-geist-sans",
@@ -62,7 +62,7 @@ export default function RootLayout({
             <Toaster />
           </AppWrapper>
         </ThemeProvider>
-        <SpeedInsights />
+        {/* <SpeedInsights /> */}
       </body>
     </html>
   );
