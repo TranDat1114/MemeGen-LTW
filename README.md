@@ -59,4 +59,4 @@ All contributions to improve the project are welcome! Please create an issue or 
 ## License 📜
 This project is licensed under the MIT License.
 
-<img alt="Avatar" src="oh-clapping-meme.gif" width="200" height="200">
+<img alt="Avatar" src="oh-clapping-meme.gif" width="400" height="200">
