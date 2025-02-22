@@ -2,10 +2,12 @@
 
 import Link from "next/link"
 import Image from "next/image"
-import { TrendingUpIcon as Trending, Zap, Award, User, Upload, Plus } from "lucide-react"
 import { Card, CardContent } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import useAuthStore from "@/stores/auth-store"
+import { motion } from "framer-motion"
+import { TrendingUp, EclipseIcon as Ethereum, Wallet, Shield, Gem, TrendingUpIcon as Trending, Zap, Award, User, Upload, Plus } from "lucide-react"
+import { useEffect, useState } from "react"
 
 const myCreations = [
   {
@@ -42,12 +44,23 @@ const trendingTemplates = [
 ]
 
 export default function Home() {
-
   const { accessToken } = useAuthStore();
+  const [matrixText, setMatrixText] = useState("")
 
+  useEffect(() => {
+    const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789$€¥₿"
+    let interval: NodeJS.Timeout
+
+    interval = setInterval(() => {
+      const randomText = Array.from({ length: 8 }, () => chars[Math.floor(Math.random() * chars.length)]).join("")
+      setMatrixText(randomText)
+    }, 100)
+
+    return () => clearInterval(interval)
+  }, [])
   return (
     <div className="space-y-8">
-      <section className="bg-gradient-to-tl from-primary to-foreground py-12 md:py-24 text-background">
+      {/* <section className="bg-gradient-to-tl from-primary to-foreground py-12 md:py-24 text-background">
         <div className="mx-auto container">
           <div className="flex md:flex-row flex-col justify-between items-center px-2">
             <div className="mb-8 md:mb-0 md:w-1/2">
@@ -71,6 +84,84 @@ export default function Home() {
                 className="shadow-lg rounded-lg"
               />
             </div>
+          </div>
+        </div>
+      </section> */}
+
+      <section className="relative py-20 md:py-32 overflow-hidden">
+        <div className="absolute inset-0 bg-grid-white/10 bg-[size:40px_40px] [mask-image:radial-gradient(white,transparent_85%)]" />
+
+        <div className="relative mx-auto px-4 container">
+          <div className="flex md:flex-row flex-col justify-between items-center gap-12">
+            <div className="space-y-6 md:w-1/2">
+              <div className="inline-block">
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5 }}
+                  className="bg-primary/10 backdrop-blur-sm px-4 py-2 border border-primary/20 rounded-full text-primary"
+                >
+                  {matrixText} | The Future of Meme NFTs
+                </motion.div>
+              </div>
+
+              <motion.h1
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: 0.2 }}
+                className="bg-clip-text bg-gradient-to-r from-primary to-purple-500 font-bold text-transparent text-4xl md:text-6xl"
+              >
+                Create, Mint & Trade Crypto Memes
+              </motion.h1>
+
+              <motion.p
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: 0.4 }}
+                className="text-muted-foreground text-xl"
+              >
+                Join the decentralized meme revolution. Create, collect, and trade the dankest memes as NFTs on the
+                blockchain.
+              </motion.p>
+
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: 0.6 }}
+                className="flex flex-wrap gap-4"
+              >
+                <Button size="lg" className="bg-gradient-to-r from-primary to-purple-500 hover:opacity-90" asChild>
+                  <Link href="/make-meme">
+                    <Plus className="mr-2 w-5 h-5" />
+                    Mint a Meme
+                  </Link>
+                </Button>
+                <Button size="lg" variant="outline" className="hover:bg-primary/10 border-primary/20" asChild>
+                  <Link href="/marketplace">
+                    <Ethereum className="mr-2 w-5 h-5" />
+                    Browse Marketplace
+                  </Link>
+                </Button>
+              </motion.div>
+            </div>
+
+            <motion.div
+              initial={{ opacity: 0, scale: 0.8 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.8 }}
+              className="md:w-1/2"
+            >
+              <div className="relative">
+                <div className="absolute -inset-1 bg-gradient-to-r from-primary to-purple-500 opacity-50 rounded-lg blur" />
+                <Image
+                  src="/images/tomemeornottomeme.jpg"
+                  alt="MemeNFT Hero"
+                  width={600}
+                  height={400}
+                  className="relative shadow-2xl rounded-lg"
+                />
+              </div>
+            </motion.div>
           </div>
         </div>
       </section>

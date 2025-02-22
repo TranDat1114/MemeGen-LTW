@@ -13,6 +13,8 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover"
 import { HexColorPicker } from "react-colorful"
 import { motion } from "framer-motion"
+import { useDropzone } from "react-dropzone"
+import { GridPattern } from "@/components/ui/file-upload"
 
 interface TextPosition {
     id: number
@@ -377,163 +379,15 @@ export default function MemeGenerator() {
                         <Upload className="size-4" />
                     </Button>
 
-                    {/* <Popover>
-                        <PopoverTrigger asChild>
-                            <Button variant="default" className="w-full">
-                                <Upload className="size-4" />
-                            </Button>
-                        </PopoverTrigger>
-                        <PopoverContent className="w-80">
-                            <div className="flex flex-col gap-2">
-                                <Button onClick={() => fileInputRef.current?.click()}>Take Photo</Button>
-                            </div>
-                        </PopoverContent>
-                    </Popover> */}
                 </div>
             </div>
             <div className="hidden mb-2">
                 <Label htmlFor="image-upload">Upload Image</Label>
                 <Input id="image-upload" type="file" accept="image/*" onChange={handleImageUpload} ref={fileInputRef} />
             </div>
-            {/* <Button className="max-sm:hidden mb-4" onClick={() => fileInputRef.current?.click()}>
-                Choose Image
-            </Button> */}
 
-            {/* {image && (
-                <div className="max-sm:hidden">
-                    <div className="mb-4">
-                        <Label htmlFor="text-add">
-                            In {addTextState ? "Add" : "Edit"} Text Mode {`(Toggle to change)`}
-                        </Label>
-                        <br />
-                        <Toggle
-                            id="text-add"
-                            className="cursor-pointer"
-                            variant="outline"
-                            size="default"
-                            pressed={addTextState}
-                            onPressedChange={setAddTextState}
-                        >
-                            <Type className="size-4" />
-                        </Toggle>
-                    </div>
-                    {
-                        <div className="mb-4">
-                            <Label htmlFor="text-input">Meme Text</Label>
-                            <Textarea
-                                rows={2}
-                                className="textarea-no-scrollbar"
-                                id="text-input"
-                                value={text}
-                                onChange={(e) => {
-                                    setText(e.target.value)
-                                    if (selectedTextId !== null) {
-                                        setTextPositions((prev) =>
-                                            prev.map((pos) => (pos.id === selectedTextId ? { ...pos, text: e.target.value } : pos)),
-                                        )
-                                    }
-                                }}
-                                placeholder="Enter meme text"
-                            />
-                        </div>
-                    }
 
-                    <div className="flex md:flex-row flex-col md:space-x-4">
-                        <div className="mb-4 md:w-1/2">
-                            <Label htmlFor="text-size">Text Size</Label>
-                            <Slider
-                                id="text-size"
-                                min={10}
-                                max={500}
-                                step={1}
-                                value={[selectedText ? selectedText.size : 0]}
-                                onValueChange={(value) => handleTextSizeChange(value[0])}
-                            />
-                        </div>
-                        <div className="mb-4 md:w-1/2">
-                            <Label htmlFor="text-rotation">Text Rotation</Label>
-                            <Slider
-                                id="text-rotation"
-                                min={-180}
-                                max={180}
-                                step={1}
-                                value={[selectedText ? selectedText.rotation : -180]}
-                                onValueChange={(value) => handleTextRotationChange(value[0])}
-                            />
-                        </div>
-                    </div>
 
-                    <div className="flex md:flex-row md:space-x-4">
-                        <div className="mb-4 md:w-1/2">
-                            <Label htmlFor="text-color">{`Text Color: `}
-                                <span>
-                                    {selectedText ? selectedText.color : "#000000"}
-                                </span>
-                            </Label>
-                            <br />
-                            <Popover>
-                                <PopoverTrigger asChild>
-                                    <Button
-                                        id="text-color"
-                                        variant="outline"
-                                        className="justify-start w-full font-normal text-left"
-                                        style={{ backgroundColor: selectedText ? selectedText.color : "#000000" }}
-                                    >
-                                        <div
-                                            className="mr-2 border border-gray-200 rounded-full size-4"
-                                            style={{ backgroundColor: selectedText ? selectedText.color : "#000000" }}
-                                        />
-                                    </Button>
-                                </PopoverTrigger>
-                                <PopoverContent className="w-80">
-                                    <HexColorPicker
-                                        color={selectedText ? selectedText.color : "#000000"}
-                                        onChange={handleTextColorChange}
-                                    />
-                                </PopoverContent>
-                            </Popover>
-                        </div>
-                        <div className="mb-4 md:w-1/2">
-                            <Label htmlFor="text-font">Text Font</Label>
-                            <Select onValueChange={handleTextFontChange} value={selectedText ? selectedText.font : "Arial"}>
-                                <SelectTrigger className="w-full">
-                                    <SelectValue placeholder="Select a font" />
-                                </SelectTrigger>
-                                <SelectContent>
-                                    {fonts.map((font) => (
-                                        <SelectItem key={font} value={font}>
-                                            {font}
-                                        </SelectItem>
-                                    ))}
-                                </SelectContent>
-                            </Select>
-                        </div>
-                    </div>
-                    <div className="flex space-x-2 mb-4">
-                        <Toggle pressed={selectedText?.bold} onPressedChange={() => handleTextStyleChange("bold")}>
-                            <Bold className="size-4" />
-                        </Toggle>
-                        <Toggle pressed={selectedText?.italic} onPressedChange={() => handleTextStyleChange("italic")}>
-                            <Italic className="size-4" />
-                        </Toggle>
-                        <Toggle pressed={selectedText?.underline} onPressedChange={() => handleTextStyleChange("underline")}>
-                            <Underline className="size-4" />
-                        </Toggle>
-                    </div>
-
-                    <div className="mb-4">
-                        <Label htmlFor="text-opacity">Text Opacity</Label>
-                        <Slider
-                            id="text-opacity"
-                            min={0}
-                            max={1}
-                            step={0.01}
-                            value={[selectedText ? selectedText.opacity : 1]}
-                            onValueChange={(value) => handleTextOpacityChange(value[0])}
-                        />
-                    </div>
-                </div>
-            )} */}
 
             {image && (<div className="z-50 relative mb-2">
                 <Popover>
