@@ -6,7 +6,7 @@
 
 Meme Generator NFT is a platform that allows users to create, edit memes in the style of Imgflip, and convert them into NFTs. Users can browse, buy, sell, and trade meme NFTs on the platform.
 
-[Live Demo](https://meme-generator-nft.vercel.app/)
+[Live Demo](https://meme-gen-ltw.vercel.app)
 
 <!-- gif -->
 <img alt="Avatar" src="smile-nod.gif" width="200" height="200">
