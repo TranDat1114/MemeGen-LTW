@@ -21,8 +21,6 @@
   }, */
 }
 
-
-
 @utility container {
   margin-inline: auto;
 }
@@ -142,7 +140,6 @@
     /* 340 75% 55% */
   }
 }
-
 
 @theme inline {
   --color-background: var(--background);

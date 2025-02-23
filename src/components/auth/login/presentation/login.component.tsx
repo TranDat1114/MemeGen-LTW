@@ -7,7 +7,7 @@ import { useForm } from "react-hook-form"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import toast from 'react-hot-toast'
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form"
 import { Button } from "@/components/ui/button"
@@ -20,6 +20,7 @@ import Image from "next/image"
 import { useRouter } from "next/navigation";
 import { AxiosError } from "axios"
 import { BaseResponse } from "@/backend/types/baseResponse"
+import confetti from "canvas-confetti"
 
 
 const formSchema = z.object({
@@ -43,6 +44,60 @@ export default function LoginComponent() {
     })
 
     const [orderErrorMessages, setOrderErrorMessages] = useState<string>();
+
+    const secretMessage = ["ArrowUp", "ArrowUp", "ArrowDown", "ArrowDown", "ArrowLeft", "ArrowRight", "ArrowLeft", "ArrowRight", "b", "a"];
+    const [secretIndex, setSecretMessage] = useState(0);
+    const [foundSecret, setFoundSecret] = useState(false);
+
+    useEffect(() => {
+        function handleKeyDown(event: KeyboardEvent) {
+            if (event.key === secretMessage[secretIndex]) {
+                setSecretMessage((prev) => prev + 1);
+                if (secretIndex + 1 === secretMessage.length) {
+                    handleClick();
+                    setSecretMessage(0);
+                }
+            } else {
+                setSecretMessage(0);
+            }
+        }
+
+        window.addEventListener("keydown", handleKeyDown);
+        return () => {
+            window.removeEventListener("keydown", handleKeyDown);
+        };
+    }, [secretIndex]);
+
+    const handleClick = () => {
+        const end = Date.now() + 3 * 1000; // 3 seconds
+        const colors = ["#a786ff", "#fd8bbc", "#eca184", "#f8deb1"];
+
+        const frame = () => {
+            if (Date.now() > end) return;
+
+            confetti({
+                particleCount: 2,
+                angle: 60,
+                spread: 55,
+                startVelocity: 60,
+                origin: { x: 0, y: 0.5 },
+                colors: colors,
+            });
+            confetti({
+                particleCount: 2,
+                angle: 120,
+                spread: 55,
+                startVelocity: 60,
+                origin: { x: 1, y: 0.5 },
+                colors: colors,
+            });
+
+            requestAnimationFrame(frame);
+        };
+
+        frame();
+        setFoundSecret(true);
+    };
 
     const onSubmit = async (data: UserLoginDTO) => {
         await fetchLogin(data).then((res) => {
@@ -76,7 +131,7 @@ export default function LoginComponent() {
     }
 
     return (
-        <>
+        <div className="space-y-12">
             <Card className="w-full max-w-md">
                 <CardHeader>
                     <CardTitle>Welcome to Meme Generator</CardTitle>
@@ -169,7 +224,8 @@ export default function LoginComponent() {
                         </div>
                         <div className="flex justify-center items-center">
                             <Label>
-                                {`Don't have an account?&nbsp;`}
+                                {`Don't have an account?`}
+                                &nbsp;
                                 <Link
                                     href="/register"
                                     className="text-primary">
@@ -180,6 +236,16 @@ export default function LoginComponent() {
                     </div>
                 </CardContent>
             </Card>
-        </>
+
+            {foundSecret ? (
+                <p className="text-center text-xs text-green-500">
+                    You know what it does, right? 😉
+                </p>
+            ) : (
+                <p className="text-muted-foreground text-xs text-center">
+                    Do you know? The game Contra by Konami is one of the childhood games of the developers in this project.
+                </p>
+            )}
+        </div>
     );
 }
