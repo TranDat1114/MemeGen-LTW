@@ -86,10 +86,10 @@ export default function Home() {
         </div>
       </section> */}
 
-      <section className="relative py-20 md:py-32 overflow-hidden">
+      <section className="relative  py-20 md:py-32 overflow-hidden">
         <div className="absolute inset-0 bg-grid-white/10 bg-[size:40px_40px] [mask-image:radial-gradient(white,transparent_85%)]" />
 
-        <div className="relative mx-auto px-4 container">
+        <div className="relative  mx-auto container">
           <div className="flex md:flex-row flex-col justify-between items-center gap-12">
             <div className="space-y-6 md:w-1/2">
               <div className="inline-block">
@@ -97,8 +97,7 @@ export default function Home() {
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.5 }}
-                  className="bg-primary/10 backdrop-blur-sm px-4 py-2 border border-primary/20 rounded-full text-primary"
-                >
+                  className=" bg-primary/10 backdrop-blur-sm px-2  py-2 border border-primary/20 rounded-full text-primary">
                   {matrixText} | The Future of Meme NFTs
                 </motion.div>
               </div>
@@ -107,8 +106,7 @@ export default function Home() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: 0.2 }}
-                className="bg-clip-text bg-gradient-to-r from-primary to-purple-500 py-4 font-bold text-transparent text-4xl md:text-6xl"
-              >
+                className="bg-clip-text bg-gradient-to-r from-primary to-purple-500 py-2 font-bold text-transparent text-3xl md:text-5xl">
                 Create, Mint & Trade Crypto Memes
               </motion.h1>
 
@@ -116,25 +114,30 @@ export default function Home() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: 0.4 }}
-                className="text-muted-foreground text-xl"
-              >
-                Join the decentralized meme revolution. Create, collect, and trade the dankest memes as NFTs on the
-                blockchain.
+                className="text-muted-foreground text-xl">
+                Join the decentralized meme revolution. Create, collect, and
+                trade the dankest memes as NFTs on the blockchain.
               </motion.p>
 
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: 0.6 }}
-                className="flex flex-wrap gap-4"
-              >
-                <Button size="lg" className="bg-gradient-to-r from-primary to-purple-500 hover:opacity-90" asChild>
+                className="flex flex-wrap gap-4">
+                <Button
+                  size="lg"
+                  className="bg-gradient-to-r from-primary to-purple-500 hover:opacity-90"
+                  asChild>
                   <Link href="/make-meme">
                     <Plus className="mr-2 w-5 h-5" />
                     Make your MEME come true
                   </Link>
                 </Button>
-                <Button size="lg" variant="outline" className="hover:bg-primary/10 border-primary/20" asChild>
+                <Button
+                  size="lg"
+                  variant="outline"
+                  className="hover:bg-primary/10 border-primary/20"
+                  asChild>
                   <Link href="/marketplace">
                     <Ethereum className="mr-2 w-5 h-5" />
                     Browse Marketplace
@@ -147,8 +150,7 @@ export default function Home() {
               initial={{ opacity: 0, scale: 0.8 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.8 }}
-              className="md:w-1/2"
-            >
+              className="md:w-1/2">
               <div className="relative">
                 <div className="absolute -inset-1 bg-gradient-to-r from-primary to-purple-500 opacity-50 rounded-lg blur" />
                 <Image
@@ -170,7 +172,9 @@ export default function Home() {
             <h2 className="flex items-center font-semibold max-md:text-sm text-2xl">
               <Trending className="mr-2" /> Trending Meme Templates
             </h2>
-            <Button asChild variant="outline">
+            <Button
+              asChild
+              variant="outline">
               <Link href="/meme-templates">View All Templates</Link>
             </Button>
           </div>
@@ -185,8 +189,12 @@ export default function Home() {
                     height={200}
                     className="mb-2 rounded-md w-full h-40 object-cover"
                   />
-                  <h3 className="mb-1 font-semibold text-lg">{template.name}</h3>
-                  <p className="text-muted-foreground text-sm">{template.uses} uses</p>
+                  <h3 className="mb-1 font-semibold text-lg">
+                    {template.name}
+                  </h3>
+                  <p className="text-muted-foreground text-sm">
+                    {template.uses} uses
+                  </p>
                 </CardContent>
               </Card>
             ))}
@@ -200,7 +208,9 @@ export default function Home() {
             </h2>
             <div className="gap-4 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
               {myCreations.map((meme) => (
-                <Link href={`/meme/${meme.id}`} key={meme.id}>
+                <Link
+                  href={`/meme/${meme.id}`}
+                  key={meme.id}>
                   <Card>
                     <CardContent className="p-0">
                       <Image
@@ -211,9 +221,12 @@ export default function Home() {
                         className="rounded-t-lg w-full h-36 object-cover"
                       />
                       <div className="p-4">
-                        <h3 className="mb-2 font-semibold text-sm">{meme.title}</h3>
+                        <h3 className="mb-2 font-semibold text-sm">
+                          {meme.title}
+                        </h3>
                         <p className="text-gray-600 text-xs">
-                          {meme.upvotes} upvotes • {meme.comments} comments • {meme.views} views
+                          {meme.upvotes} upvotes • {meme.comments} comments •{" "}
+                          {meme.views} views
                         </p>
                       </div>
                     </CardContent>
@@ -233,8 +246,7 @@ export default function Home() {
               <Link
                 href={`/meme/${i}`}
                 key={i}
-                className="bg-card shadow-md hover:shadow-lg rounded-lg overflow-hidden text-card-foreground transition-shadow"
-              >
+                className="bg-card shadow-md hover:shadow-lg rounded-lg overflow-hidden text-card-foreground transition-shadow">
                 <Image
                   src={`/images/placeholder.jpg?height=150&width=200`}
                   alt={`Latest Meme ${i}`}
@@ -259,8 +271,7 @@ export default function Home() {
               <Link
                 href={`/user/creator${i}`}
                 key={i}
-                className="flex items-center bg-card shadow-md hover:shadow-lg p-4 rounded-lg text-card-foreground transition-shadow"
-              >
+                className="flex items-center bg-card shadow-md hover:shadow-lg p-4 rounded-lg text-card-foreground transition-shadow">
                 <Image
                   src={`/images/placeholder.jpg?height=80&width=80`}
                   alt={`Creator ${i}`}
@@ -270,7 +281,9 @@ export default function Home() {
                 />
                 <div>
                   <h3 className="font-semibold">Creator {i}</h3>
-                  <p className="text-muted-foreground">Memes created: {i * 10}</p>
+                  <p className="text-muted-foreground">
+                    Memes created: {i * 10}
+                  </p>
                 </div>
               </Link>
             ))}
@@ -282,7 +295,10 @@ export default function Home() {
             <h2 className="flex items-center font-semibold text-2xl">
               <TrendingUp className="mr-2 text-primary" /> Trending NFT Memes
             </h2>
-            <Button variant="outline" className="hover:bg-primary/10 border-primary/20" asChild>
+            <Button
+              variant="outline"
+              className="hover:bg-primary/10 border-primary/20"
+              asChild>
               <Link href="/marketplace">View All</Link>
             </Button>
           </div>
@@ -291,8 +307,7 @@ export default function Home() {
             {trendingTemplates.map((template) => (
               <Card
                 key={template.id}
-                className="group bg-card/50 backdrop-blur-sm border-primary/20 hover:border-primary/40 overflow-hidden transition-all"
-              >
+                className="group bg-card/50 backdrop-blur-sm border-primary/20 hover:border-primary/40 overflow-hidden transition-all">
                 <CardContent className="p-4">
                   <div className="relative">
                     <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
@@ -311,8 +326,12 @@ export default function Home() {
                     </div>
                   </div>
                   <div className="mt-3">
-                    <h3 className="mb-1 font-semibold text-lg">{template.name}</h3>
-                    <p className="text-muted-foreground text-sm">{template.uses} mints</p>
+                    <h3 className="mb-1 font-semibold text-lg">
+                      {template.name}
+                    </h3>
+                    <p className="text-muted-foreground text-sm">
+                      {template.uses} mints
+                    </p>
                   </div>
                 </CardContent>
               </Card>
@@ -330,7 +349,8 @@ export default function Home() {
                 </div>
                 <h3 className="mb-2 font-semibold text-xl">Secure Minting</h3>
                 <p className="text-muted-foreground">
-                  Your memes are securely minted as NFTs on the blockchain with proof of ownership and authenticity.
+                  Your memes are securely minted as NFTs on the blockchain with
+                  proof of ownership and authenticity.
                 </p>
               </CardContent>
             </Card>
@@ -342,7 +362,8 @@ export default function Home() {
                 </div>
                 <h3 className="mb-2 font-semibold text-xl">Easy Trading</h3>
                 <p className="text-muted-foreground">
-                  Buy and sell meme NFTs with cryptocurrency. Support for multiple wallets and chains.
+                  Buy and sell meme NFTs with cryptocurrency. Support for
+                  multiple wallets and chains.
                 </p>
               </CardContent>
             </Card>
@@ -354,7 +375,8 @@ export default function Home() {
                 </div>
                 <h3 className="mb-2 font-semibold text-xl">Rare Collections</h3>
                 <p className="text-muted-foreground">
-                  Create and collect rare meme NFTs. Build your digital portfolio of dank assets.
+                  Create and collect rare meme NFTs. Build your digital
+                  portfolio of dank assets.
                 </p>
               </CardContent>
             </Card>
@@ -365,7 +387,8 @@ export default function Home() {
                 </div>
                 <h3 className="mb-2 font-semibold text-xl">Create Memes</h3>
                 <p>
-                  Use our meme generator to create hilarious memes from trending templates or upload your own images.
+                  Use our meme generator to create hilarious memes from trending
+                  templates or upload your own images.
                 </p>
               </CardContent>
             </Card>
@@ -375,7 +398,10 @@ export default function Home() {
                   <Upload className="w-6 h-6 text-primary" />
                 </div>
                 <h3 className="mb-2 font-semibold text-xl">Upload Templates</h3>
-                <p>Share your meme templates with the community and see them become the next viral sensation.</p>
+                <p>
+                  Share your meme templates with the community and see them
+                  become the next viral sensation.
+                </p>
               </CardContent>
             </Card>
             <Card>
@@ -385,7 +411,8 @@ export default function Home() {
                 </div>
                 <h3 className="mb-2 font-semibold text-xl">NFT Marketplace</h3>
                 <p>
-                  Turn your memes into NFTs, buy and sell unique meme creations in our blockchain-powered marketplace.
+                  Turn your memes into NFTs, buy and sell unique meme creations
+                  in our blockchain-powered marketplace.
                 </p>
               </CardContent>
             </Card>
@@ -395,23 +422,29 @@ export default function Home() {
         <section className="relative mb-12 border border-primary/20 rounded-lg overflow-hidden">
           <div className="absolute inset-0 bg-gradient-to-r from-primary/10 to-purple-500/10" />
           <div className="relative p-8 md:p-12">
-            <h2 className="mb-4 font-bold text-3xl">Ready to Join the Meme Economy?</h2>
+            <h2 className="mb-4 font-bold text-3xl">
+              Ready to Join the Meme Economy?
+            </h2>
             <p className="mb-6 text-muted-foreground text-xl">
               Start creating, collecting, and trading meme NFTs today.
             </p>
             <div className="flex flex-wrap gap-4">
-              <Button size="lg" className="bg-gradient-to-r from-primary to-purple-500 hover:opacity-90">
+              <Button
+                size="lg"
+                className="bg-gradient-to-r from-primary to-purple-500 hover:opacity-90">
                 Connect Wallet
               </Button>
-              <Button size="lg" variant="outline" className="hover:bg-primary/10 border-primary/20">
+              <Button
+                size="lg"
+                variant="outline"
+                className="hover:bg-primary/10 border-primary/20">
                 Learn More
               </Button>
             </div>
           </div>
         </section>
       </div>
-
     </div>
-  )
+  );
 }
 
