@@ -86,10 +86,10 @@ export default function Home() {
         </div>
       </section> */}
 
-      <section className="relative  py-20 md:py-32 overflow-hidden">
+      <section className="relative py-20 md:py-32 overflow-hidden">
         <div className="absolute inset-0 bg-grid-white/10 bg-[size:40px_40px] [mask-image:radial-gradient(white,transparent_85%)]" />
 
-        <div className="relative  mx-auto container">
+        <div className="relative mx-auto container">
           <div className="flex md:flex-row flex-col justify-between items-center gap-12">
             <div className="space-y-6 md:w-1/2">
               <div className="inline-block">
@@ -97,7 +97,7 @@ export default function Home() {
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.5 }}
-                  className=" bg-primary/10 backdrop-blur-sm px-2  py-2 border border-primary/20 rounded-full text-primary">
+                  className="bg-primary/10 backdrop-blur-sm px-2 py-2 border border-primary/20 rounded-lg md:rounded-full text-primary">
                   {matrixText} | The Future of Meme NFTs
                 </motion.div>
               </div>
@@ -136,7 +136,7 @@ export default function Home() {
                 <Button
                   size="lg"
                   variant="outline"
-                  className="hover:bg-primary/10 border-primary/20"
+                  className="hover:bg-primary/10 border-primary/20 max-sm:w-full"
                   asChild>
                   <Link href="/marketplace">
                     <Ethereum className="mr-2 w-5 h-5" />
